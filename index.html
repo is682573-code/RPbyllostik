@@ -3,31 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚖️ МЕГА-СПРАВОЧНИК | RP-Проект</title>
+<title>⚖️ МЕГА-СПРАВОЧНИК | Полная версия</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --bg: #0f1419;
-    --bg-2: #1a2029;
-    --bg-3: #232a36;
-    --border: #2d3542;
-    --text: #e4e6eb;
-    --text-dim: #8b95a7;
-    --accent: #4a9eff;
-    --green: #2ecc71;
-    --red: #e74c3c;
-    --yellow: #f1c40f;
-    --purple: #9b59b6;
+    --bg-2: #161b22;
+    --bg-3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-dim: #8b949e;
+    --accent: #f78166;
+    --green: #7ee787;
+    --red: #f85149;
+    --yellow: #ffc107;
+    --blue: #79c0ff;
+    --purple: #d2a8ff;
   }
   body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    background: var(--bg);
+    background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
     color: var(--text);
     min-height: 100vh;
     padding-bottom: 40px;
+    line-height: 1.6;
   }
   header {
-    background: linear-gradient(135deg, #1a2029, #2d3542);
+    background: rgba(22, 27, 34, 0.95);
     border-bottom: 2px solid var(--accent);
     padding: 20px;
     position: sticky;
@@ -35,48 +37,41 @@
     z-index: 100;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
   }
-  .header-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
+  .header-inner { max-width: 1400px; margin: 0 auto; }
   h1 {
     font-size: 24px;
     margin-bottom: 15px;
     color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(247, 129, 102, 0.3);
   }
-  h1 small { color: var(--text-dim); font-weight: normal; font-size: 14px; margin-left: 10px; }
-  .search-box {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
+  h1 small { color: var(--text-dim); font-weight: normal; font-size: 13px; margin-left: 10px; text-transform: none; letter-spacing: 0; }
+  .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
   .search-box input {
     flex: 1;
-    padding: 12px 16px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    padding: 14px 20px;
+    background: var(--bg-2);
+    border: 2px solid var(--border);
+    border-radius: 10px;
     color: var(--text);
     font-size: 15px;
     outline: none;
-    transition: all 0.2s;
+    transition: all 0.3s;
   }
   .search-box input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(74,158,255,0.2);
+    box-shadow: 0 0 0 4px rgba(247, 129, 102, 0.1);
   }
-  .mode-switch {
-    display: flex;
-    gap: 8px;
-  }
+  .mode-switch { display: flex; gap: 6px; }
   .mode-btn {
-    padding: 12px 18px;
+    padding: 12px 16px;
     background: var(--bg-3);
     border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--text-dim);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.2s;
   }
   .mode-btn.active, .mode-btn:hover {
@@ -84,59 +79,53 @@
     color: white;
     border-color: var(--accent);
   }
-  .factions-nav {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  .factions-nav { display: flex; gap: 6px; flex-wrap: wrap; }
   .faction-btn {
-    padding: 10px 16px;
+    padding: 9px 14px;
     background: var(--bg-3);
     border: 1px solid var(--border);
     border-radius: 8px;
     color: var(--text);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     transition: all 0.2s;
   }
-  .faction-btn:hover {
-    background: var(--bg-2);
-    transform: translateY(-2px);
-  }
+  .faction-btn:hover { background: var(--bg-2); transform: translateY(-2px); }
   .faction-btn.active {
     background: var(--accent);
     border-color: var(--accent);
     color: white;
+    box-shadow: 0 4px 12px rgba(247, 129, 102, 0.3);
   }
-  main {
-    max-width: 1400px;
-    margin: 20px auto;
-    padding: 0 20px;
-  }
+  main { max-width: 1400px; margin: 20px auto; padding: 0 20px; }
   .tabs {
     display: flex;
     gap: 4px;
     border-bottom: 2px solid var(--border);
     margin-bottom: 20px;
     flex-wrap: wrap;
+    padding-bottom: 8px;
   }
   .tab {
-    padding: 10px 18px;
+    padding: 10px 16px;
     background: transparent;
     border: none;
     color: var(--text-dim);
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 600;
     border-bottom: 3px solid transparent;
     transition: all 0.2s;
+    border-radius: 8px 8px 0 0;
   }
-  .tab:hover { color: var(--text); }
+  .tab:hover { color: var(--text); background: rgba(247, 129, 102, 0.05); }
   .tab.active {
     color: var(--accent);
     border-bottom-color: var(--accent);
+    background: rgba(247, 129, 102, 0.05);
   }
   .content-section { display: none; }
   .content-section.active { display: block; animation: fadeIn 0.3s; }
@@ -144,42 +133,150 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 18px;
+    margin-bottom: 25px;
+  }
   .card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    transition: all 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 10px 28px rgba(247, 129, 102, 0.15);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+  .card-title {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0;
+    flex: 1;
+  }
+  .card-badge {
+    padding: 4px 10px;
+    background: rgba(247, 129, 102, 0.15);
+    color: var(--accent);
+    border-radius: 6px;
+    font-size: 0.72em;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .card-badge.green { background: rgba(126, 231, 135, 0.2); color: var(--green); }
+  .card-badge.red { background: rgba(248, 81, 73, 0.2); color: var(--red); }
+  .card-badge.blue { background: rgba(121, 192, 255, 0.2); color: var(--blue); }
+  .card-badge.purple { background: rgba(210, 168, 255, 0.2); color: var(--purple); }
+  .card-label {
+    color: var(--text-dim);
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 12px;
+    display: block;
+    font-weight: 600;
+  }
+  .card-text { color: #c9d1d9; margin: 6px 0; font-size: 0.92em; }
+  .legal-ref {
+    font-family: 'Consolas', 'Courier New', monospace;
+    color: var(--blue);
+    font-size: 0.82em;
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+    padding: 6px 10px;
+    background: rgba(121, 192, 255, 0.08);
+    border-radius: 4px;
+  }
+  .critical-warning {
+    background: rgba(248, 81, 73, 0.1);
+    border-left: 4px solid var(--red);
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: var(--red);
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+  .warning {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid var(--yellow);
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+  .info-box {
+    background: rgba(121, 192, 255, 0.1);
+    border-left: 4px solid var(--blue);
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: var(--blue);
+    font-size: 0.9em;
+  }
+  .ok-box {
+    background: rgba(126, 231, 135, 0.1);
+    border-left: 4px solid var(--green);
+    padding: 10px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    color: var(--green);
+    font-size: 0.9em;
+  }
+  .section-title {
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .info-banner {
+    background: linear-gradient(135deg, rgba(247, 129, 102, 0.1), rgba(210, 168, 255, 0.1));
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .info-banner h2 { color: var(--accent); margin-bottom: 8px; font-size: 18px; }
+  .hierarchy {
     background: var(--bg-2);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 18px;
+    font-family: 'Consolas', monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    line-height: 1.5;
     margin-bottom: 15px;
-  }
-  .card h3 {
-    color: var(--accent);
-    margin-bottom: 12px;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .card ul { list-style: none; padding-left: 0; }
-  .card li {
-    padding: 8px 0;
-    padding-left: 20px;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-  }
-  .card li:last-child { border-bottom: none; }
-  .card li::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
+    color: #c9d1d9;
   }
   .law-table {
     width: 100%;
     border-collapse: collapse;
     background: var(--bg-2);
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     margin-bottom: 15px;
+    border: 1px solid var(--border);
   }
   .law-table th {
     background: var(--bg-3);
@@ -187,7 +284,8 @@
     text-align: left;
     color: var(--accent);
     font-weight: 600;
-    border-bottom: 2px solid var(--border);
+    text-transform: uppercase;
+    font-size: 0.82em;
   }
   .law-table td {
     padding: 12px;
@@ -198,49 +296,39 @@
   .law-tag {
     display: inline-block;
     padding: 3px 8px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
+    background: rgba(121, 192, 255, 0.15);
+    border: 1px solid var(--blue);
     border-radius: 4px;
     font-size: 12px;
     font-family: 'Consolas', monospace;
-    color: var(--accent);
+    color: var(--blue);
     margin-right: 4px;
   }
-  .status-badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-right: 4px;
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .status-green { background: rgba(46,204,113,0.2); color: var(--green); border: 1px solid var(--green); }
-  .status-red { background: rgba(231,76,60,0.2); color: var(--red); border: 1px solid var(--red); }
-  .status-yellow { background: rgba(241,196,15,0.2); color: var(--yellow); border: 1px solid var(--yellow); }
-  .error-card {
-    background: linear-gradient(135deg, rgba(231,76,60,0.1), rgba(231,76,60,0.05));
-    border-left: 4px solid var(--red);
-    padding: 14px 18px;
-    margin-bottom: 10px;
-    border-radius: 6px;
+  .filter-chip {
+    padding: 8px 16px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+    font-weight: 500;
   }
-  .error-card strong { color: var(--red); }
-  .warn-card {
-    background: linear-gradient(135deg, rgba(241,196,15,0.1), rgba(241,196,15,0.05));
-    border-left: 4px solid var(--yellow);
-    padding: 14px 18px;
-    margin-bottom: 10px;
-    border-radius: 6px;
+  .filter-chip:hover { background: var(--border); transform: translateY(-2px); }
+  .filter-chip.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(247, 129, 102, 0.3);
   }
-  .warn-card strong { color: var(--yellow); }
-  .ok-card {
-    background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.05));
-    border-left: 4px solid var(--green);
-    padding: 14px 18px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-  }
-  .ok-card strong { color: var(--green); }
   .blank-card {
     background: var(--bg-2);
     border: 1px solid var(--border);
@@ -257,21 +345,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
   }
-  .blank-header h4 { color: var(--text); font-size: 15px; }
+  .blank-header h4 { color: var(--text); font-size: 15px; flex: 1; }
   .blank-status {
     padding: 3px 10px;
     border-radius: 12px;
     font-size: 11px;
     font-weight: 600;
+    white-space: nowrap;
   }
-  .status-green-bg { background: var(--green); color: white; }
+  .status-green-bg { background: var(--green); color: #000; }
   .status-yellow-bg { background: var(--yellow); color: #000; }
   .status-red-bg { background: var(--red); color: white; }
-  .blank-body {
-    padding: 18px;
-    display: none;
-  }
+  .blank-body { padding: 18px; display: none; }
   .blank-body.open { display: block; }
   .blank-form {
     display: grid;
@@ -279,7 +366,6 @@
     gap: 10px;
     margin-bottom: 15px;
   }
-  .blank-form .full { grid-column: 1 / -1; }
   .blank-form label {
     display: block;
     font-size: 12px;
@@ -296,9 +382,7 @@
     font-size: 14px;
     outline: none;
   }
-  .blank-form input:focus, .blank-form select:focus, .blank-form textarea:focus {
-    border-color: var(--accent);
-  }
+  .blank-form input:focus { border-color: var(--accent); }
   .blank-preview {
     background: var(--bg);
     border: 1px solid var(--border);
@@ -324,36 +408,17 @@
     margin-bottom: 8px;
   }
   .btn-primary { background: var(--accent); color: white; }
-  .btn-primary:hover { background: #3a8ee6; }
+  .btn-primary:hover { background: #e66a50; }
   .btn-secondary { background: var(--bg-3); color: var(--text); border: 1px solid var(--border); }
-  .btn-secondary:hover { background: var(--border); }
-  .btn-copy { background: var(--green); color: white; }
-  .btn-copy:hover { background: #27ae60; }
-  .cross-link {
-    display: inline-block;
-    padding: 4px 10px;
-    background: var(--bg-3);
-    border: 1px dashed var(--accent);
-    border-radius: 4px;
-    font-size: 12px;
-    color: var(--accent);
-    text-decoration: none;
-    margin-top: 8px;
-    cursor: pointer;
-  }
-  .cross-link:hover { background: var(--accent); color: white; }
+  .btn-copy { background: var(--green); color: #000; }
   .checklist {
     background: var(--bg-2);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 15px;
     margin-bottom: 12px;
   }
-  .checklist h4 {
-    color: var(--green);
-    margin-bottom: 10px;
-    font-size: 15px;
-  }
+  .checklist h4 { color: var(--green); margin-bottom: 10px; font-size: 15px; }
   .check-item {
     display: flex;
     align-items: flex-start;
@@ -362,48 +427,25 @@
     border-bottom: 1px solid var(--border);
   }
   .check-item:last-child { border-bottom: none; }
-  .check-item input[type="checkbox"] {
-    margin-top: 3px;
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-  }
-  .check-item.checked label {
-    text-decoration: line-through;
-    color: var(--text-dim);
-  }
-  .hierarchy {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
+  .check-item input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; cursor: pointer; }
+  .check-item.checked label { text-decoration: line-through; color: var(--text-dim); }
+  .copy-toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--green);
+    color: #000;
+    padding: 12px 24px;
     border-radius: 8px;
-    padding: 15px;
-    font-family: 'Consolas', monospace;
-    font-size: 13px;
-    white-space: pre-wrap;
-    line-height: 1.4;
-    margin-bottom: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s;
+    z-index: 1000;
+    font-weight: 600;
   }
-  .filters-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-  }
-  .filter-chip {
-    padding: 6px 14px;
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--text-dim);
-    cursor: pointer;
-    font-size: 13px;
-    transition: all 0.2s;
-  }
-  .filter-chip.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
+  .copy-toast.show { opacity: 1; transform: translateY(0); }
+  .highlight { background: rgba(255, 193, 7, 0.35); padding: 0 2px; border-radius: 2px; }
   footer {
     max-width: 1400px;
     margin: 40px auto 20px;
@@ -413,74 +455,28 @@
     font-size: 13px;
     border-top: 1px solid var(--border);
   }
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-dim);
-  }
-  .empty-state h3 { margin-bottom: 10px; color: var(--text); }
-  .copy-toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--green);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s;
-    z-index: 1000;
-    pointer-events: none;
-  }
-  .copy-toast.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .highlight { background: rgba(241,196,15,0.3); padding: 0 2px; border-radius: 2px; }
-  .section-title {
-    font-size: 20px;
-    color: var(--accent);
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--border);
-  }
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
   @media (max-width: 768px) {
-    .grid-2 { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
     .blank-form { grid-template-columns: 1fr; }
     h1 { font-size: 18px; }
-    .faction-btn { padding: 8px 12px; font-size: 12px; }
+    .faction-btn { padding: 7px 10px; font-size: 12px; }
   }
-  .info-banner {
-    background: linear-gradient(135deg, rgba(74,158,255,0.1), rgba(155,89,182,0.1));
-    border: 1px solid var(--accent);
-    border-radius: 10px;
-    padding: 18px;
-    margin-bottom: 20px;
-  }
-  .info-banner h2 {
-    color: var(--accent);
-    margin-bottom: 10px;
-    font-size: 18px;
-  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg-2); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: #484f58; }
 </style>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <h1>⚖️ МЕГА-СПРАВОЧНИК СИЛОВЫХ СТРУКТУР <small>v1.0 | RP-Проект</small></h1>
+    <h1>⚖️ МЕГА-СПРАВОЧНИК СИЛОВЫХ СТРУКТУР <small>v2.0 | RP-Проект</small></h1>
     <div class="search-box">
-      <input type="text" id="globalSearch" placeholder="🔍 Поиск по законам, статьям, бланкам (например: ст. 91 УПК, задержание, ФСБ)">
+      <input type="text" id="globalSearch" placeholder="🔍 Поиск по статьям, законам, процедурам, бланкам...">
       <div class="mode-switch">
         <button class="mode-btn active" data-mode="criminal">Уголовный</button>
-        <button class="mode-btn" data-mode="admin">Административный</button>
+        <button class="mode-btn" data-mode="admin">Админ</button>
         <button class="mode-btn" data-mode="civil">Гражданский</button>
       </div>
     </div>
@@ -497,111 +493,19 @@
 </main>
 
 <footer>
-  <p>© 2026 Мега-справочник RP-проекта | Создано на основе действующего законодательства РФ</p>
-  <p style="margin-top:8px; font-size:11px;">Данные актуальны на июнь 2026 г. | Обновление: ручное</p>
+  <p>© 2026 Мега-справочник RP-проекта | Актуально на июнь 2026 г.</p>
+  <p style="margin-top:8px; font-size:11px; opacity:0.7;">Нарушение процессуальных норм (ст. 75 УПК РФ) влечет признание доказательств недопустимыми</p>
 </footer>
 
-<div class="copy-toast" id="copyToast">✅ Текст скопирован в буфер обмена!</div>
+<div class="copy-toast" id="copyToast">✅ Скопировано в буфер!</div>
 
 <script>
-// ============ ДАННЫЕ ============
+// ============ ДАННЫЕ ФРАКЦИЙ ============
 
 const FACTIONS = {
-  army: {
-    id: 'army',
-    name: 'Армия (МО РФ)',
-    icon: '🪖',
-    color: '#5a7a3a',
-    structure: {
-      text: `Сухопутные войска
-Воздушно-космические силы (ВКС)
-Военно-морской флот (ВМФ)
-Ракетные войска стратегического назначения (РВСН)
-Воздушно-десантные войска (ВДВ)
-
-ОТДЕЛЬНЫЕ РОДЫ:
-├── Военная полиция (ВП) — подчиняется зам. Министра обороны
-├── Главная военная прокуратура (ГВП) — надзор
-└── Военные следственные органы СКР — расследование`
-    },
-    laws: [
-      { num: 'ФЗ №76-ФЗ', name: 'О статусе военнослужащих', date: '27.05.1998' },
-      { num: 'ФЗ №53-ФЗ', name: 'О воинской обязанности и военной службе', date: '28.03.1998' },
-      { num: 'ФЗ №61-ФЗ', name: 'Об обороне', date: '31.05.1996' },
-      { num: 'Указ №1495', name: 'Общевоинские уставы ВС РФ', date: '10.11.2007' },
-      { num: 'Приказ МО №727', name: 'Руководство по ВП', date: '' }
-    ],
-    powers: [
-      { text: 'Представиться и показать удостоверение гражданским', status: 'green' },
-      { text: 'Проверять документы ТОЛЬКО на территории воинской части', status: 'yellow' },
-      { text: 'Задерживать военнослужащих при нарушении устава/УК', status: 'green' },
-      { text: 'Применять оружие по ст. 32 ФЗ №76', status: 'yellow' }
-    ],
-    restrictions: [
-      'ВП НЕ задерживает гражданских ВНЕ территории воинской части (это МВД/Росгвардия)',
-      'Офицеры НЕ подлежат дисциплинарному аресту (только солдаты/сержанты)',
-      'Командир части НЕ судит — только гарнизонный военный суд'
-    ],
-    algorithms: {
-      'Задержание военнослужащего': [
-        'Убедиться в факте нарушения (СОЧ, неисполнение приказа, уставное)',
-        'Представиться, предъявить удостоверение ВП',
-        'Разъяснить основания задержания',
-        'Доложить командиру части и военному коменданту',
-        'Составить протокол задержания',
-        'Передать в гарнизонную гауптвахту ИЛИ комендатуру'
-      ],
-      'Дисциплинарное взыскание': [
-        'Выявить нарушение устава',
-        'Провести служебную проверку',
-        'Издать приказ о наложении взыскания',
-        'Ознакомить военнослужащего под роспись',
-        'Исполнить взыскание (выговор, арест и т.д.)'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Задержание солдата/сержанта ВП',
-        items: [
-          'Представиться и показать удостоверение',
-          'Разъяснить основания',
-          'Доложить коменданту',
-          'Составить протокол',
-          'Направить на гауптвахту (до 30 суток)',
-          'Уведомить командира части'
-        ]
-      },
-      {
-        title: '✅ Передача гражданских лиц (если задержан на ВЧ)',
-        items: [
-          'Составить протокол доставления',
-          'Передать в ОВД по месту дислокации части',
-          'Уведомить военную прокуратуру',
-          'Сохранить материалы в деле части'
-        ]
-      }
-    ],
-    errors: [
-      { text: 'ВП задерживает гражданских на улице' },
-      { text: 'Командир лично судит военнослужащего' },
-      { text: 'Офицер посажен на гауптвахту по приказу командира' },
-      { text: 'Применение оружия без оснований по ст. 32 ФЗ-76' }
-    ],
-    interactions: [
-      { target: 'СКР', reason: 'Передача материалов о преступлениях военнослужащих' },
-      { target: 'Военная прокуратура', reason: 'Надзор за законностью в части' },
-      { target: 'МВД', reason: 'Передача гражданских, задержанных на территории ВЧ' },
-      { target: 'ФСБ', reason: 'Контрразведывательное обеспечение' }
-    ],
-    blanks: [24, 25, 26]
-  },
   mvd: {
-    id: 'mvd',
-    name: 'МВД России',
-    icon: '👮',
-    color: '#2874a6',
-    structure: {
-      text: `МВД России
+    id: 'mvd', name: 'МВД России', icon: '👮', color: '#2874a6',
+    structure: `МВД России
 ├── Полиция
 │   ├── ППС (патрульно-постовая служба)
 │   ├── ГИБДД / ДПС
@@ -610,385 +514,643 @@ const FACTIONS = {
 │   ├── ОЭБиПК (экономическая безопасность)
 │   ├── ОНК (наркоконтроль)
 │   └── ПДН (по делам несовершеннолетних)
-└── Росгвардия (ОТДЕЛЬНО, не МВД!)`
-    },
+└── Росгвардия (ОТДЕЛЬНО, не МВД!)`,
     laws: [
       { num: 'ФЗ №3-ФЗ', name: 'О полиции', date: '07.02.2011' },
       { num: 'ФЗ №247-ФЗ', name: 'О социальных гарантиях сотрудникам ОВД', date: '19.07.2011' },
-      { num: 'ФЗ №197-ФЗ', name: 'О службе в органах внутренних дел', date: '30.11.2011' },
+      { num: 'ФЗ №197-ФЗ', name: 'О службе в ОВД', date: '30.11.2011' },
       { num: 'Приказ №736', name: 'Инструкция о приеме заявлений (КУСП)', date: '' },
       { num: 'Приказ №615', name: 'Организация деятельности ДПС', date: '' },
       { num: 'ФЗ №196-ФЗ', name: 'О безопасности дорожного движения', date: '10.12.1995' },
       { num: 'Приказ №38', name: 'Наставление ППС', date: '' }
     ],
     powers: [
-      { text: 'Проверять документы при наличии оснований (п.1 ч.1 ст.13 ФЗ-3)', status: 'green' },
-      { text: 'Задерживать подозреваемых (ст. 91 УПК + ст. 14 ФЗ-3)', status: 'green' },
-      { text: 'Применять силу, спецсредства, оружие (ст. 18-23 ФЗ-3)', status: 'yellow' },
-      { text: 'Оцеплять территории (ст. 13 п.7 ФЗ-3)', status: 'green' },
-      { text: 'Личный досмотр (ст. 27.7 КоАП)', status: 'green' },
-      { text: 'Входить в жилье в экстренных случаях (ст. 15 ФЗ-3)', status: 'yellow' }
-    ],
-    restrictions: [
-      'ППС НЕ проводит оперативно-розыскные мероприятия (только ОУР по ФЗ-144)',
-      'Проверка документов без оснований = ст. 286 УК РФ (превышение)',
-      'Основания строго по п.1 ч.1 ст.13 ФЗ-3'
-    ],
-    algorithms: {
-      'Задержание подозреваемого (ст. 91 УПК)': [
-        'Убедиться в наличии оснований (застигнут / данные ОРМ / очевидцы)',
-        'Представиться, предъявить удостоверение',
-        'Применить силу/средства при необходимости (ст. 18-23 ФЗ-3)',
-        'Разъяснить права (ст. 46 УПК, ст. 51 Конституции)',
-        'Составить протокол в течение 3 часов',
-        'Доставить в ОВД',
-        'Уведомить родственников в течение 12 часов (ст. 96 УПК)',
-        'В течение 48 часов — суд об избрании меры пресечения ИЛИ освобождение'
-      ],
-      'Административное задержание (ст. 27.3 КоАП)': [
-        'Установить состав административного правонарушения',
-        'Представиться, предъявить удостоверение',
-        'Разъяснить права (ст. 25.1 КоАП)',
-        'Составить протокол',
-        'Срок задержания: до 3 часов (в исключительных случаях до 48 ч.)'
-      ],
-      'Личный досмотр (ст. 27.7 КоАП)': [
-        'Обеспечить присутствие 2 понятых ТОГО ЖЕ ПОЛА',
-        'Видеозапись НЕ заменяет понятых!',
-        'Составить протокол с описью',
-        'Изъятые предметы упаковать и опечатать',
-        'Копию протокола вручить досмотренному'
-      ],
-      'Прием заявления о преступлении': [
-        'Зарегистрировать в КУСП (Приказ №736)',
-        'Выдать талон-уведомление заявителю',
-        'Провести проверку в течение 3 суток (продление до 10/30 суток)',
-        'Вынести постановление: о возбуждении УД ИЛИ об отказе'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Задержание по ст. 91 УПК',
-        items: [
-          'Представиться',
-          'Показать удостоверение',
-          'Разъяснить основания',
-          'Разъяснить права (ст. 46 УПК, ст. 51 Конституции)',
-          'Составить протокол в течение 3 часов',
-          'Сообщить родственникам в течение 12 часов (ст. 96 УПК)',
-          'В течение 48 часов — суд или освобождение'
-        ]
+      { title: 'Проверка документов', category: 'docs', badge: 'Ст. 13 ФЗ-3', badgeColor: 'blue',
+        content: `<span class="card-label">Основания (строго по п.1 ч.1 ст.13 ФЗ-3):</span>
+          <p class="card-text">• Подозрение в совершении преступления<br>• Данные о нахождении в розыске<br>• Повод к административному задержанию<br>• Проникновение на охраняемый объект</p>
+          <div class="critical-warning">Проверка документов БЕЗ оснований = ст. 286 УК РФ (превышение полномочий)</div>
+          <span class="card-label">Обязанность сотрудника:</span>
+          <p class="card-text">Представиться (должность, звание, ФИО) и по требованию гражданина предъявить служебное удостоверение.</p>
+          <span class="legal-ref">Право: п.1 ч.1 ст.13 ФЗ-3<br>Обязанность: ч.4 ст.5 ФЗ-3</span>`
       },
-      {
-        title: '✅ Личный досмотр (ст. 27.7 КоАП)',
-        items: [
-          '2 понятых того же пола',
-          'Представиться',
-          'Разъяснить основания',
-          'Составить протокол с описью',
-          'Упаковать и опечатать изъятое',
-          'Вручить копию протокола'
-        ]
+      { title: 'Задержание подозреваемого', category: 'force', badge: 'Ст. 91 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Основания (ст. 91 УПК РФ):</span>
+          <p class="card-text">1. Лицо застигнуто при совершении преступления или непосредственно после<br>2. Потерпевшие/очевидцы указали на данное лицо<br>3. На теле/одежде обнаружены явные следы преступления<br>4. Имеются иные данные, дающие основания подозревать (при условии попытки скрыться / без ПМЖ / личность не установлена)</p>
+          <span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Объявить о задержании<br>2. Разъяснить права (ст. 46 УПК, ст. 51 Конституции)<br>3. Составить протокол в течение <strong>3 часов</strong><br>4. Уведомить родственников в течение <strong>12 часов</strong> (ст. 96 УПК)<br>5. В течение <strong>48 часов</strong> — суд об аресте ИЛИ освобождение</p>
+          <span class="legal-ref">Ст. 91, 92, 96 УПК РФ</span>`
+      },
+      { title: 'Административное задержание', category: 'force', badge: 'Ст. 27.3 КоАП', badgeColor: 'yellow',
+        content: `<span class="card-label">Отличие от уголовного:</span>
+          <div class="info-box">Админ. задержание (КоАП) ≠ Уголовное задержание (УПК). Это РАЗНЫЕ институты с разными сроками!</div>
+          <span class="card-label">Сроки:</span>
+          <p class="card-text">• Общий срок — <strong>до 3 часов</strong><br>• До <strong>48 часов</strong> — при нарушениях, связанных с проникновением в охраняемые зоны, режим ЧП, пограничный режим<br>• До <strong>48 часов</strong> — для лиц в состоянии опьянения (до вытрезвления)</p>
+          <span class="legal-ref">Ст. 27.3, 27.5 КоАП РФ</span>`
+      },
+      { title: 'Применение физической силы', category: 'force', badge: 'Ст. 18-23 ФЗ-3', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Пресечение преступления/админ. правонарушения<br>• Преодоление противодействия законным требованиям<br>• Задержание лица, оказывающего сопротивление</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предупредить о применении (голосом)<br>2. Применить соразмерно угрозе<br>3. Оказать первую помощь пострадавшим<br>4. <strong>В течение 24 часов</strong> уведомить прокурора (если причинен вред здоровью)</p>
+          <div class="critical-warning">ЗАПРЕЩЕНО применять спецсредства в отношении женщин с видимыми признаками беременности, малолетних, инвалидов (кроме вооруженного/группового нападения)</div>
+          <span class="legal-ref">Ст. 18-23 ФЗ №3-ФЗ «О полиции»</span>`
+      },
+      { title: 'Применение огнестрельного оружия', category: 'force', badge: 'Ст. 23 ФЗ-3', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Защита от нападения, угрожающего жизни<br>• Пресечение попытки завладения оружием/спецтехникой<br>• Освобождение заложников<br>• Задержание лица, застигнутого при совершении тяжкого/особо тяжкого преступления и пытающегося скрыться<br>• Пресечение побега из-под стражи</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предупредить голосом и выстрелом вверх<br>2. Применить оружие<br>3. Оказать помощь раненым<br>4. <strong>В течение 24 часов</strong> — рапорт руководителю + уведомление прокурора</p>
+          <div class="critical-warning">ЗАПРЕЩЕНО при значительном скоплении людей (если могут пострадать посторонние), в отношении женщин, детей, инвалидов (кроме вооруженного/группового нападения)</div>
+          <span class="legal-ref">Ст. 23 ФЗ №3-ФЗ «О полиции»</span>`
+      },
+      { title: 'Вход в жилые помещения', category: 'docs', badge: 'Ст. 15 ФЗ-3', badgeColor: 'yellow',
+        content: `<span class="card-label">Случаи, когда можно войти БЕЗ согласия жильцов:</span>
+          <p class="card-text">1. Для спасения жизни граждан / их имущества<br>2. Для обеспечения безопасности при массовых беспорядках/ЧС<br>3. Для задержания подозреваемых<br>4. Для пресечения совершения преступления<br>5. При получении информации о несчастном случае</p>
+          <span class="card-label">Требования:</span>
+          <p class="card-text">• Представиться, предъявить удостоверение<br>• Предупредить о намерении войти (кроме экстренных случаев)<br>• <strong>В течение 24 часов</strong> уведомить прокурора<br>• В течение 24 часов уведомить собственника</p>
+          <span class="legal-ref">Ст. 15 ФЗ №3-ФЗ «О полиции»</span>`
+      },
+      { title: 'Оцепление территорий', category: 'docs', badge: 'Ст. 13 п.7 ФЗ-3', badgeColor: 'green',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Пресечение преступления / задержание преступника<br>• Проведение контртеррористической операции<br>• Обеспечение безопасности при массовых мероприятиях<br>• При авариях, катастрофах, эпидемиях</p>
+          <span class="card-label">Действия:</span>
+          <p class="card-text">Ограничить доступ, приостановить движение транспорта, организовать контроль за перемещением лиц. При необходимости — досмотр транспортных средств.</p>
+          <span class="legal-ref">Ст. 13 п.7, 8 ФЗ №3-ФЗ</span>`
+      },
+      { title: 'Личный досмотр', category: 'search', badge: 'Ст. 27.7 КоАП', badgeColor: 'red',
+        content: `<div class="critical-warning">Видеозапись НЕ заменяет понятых! Обязательно 2 понятых того же пола, что и досматриваемый!</div>
+          <span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Представиться, разъяснить основания<br>2. Обеспечить присутствие <strong>2 понятых того же пола</strong><br>3. Провести досмотр (одежда, вещи)<br>4. Составить протокол с полной описью<br>5. Вручить копию досматриваемому</p>
+          <div class="warning">Досмотр ≠ Обыск. Досмотр — мера административного обеспечения, обыск — следственное действие по УПК.</div>
+          <span class="legal-ref">Ст. 27.7 КоАП РФ</span>`
       }
     ],
+    procedures: [
+      { title: 'Допрос подозреваемого', badge: 'Ст. 46, 187-190 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Правила:</span>
+          <p class="card-text">• Не более <strong>4 часов подряд</strong><br>• Не более <strong>8 часов в день</strong><br>• Обязательный перерыв не менее <strong>1 часа</strong> (питание, отдых)<br>• Нельзя допрашивать в ночное время (22:00-06:00), кроме неотложных случаев</p>
+          <span class="card-label">Права подозреваемого:</span>
+          <p class="card-text">• Знать, в чем подозревается<br>• Давать показания или отказаться (ст. 51 Конституции)<br>• Иметь защитника с момента задержания/предъявления подозрения<br>• Представлять доказательства<br>• Подавать жалобы</p>
+          <div class="critical-warning">ЗАПРЕЩЕНО: наводящие вопросы, угрозы, шантаж, насилие, пытки. Всё это — ст. 75 УПК РФ (недопустимые доказательства)</div>
+          <span class="legal-ref">Ст. 46, 187-190 УПК РФ</span>`
+      },
+      { title: 'Допрос свидетеля / потерпевшего', badge: 'Ст. 56, 187-190 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Правила:</span>
+          <p class="card-text">Те же, что и для подозреваемого: 4+8 часов, перерыв 1 час, запрет ночного времени.</p>
+          <span class="card-label">Ответственность:</span>
+          <p class="card-text">Свидетель предупреждается об уголовной ответственности за:<br>• Отказ от дачи показаний (ст. 308 УК РФ)<br>• Дачу заведомо ложных показаний (ст. 307 УК РФ)</p>
+          <div class="info-box">Свидетель вправе явиться с адвокатом (ч. 5 ст. 189 УПК). Адвокат-представитель имеет все права защитника.</div>
+          <span class="legal-ref">Ст. 56, 187-190 УПК РФ</span>`
+      },
+      { title: 'Осмотр места происшествия', badge: 'Ст. 176-177 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Обследование места преступления для обнаружения следов, вещественных доказательств, установления обстановки.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Обеспечить охрану места (не допустить посторонних)<br>2. Вызвать понятых (минимум 2)<br>3. Применить тех. средства (фото, видео, слепки)<br>4. Составить протокол с планом/схемой<br>5. Изъять предметы, упаковать и опечатать</p>
+          <div class="info-box">Осмотр места происшествия может производиться <strong>ДО возбуждения УД</strong>. Это одно из немногих действий, допустимых на стадии проверки сообщения о преступлении.</div>
+          <span class="legal-ref">Ст. 176-177 УПК РФ</span>`
+      },
+      { title: 'Очная ставка', badge: 'Ст. 192 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Одновременный допрос двух ранее допрошенных лиц при наличии <strong>существенных противоречий</strong> в их показаниях.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Выяснить, знают ли они друг друга и в каких отношениях<br>2. Поочередно предложить рассказать об обстоятельствах<br>3. Задать вопросы о спорных обстоятельствах<br>4. Занести все показания в протокол<br>5. Ознакомить участников под роспись</p>
+          <div class="warning">Нельзя проводить очную ставку, если есть основания опасаться давления одного участника на другого.</div>
+          <span class="legal-ref">Ст. 192 УПК РФ</span>`
+      },
+      { title: 'Предъявление для опознания', badge: 'Ст. 193 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Предъявление лица или предмета для опознания свидетелю, потерпевшему, подозреваемому, обвиняемому.</p>
+          <span class="card-label">Требования:</span>
+          <p class="card-text">• Предъявляется в группе не менее <strong>3 лиц</strong>, внешне сходных с опознаваемым<br>• Обязательно участие <strong>2 понятых</strong><br>• <strong>Предварительно</strong> опознающий допрашивается об обстоятельствах, при которых он видел лицо/предмет<br>• Опознаваемому предлагается занять любое место среди статистов</p>
+          <div class="critical-warning">Если опознающий — свидетель/потерпевший, он предупреждается об ответственности по ст. 307 УК РФ (ложные показания).</div>
+          <span class="legal-ref">Ст. 193 УПК РФ</span>`
+      },
+      { title: 'Проверка показаний на месте', badge: 'Ст. 194 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Проверка ранее данных показаний на месте, связанном с исследуемым событием, с демонстрацией обстановки.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предложить лицу указать место и рассказать обстоятельства<br>2. <strong>Запрещено</strong> наводить, подсказывать, задавать наводящие вопросы<br>3. Лицо само демонстрирует действия<br>4. Обязательно 2 понятых + фото/видео</p>
+          <div class="warning">⚠️ НЕ ПУТАТЬ: Следственный эксперимент (ст. 194 УПК) ≠ Оперативный эксперимент (ФЗ-144) ≠ Проверка показаний на месте (ст. 194 УПК). Это РАЗНЫЕ действия!</div>
+          <span class="legal-ref">Ст. 194 УПК РФ</span>`
+      },
+      { title: 'Следственный эксперимент', badge: 'Ст. 181 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Воспроизведение действий, обстановки, иных обстоятельств для проверки и уточнения данных, имеющих значение для дела.</p>
+          <span class="card-label">Что можно проверить:</span>
+          <p class="card-text">• Возможность увидеть/услышать событие<br>• Возможность совершить определенные действия<br>• Механизм образования следов<br>• Последовательность событий</p>
+          <div class="critical-warning">Не допускается, если это создает опасность для здоровья участников или окружающих, унижает честь и достоинство.</div>
+          <span class="legal-ref">Ст. 181 УПК РФ</span>`
+      },
+      { title: 'Освидетельствование', badge: 'Ст. 179 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Осмотр тела человека для обнаружения следов преступления, особых примет, состояния опьянения.</p>
+          <span class="card-label">Требования:</span>
+          <p class="card-text">• Постановление следователя<br>• Если требуется обнажение — <strong>проводится врачом</strong><br>• При отказе — принудительно по постановлению<br>• Составление протокола с фото/видео</p>
+          <div class="warning">Освидетельствование ≠ Личный обыск. При обыске досматривается одежда и вещи, при освидетельствовании — тело.</div>
+          <span class="legal-ref">Ст. 179 УПК РФ</span>`
+      }
+    ],
+    violations: [
+      { title: 'Превышение полномочий', severity: 'critical', article: 'Ст. 286 УК РФ',
+        text: 'Совершение должностным лицом действий, явно выходящих за пределы его полномочий и повлекших существенное нарушение прав граждан/организаций.',
+        punishment: 'До 4 лет лишения свободы (ч. 1). До 7 лет (ч. 2 — с применением насилия/оружия). До 10 лет (ч. 3 — тяжкие последствия)' },
+      { title: 'Служебный подлог', severity: 'critical', article: 'Ст. 292 УК РФ',
+        text: 'Внесение должностным лицом в официальные документы заведомо ложных сведений/записей, а равно внесение исправлений, искажающих действительное содержание.',
+        punishment: 'До 2 лет лишения свободы (ч. 1). До 4 лет (ч. 2 — повлекшее нарушение прав граждан)' },
+      { title: 'Незаконное задержание', severity: 'critical', article: 'Ст. 301 УК РФ',
+        text: 'Заведомо незаконное задержание, заключение под стражу или содержание под стражей.',
+        punishment: 'До 3 лет лишения свободы (ч. 1). До 5 лет (ч. 2 — тяжкие последствия)' },
+      { title: 'Принуждение к даче показаний', severity: 'critical', article: 'Ст. 302 УК РФ',
+        text: 'Принуждение подозреваемого, обвиняемого, потерпевшего, свидетеля к даче показаний путем применения угроз, шантажа, насилия, пыток.',
+        punishment: 'До 8 лет лишения свободы (ч. 2 — с применением насилия/пыток)' },
+      { title: 'Фальсификация доказательств', severity: 'critical', article: 'Ст. 303 УК РФ',
+        text: 'Фальсификация доказательств по гражданскому/административному делу (ч. 1) или по уголовному делу (ч. 2 — лицом, производящим дознание/следователем/прокурором/адвокатом).',
+        punishment: 'До 5 лет лишения свободы (ч. 2). До 7 лет (ч. 3 — тяжкие последствия)' }
+    ],
+    checklists: [
+      { title: '✅ Задержание подозреваемого (ст. 91 УПК)', items: [
+        'Представиться и показать удостоверение', 'Разъяснить основания задержания',
+        'Разъяснить права (ст. 46 УПК, ст. 51 Конституции)', 'Составить протокол в течение 3 часов',
+        'Сообщить родственникам в течение 12 часов (ст. 96 УПК)', 'В течение 48 часов — суд или освобождение'
+      ]},
+      { title: '✅ Личный досмотр (ст. 27.7 КоАП)', items: [
+        '2 понятых того же пола (строго!)', 'Представиться и разъяснить основания',
+        'Составить протокол с описью', 'Упаковать и опечатать изъятое', 'Вручить копию протокола'
+      ]}
+    ],
     errors: [
-      { text: 'ППС проводит ОРМ (это делает только ОУР по ФЗ-144)' },
-      { text: 'Проверка документов "просто так" на улице (нарушение ст. 13 ФЗ-3)' },
+      { text: 'ППС проводит ОРМ (это только ОУР по ФЗ-144)' },
+      { text: 'Проверка документов "просто так" на улице' },
       { text: 'Личный досмотр без понятых или с одним понятым' },
       { text: 'Видеозапись вместо понятых при досмотре (незаконно)' },
       { text: 'Удержание подозреваемого более 48 часов без судебного решения' }
     ],
+    blanks: [10, 11, 12, 13, 14],
     interactions: [
-      { target: 'СКР', reason: 'Передача материалов для возбуждения УД (тяжкие преступления)' },
+      { target: 'СКР', reason: 'Передача материалов для возбуждения УД' },
       { target: 'Прокуратура', reason: 'Надзор, согласование ходатайств' },
-      { target: 'ФСБ', reason: 'Совместные операции по терроризму и экстремизму' },
-      { target: 'Росгвардия', reason: 'Силовая поддержка, ОМОН/СОБР' },
+      { target: 'ФСБ', reason: 'Совместные операции' },
+      { target: 'Росгвардия', reason: 'Силовая поддержка' },
       { target: 'ФСИН', reason: 'Передача задержанных в ИВС/СИЗО' }
-    ],
-    blanks: [10, 11, 12, 13, 14]
+    ]
   },
+
   fsb: {
-    id: 'fsb',
-    name: 'ФСБ России',
-    icon: '🛡️',
-    color: '#8e44ad',
-    structure: {
-      text: `Директор ФСБ (подчиняется напрямую Президенту)
+    id: 'fsb', name: 'ФСБ России', icon: '🛡️', color: '#8e44ad',
+    structure: `Директор ФСБ (подчиняется напрямую Президенту)
 ├── СЭБ — Служба экономической безопасности
-├── СЗКСиБТ ("Двойка") — контрразведка и антитеррор
+├── СЗКСиБТ ("Двойка") — контрразведка, антитеррор
 ├── ПС ФСБ — Пограничная служба
 ├── СОКР — Кадры
 ├── СОД — Обеспечение
 ├── ЦИС/ЦИБ — Информационная безопасность
 ├── ЦСН — Альфа, Вымпел, УСО
-└── УСБ — Собственная безопасность`
-    },
+└── УСБ — Собственная безопасность`,
     laws: [
       { num: 'ФЗ №40-ФЗ', name: 'О ФСБ', date: '03.04.1995' },
       { num: 'ФЗ №144-ФЗ', name: 'Об ОРД', date: '12.08.1995' },
       { num: 'Закон №5485-1', name: 'О государственной тайне', date: '' },
       { num: 'Указ №960', name: 'Вопросы ФСБ (регламент)', date: '' },
-      { num: 'ФЗ №5486-1', name: 'Об органах внешней разведки', date: '' },
       { num: 'ФЗ №390-ФЗ', name: 'О безопасности', date: '' }
     ],
     powers: [
-      { text: 'Проводить ОРМ: прослушка, наружка, внедрение (ФЗ-144)', status: 'yellow' },
-      { text: 'Проникать в помещения (с решением суда или постфактум)', status: 'yellow' },
-      { text: 'Получать информацию от операторов связи (СОРМ)', status: 'yellow' },
-      { text: 'Выдавать предостережения гражданам (ст. 13.1 ФЗ-40)', status: 'green' },
-      { text: 'Задерживать до 30 суток при угрозе терроризма (ст. 27.5 КоАП)', status: 'yellow' }
-    ],
-    restrictions: [
-      'ФСБ НЕ возбуждает уголовные дела (это делает СКР)',
-      'ФСБ предоставляет материалы ОРД следователю',
-      'На КПП воинских частей — по удостоверению + ордеру (для адвоката)'
-    ],
-    algorithms: {
-      'Проведение ОРМ (прослушка)': [
-        'Установить основания (тяжкое/особо тяжкое преступление)',
-        'Подготовить постановление начальника УФСБ',
-        'Получить решение суда (ст. 8 ФЗ-144)',
-        'Направить оператору связи',
-        'Срок — до 180 суток с продлением',
-        'Результаты оформить актом',
-        'При необходимости — рассекретить (ст. 11 ФЗ-144)'
-      ],
-      'Предостережение гражданину': [
-        'Получить оперативные данные о готовящемся преступлении',
-        'Составить предостережение (ст. 13.1 ФЗ-40)',
-        'Вручить гражданину под роспись',
-        'При отказе — составить акт',
-        'Игнорирование может квалифицироваться как приготовление'
-      ],
-      'Передача материалов в СКР': [
-        'Собрать материалы ОРД',
-        'Рассекретить при необходимости',
-        'Составить рапорт (ст. 143 УПК)',
-        'Направить в СО СКР',
-        'СКР выносит постановление о возбуждении УД'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ ОРМ с ограничением прав (прослушка)',
-        items: [
-          'Постановление начальника УФСБ',
-          'Решение суда (ст. 8 ФЗ-144)',
-          'Срок — до 180 суток',
-          'Направление оператору связи',
-          'Акт о результатах',
-          'Рассекречивание при необходимости'
-        ]
+      { title: 'Проверка документов', category: 'docs', badge: 'Ч. 1 ст. 13 ФЗ-40', badgeColor: 'blue',
+        content: `<span class="card-label">Право на проверку:</span>
+          <p class="card-text">Проверка допускается ТОЛЬКО при наличии данных, дающих основания подозревать гражданина в совершении преступления, или если имеются данные, что гражданин находится в розыске.</p>
+          <span class="card-label">ОБЯЗАННОСТЬ представиться:</span>
+          <p class="card-text">При обращении к гражданину сотрудник <strong>обязан</strong> представиться (должность, звание, ФИО) и по требованию гражданина предъявить служебное удостоверение.</p>
+          <span class="legal-ref">Право: ч. 1 ст. 13 ФЗ-40 «О ФСБ»<br>Обязанность: ст. 16.1 ФЗ-40</span>`
       },
-      {
-        title: '✅ Передача материалов в СКР',
-        items: [
-          'Собрать материалы ОРД',
-          'Рассекретить (постановление начальника)',
-          'Составить рапорт (ст. 143 УПК)',
-          'Направить в СО СКР по Небогорску',
-          'Сопровождать при следственных действиях'
-        ]
+      { title: 'Отказ в предъявлении удостоверения', category: 'docs', badge: 'Исключение', badgeColor: 'purple',
+        content: `<span class="card-label">Когда можно:</span>
+          <p class="card-text">При проведении оперативного внедрения, контрольной закупки или оперативного эксперимента. Предъявление реального удостоверения скомпрометирует мероприятие.</p>
+          <span class="card-label">Действия:</span>
+          <p class="card-text">1. Сообщить о проведении ОРМ<br>2. Отказать в показе удостоверения<br>3. Разъяснить право на проверку законности через прокурора</p>
+          <span class="legal-ref">Ч. 5 ст. 5 ФЗ-144 «Об ОРД»</span>`
+      },
+      { title: 'Отказ в названии подразделения', category: 'docs', badge: 'Гостайна', badgeColor: 'purple',
+        content: `<span class="card-label">Основание:</span>
+          <p class="card-text">Сведения об организационно-штатной структуре, дислокации и принадлежности к конкретным управлениям ФСБ составляют государственную тайну.</p>
+          <span class="card-label">Действия:</span>
+          <p class="card-text">Обязан назвать ФИО и звание. Вправе отказать в названии конкретного отдела, сославшись на режим секретности.</p>
+          <span class="legal-ref">Ст. 5, 11 Закона РФ «О гостайне»</span>`
+      },
+      { title: 'Задержание с поличным', category: 'force', badge: 'Ст. 91 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Условия:</span>
+          <p class="card-text">Лицо застигнуто при совершении преступления или непосредственно после. Или на его теле/одежде обнаружены явные следы преступления.</p>
+          <span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Объявить о задержании<br>2. Разъяснить права (ст. 51 Конституции)<br>3. Составить протокол в течение 3 часов<br>4. Доставить в изолятор</p>
+          <span class="legal-ref">Ст. 91 УПК РФ</span>`
+      },
+      { title: 'Применение физической силы', category: 'force', badge: 'Ст. 14-15 ФЗ-40', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">Для пресечения преступлений, задержания лиц, оказывающих вооруженное сопротивление, преодоления противодействия законной деятельности.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предупредить (голосом)<br>2. Применить соразмерную силу<br>3. Оказать первую помощь<br>4. Уведомить прокурора в течение 24 часов</p>
+          <span class="legal-ref">Ст. 14, 15 ФЗ-40 «О ФСБ»</span>`
+      },
+      { title: 'Применение огнестрельного оружия', category: 'force', badge: 'Ст. 16 ФЗ-40', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">Для защиты от нападения, угрожающего жизни, пресечения попытки завладения оружием, освобождения заложников.</p>
+          <div class="critical-warning">ЗАПРЕЩЕНО применять в отношении женщин, инвалидов и несовершеннолетних (кроме вооруженного сопротивления)</div>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предупредить (выстрел вверх)<br>2. Применить оружие<br>3. Оказать помощь<br>4. Сохранить место до следствия</p>
+          <span class="legal-ref">Ст. 16 ФЗ-40 «О ФСБ»</span>`
+      },
+      { title: 'Вход в жилые помещения', category: 'docs', badge: 'Ст. 13 ФЗ-40', badgeColor: 'yellow',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">Для пресечения преступлений, преследования лиц, подозреваемых в совершении преступлений, при наличии сведений об угрозе жизни граждан.</p>
+          <span class="card-label">Требование:</span>
+          <p class="card-text">В течение <strong>24 часов</strong> уведомить прокурора о факте проникновения.</p>
+          <span class="legal-ref">Ст. 13 ФЗ-40 «О ФСБ»</span>`
+      },
+      { title: 'Оцепление территорий', category: 'docs', badge: 'Ст. 13 ФЗ-40', badgeColor: 'green',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">При проведении ОРМ, расследовании преступлений, для обеспечения безопасности граждан (КТР, режим ЧП).</p>
+          <span class="card-label">Действия:</span>
+          <p class="card-text">Ограничить доступ граждан на территорию, приостановить движение транспорта, организовать контроль за перемещением лиц.</p>
+          <span class="legal-ref">Ст. 13 ФЗ-40 «О ФСБ»</span>`
       }
+    ],
+    procedures: [
+      { title: '🆕 Рапорт об обнаружении преступления', badge: 'Ст. 143 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">ФСБ <strong>НЕ возбуждает уголовные дела</strong> по большинству профильных статей (терроризм, госизмена, коррупция, бандитизм). Оперативник составляет Рапорт и передает материал в СКР.</p>
+          <span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Составить Рапорт об обнаружении признаков преступления<br>2. Зарегистрировать в КУСП<br>3. Передать в Следственный Комитет РФ<br>4. Следователь СКР выносит Постановление о возбуждении УД</p>
+          <span class="legal-ref">Ст. 143 УПК РФ (Рапорт)<br>Ст. 146 УПК РФ (Возбуждение УД следователем)</span>`
+      },
+      { title: '🆕 Подследственность', badge: 'Ст. 151 УПК', badgeColor: 'red',
+        content: `<span class="card-label">СКР ведет:</span>
+          <p class="card-text">• Ст. 205 УК (Терроризм)<br>• Ст. 275, 276 УК (Госизмена, Шпионаж)<br>• Ст. 282 УК (Экстремизм)<br>• Ст. 209, 210 УК (Бандитизм, ОПГ)<br>• Ст. 290, 291 УК (Взятки высокопоставленные)</p>
+          <span class="card-label">ФСБ (следствие) ведет самостоятельно:</span>
+          <p class="card-text">Ст. 283, 283.1 (Гостайна), ст. 272-274 (Киберпреступления против государства), ст. 322 (Незаконное пересечение границы).</p>
+          <span class="legal-ref">Ст. 151 УПК РФ</span>`
+      },
+      { title: 'Статус: Подозреваемый', badge: 'Ст. 46 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Момент возникновения:</span>
+          <p class="card-text">1. Возбуждение УД в отношении <strong>конкретного лица</strong><br>2. Фактическое задержание (ст. 91, 92 УПК)<br>3. Применение меры пресечения до предъявления обвинения<br>4. Уведомление о подозрении</p>
+          <span class="card-label">Права:</span>
+          <p class="card-text">Знать, в чем подозреваться; давать показания или отказаться (ст. 51); иметь защитника с момента задержания; представлять доказательства; подавать жалобы.</p>
+          <span class="legal-ref">Ст. 46 УПК РФ</span>`
+      },
+      { title: 'Статус: Обвиняемый', badge: 'Ст. 47 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Момент возникновения:</span>
+          <p class="card-text">1. Вынесение Постановления о привлечении в качестве обвиняемого<br>2. Предъявление обвинения в порядке ст. 172-175 УПК</p>
+          <span class="card-label">Процедура предъявления:</span>
+          <p class="card-text">1. Следователь выносит постановление<br>2. Не позднее <strong>3 суток</strong> предъявляет обвинение с участием защитника<br>3. Разъясняет существо обвинения и права<br>4. Допрашивает в качестве обвиняемого</p>
+          <span class="legal-ref">Ст. 47 УПК РФ</span>`
+      },
+      { title: 'Оперативный эксперимент', badge: 'ФЗ-144', badgeColor: 'purple',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Воспроизведение экспериментальных условий и обстоятельств преступления, проведение других опытных действий для выявления лиц.</p>
+          <span class="card-label">Требование:</span>
+          <p class="card-text">Письменное решение руководителя органа ОРД. Нельзя провоцировать на совершение преступления.</p>
+          <span class="legal-ref">Ст. 6 ФЗ-144 «Об ОРД»</span>`
+      },
+      { title: 'Снятие информации с техканалов (СОРМ)', badge: 'Ч. 4 ст. 8 ФЗ-144', badgeColor: 'purple',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Получение интернет-трафика, данных с компьютерных сетей, СМС-сообщений, метаданных связи через системы СОРМ-1, СОРМ-2, СОРМ-3.</p>
+          <div class="info-box">В отличие от прослушивания (ст. 186 УПК), снятие информации с технических каналов <strong>НЕ ограничено</strong> только тяжкими/особо тяжкими.</div>
+          <span class="card-label">Требование:</span>
+          <p class="card-text">Только на основании судебного решения. Операторы связи обязаны предоставлять доступ.</p>
+          <span class="legal-ref">Ст. 6 · Ч. 4 ст. 8 ФЗ-144</span>`
+      },
+      { title: 'Оперативное внедрение', badge: 'Легендирование', badgeColor: 'purple',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Введение сотрудника в преступную группу под вымышленной личностью для документирования преступлений изнутри.</p>
+          <span class="card-label">Требование:</span>
+          <p class="card-text">Письменное решение руководителя органа ОРД. Сотрудник вправе не раскрывать принадлежность к ФСБ (ч. 5 ст. 5 ФЗ-144).</p>
+          <span class="legal-ref">Ст. 6 · Ч. 5 ст. 5 ФЗ-144</span>`
+      },
+      { title: 'Контроль и запись переговоров (ПН)', badge: 'Ст. 186 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Применение:</span>
+          <p class="card-text">Допускается по уголовным делам о преступлениях <strong>средней тяжести</strong>, тяжких и особо тяжких.</p>
+          <span class="card-label">Требование:</span>
+          <p class="card-text">Только по судебному решению. Результаты оформляются протоколом прослушивания с расшифровкой записей.</p>
+          <span class="legal-ref">Ст. 186 УПК · Ч. 4 ст. 8 ФЗ-144</span>`
+      },
+      { title: 'Контрольная закупка', badge: 'ФЗ-144', badgeColor: 'purple',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Приобретение у подозреваемых предметов, веществ, товаров, изъятых из оборота (наркотики, оружие).</p>
+          <span class="card-label">Требование:</span>
+          <p class="card-text">Письменное решение руководителя органа ОРД. Оформление акта закупки с описанием приобретенного.</p>
+          <span class="legal-ref">Ст. 6 ФЗ-144</span>`
+      },
+      { title: 'Оперативные учеты (Базы данных)', badge: 'ФЗ-152', badgeColor: 'blue',
+        content: `<span class="card-label">Внутриведомственные:</span>
+          <p class="card-text">• <strong>ПУО</strong> — Подозреваемые, Обвиняемые, Осужденные<br>• <strong>ИБД</strong> — Информационный банк данных<br>• <strong>«Заслон»</strong> — Федеральный розыск ФСБ<br>• <strong>АИПС «Розыск-Магистраль»</strong> — розыск на транспорте</p>
+          <span class="card-label">Межведомственные запросы:</span>
+          <p class="card-text">• <strong>ГИАЦ МВД</strong> — судимости, розыск<br>• <strong>ФНС</strong> — ИНН, налоговая история<br>• <strong>ЕГРЮЛ/ЕГРИП</strong> — юр. лица<br>• <strong>Росреестр</strong> — недвижимость<br>• <strong>ГИБДД</strong> — ТС</p>
+          <span class="legal-ref">ФЗ-152 «О персональных данных» (с исключениями для ОРД)</span>`
+      }
+    ],
+    violations: [
+      { title: 'Превышение полномочий', severity: 'critical', article: 'Ст. 286 УК РФ',
+        text: 'Действия, явно выходящие за пределы полномочий сотрудника ФСБ, повлекшие нарушение прав граждан.', punishment: 'До 10 лет лишения свободы (при тяжких последствиях)' },
+      { title: 'Принуждение к даче показаний', severity: 'critical', article: 'Ст. 302 УК РФ',
+        text: 'Применение угроз, шантажа, насилия, пыток к подозреваемому/обвиняемому/свидетелю.', punishment: 'До 8 лет лишения свободы' },
+      { title: 'Фальсификация результатов ОРД', severity: 'critical', article: 'Ст. 303 УК РФ',
+        text: 'Фальсификация доказательств по уголовному делу лицом, производящим ОРД.', punishment: 'До 7 лет лишения свободы' },
+      { title: 'Разглашение гостайны', severity: 'critical', article: 'Ст. 283 УК РФ',
+        text: 'Разглашение сведений, составляющих гостайну, лицом, которому они были доверены по службе.', punishment: 'До 7 лет лишения свободы (ч. 2 — при тяжких последствиях)' }
+    ],
+    checklists: [
+      { title: '✅ ОРМ с ограничением прав (прослушка)', items: [
+        'Постановление начальника УФСБ', 'Решение суда (ст. 8 ФЗ-144)',
+        'Срок — до 180 суток', 'Направление оператору связи',
+        'Акт о результатах', 'Рассекречивание при необходимости'
+      ]},
+      { title: '✅ Передача материалов в СКР', items: [
+        'Собрать материалы ОРД', 'Рассекретить (постановление начальника)',
+        'Составить рапорт (ст. 143 УПК)', 'Направить в СО СКР по Небогорску',
+        'Сопровождать при следственных действиях'
+      ]}
     ],
     errors: [
       { text: 'ФСБ "возбуждает уголовное дело" (это только СКР)' },
-      { text: 'Прослушка без решения суда (нарушение ст. 8 ФЗ-144)' },
-      { text: 'Путаница: следственный эксперимент (ст. 194 УПК) ≠ оперативный эксперимент (ФЗ-144)' },
-      { text: 'Оперуполномоченный (ОРД) путается со следователем (УПК)' }
+      { text: 'Прослушка без решения суда' },
+      { text: 'Следственный эксперимент путают с оперативным экспериментом' },
+      { text: 'Оперуполномоченный путают со следователем' }
     ],
+    blanks: [1, 2, 3, 4, 5],
     interactions: [
-      { target: 'СКР', reason: 'Передача материалов ОРД для возбуждения УД' },
+      { target: 'СКР', reason: 'Передача материалов ОРД' },
       { target: 'Прокуратура', reason: 'Надзор за ОРД' },
       { target: 'МВД', reason: 'Совместные операции' },
       { target: 'Росгвардия', reason: 'Силовая поддержка ЦСН' },
       { target: 'Суд', reason: 'Получение решений на ОРМ' }
-    ],
-    blanks: [1, 2, 3, 4, 5]
+    ]
   },
+
   skr: {
-    id: 'skr',
-    name: 'СКР (Следственный комитет)',
-    icon: '🕵️',
-    color: '#c0392b',
-    structure: {
-      text: `Председатель СКР
+    id: 'skr', name: 'СКР (Следственный комитет)', icon: '🕵️', color: '#c0392b',
+    structure: `Председатель СКР
 ├── Центральный аппарат
 ├── Главные следственные управления по ФО
 │   └── СО по Небогорску
 ├── Военные следственные органы
-└── Специализированные СО`
-    },
+└── Специализированные СО`,
     laws: [
       { num: 'ФЗ №403-ФЗ', name: 'О Следственном комитете РФ', date: '' },
-      { num: 'ФЗ №1437-ФЗ', name: 'Изменения в УПК', date: '' },
-      { num: 'Ст. 151 УПК', name: 'Подследственность', date: '' }
+      { num: 'Ст. 151 УПК', name: 'Подследственность', date: '' },
+      { num: 'ФЗ №1437-ФЗ', name: 'Изменения в УПК', date: '' }
     ],
     powers: [
-      { text: 'Возбуждать уголовные дела (ст. 146 УПК)', status: 'green' },
-      { text: 'Проводить любые следственные действия (обыск, допрос, опознание)', status: 'green' },
-      { text: 'Ходатайствовать о мере пресечения (ст. 97-110 УПК)', status: 'yellow' },
-      { text: 'Направлять запросы, ОБЯЗАТЕЛЬНЫЕ к исполнению', status: 'green' },
-      { text: 'Выносить постановления о привлечении в качестве обвиняемого', status: 'green' }
-    ],
-    restrictions: [
-      'СКР НЕ проводит ОРМ (это ФСБ/МВД по ФЗ-144)',
-      'Следователь ≠ оперуполномоченный',
-      'Все действия строго по УПК РФ'
-    ],
-    algorithms: {
-      'Возбуждение УД (ст. 146 УПК)': [
-        'Изучить рапорт/заявление/материалы ОРД',
-        'Установить признаки преступления',
-        'Вынести постановление о возбуждении УД',
-        'Принять дело к производству',
-        'Направить копию прокурору в течение 24 часов',
-        'Уведомить заявителя и подозреваемого'
-      ],
-      'Обыск в жилище (ст. 182 УПК)': [
-        'Собрать данные о наличии предметов/документов',
-        'Получить решение суда (обязательно!)',
-        'Предложить выдать добровольно',
-        'При отказе — произвести принудительно',
-        'Обеспечить 2 понятых ИЛИ видеозапись',
-        'Составить протокол с описью изъятого',
-        'Копию протокола — владельцу'
-      ],
-      'Допрос подозреваемого': [
-        'Вызвать повесткой (ст. 188 УПК)',
-        'Разъяснить права (ст. 46 УПК, ст. 51 Конституции)',
-        'Обеспечить участие защитника (обязательно!)',
-        'Составить протокол',
-        'Ознакомить под роспись'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Возбуждение УД (ст. 146 УПК)',
-        items: [
-          'Изучить материалы',
-          'Вынести постановление',
-          'Принять к производству',
-          'Направить прокурору (24 часа)',
-          'Уведомить участников'
-        ]
+      { title: 'Возбуждение уголовного дела', category: 'docs', badge: 'Ст. 146 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Заявление о преступлении<br>• Явка с повинной<br>• Рапорт об обнаружении признаков преступления (от ФСБ/МВД)<br>• Сообщение из иных источников (СМИ, прокуратура)</p>
+          <span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Изучить поступивший материал<br>2. Установить наличие признаков преступления<br>3. Вынести Постановление о возбуждении УД<br>4. Принять дело к производству<br>5. В течение <strong>24 часов</strong> направить копию прокурору<br>6. Уведомить заявителя и подозреваемого</p>
+          <div class="info-box">Прокурор вправе отменить постановление о возбуждении УД в течение 24 часов с момента получения копии.</div>
+          <span class="legal-ref">Ст. 140-147 УПК РФ</span>`
       },
-      {
-        title: '✅ Обыск в жилище',
-        items: [
-          'Решение суда (обязательно!)',
-          'Предложить выдать добровольно',
-          '2 понятых ИЛИ видеозапись',
-          'Протокол с описью',
-          'Копия — владельцу'
-        ]
+      { title: 'Привлечение в качестве обвиняемого', category: 'docs', badge: 'Ст. 171 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">Собрано достаточно доказательств, дающих основания для обвинения лица в совершении преступления.</p>
+          <span class="card-label">Процедура:</span>
+          <p class="card-text">1. Вынести Постановление о привлечении в качестве обвиняемого<br>2. Не позднее <strong>3 суток</strong> предъявить обвинение<br>3. Разъяснить существо обвинения и права<br>4. Допросить в качестве обвиняемого (обязательно с защитником)</p>
+          <div class="critical-warning">Обвинение должно быть конкретным: статья УК, часть, пункт, время, место, способ, мотив, последствия.</div>
+          <span class="legal-ref">Ст. 171-175 УПК РФ</span>`
+      },
+      { title: 'Обыск в жилище', category: 'search', badge: 'Ст. 182 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">Имеются достаточные данные полагать, что в жилище находятся орудия преступления, предметы/документы/ценности, имеющие значение для дела.</p>
+          <span class="card-label">Требования:</span>
+          <p class="card-text">• <strong>ТОЛЬКО по решению суда</strong> (ст. 29, 165, 182 УПК)<br>• Исключение — неотложные случаи (с уведомлением суда в течение 24ч)<br>• 2 понятых ИЛИ видеозапись<br>• Предложить выдать добровольно<br>• Составить протокол с описью</p>
+          <div class="critical-warning">Обыск в жилище БЕЗ решения суда = нарушение ст. 25 Конституции. Все доказательства — недопустимые (ст. 75 УПК).</div>
+          <span class="legal-ref">Ст. 182, 165 УПК РФ</span>`
+      },
+      { title: 'Обыск в неотложных случаях', category: 'search', badge: 'Ч. 5 ст. 165 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Когда можно БЕЗ суда:</span>
+          <p class="card-text">• Преследование по горячим следам<br>• Спасение заложников / жизни граждан<br>• Риск немедленного уничтожения улик<br>• Задержание подозреваемого, скрывшегося в жилище</p>
+          <span class="card-label">ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ:</span>
+          <p class="card-text">Следователь в течение <strong>24 часов</strong> с момента начала обыска обязан уведомить судью и прокурора. Судья в течение 24 часов проверяет законность.</p>
+          <div class="warning">Если судья признает обыск незаконным — все доказательства недопустимы (ст. 75 УПК).</div>
+          <span class="legal-ref">Ч. 5 ст. 165 УПК РФ</span>`
+      },
+      { title: 'Осмотр жилища (с согласия)', category: 'search', badge: 'Ст. 177 УПК', badgeColor: 'green',
+        content: `<span class="card-label">КЛЮЧЕВОЕ ОТЛИЧИЕ от обыска:</span>
+          <div class="info-box">Если проживающие <strong>не возражают</strong> против осмотра, судебное решение <strong>НЕ требуется</strong>.</div>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Получить согласие проживающих (желательно в письменной форме)<br>2. Составить протокол осмотра<br>3. При отказе жильцов — переходить к процедуре обыска с судебным решением</p>
+          <span class="legal-ref">Ст. 177 УПК РФ</span>`
+      },
+      { title: 'Выемка', category: 'search', badge: 'Ст. 183 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Изъятие предметов и документов, если <strong>точно известно</strong>, где и у кого они находятся. Отличается от обыска точностью.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">• Постановление следователя<br>• Предложить выдать добровольно<br>• При отказе — принудительно<br>• Понятые или видеозапись</p>
+          <div class="info-box">Выемка в адвокатском образовании — <strong>только по судебному решению</strong> (ст. 450.1 УПК).</div>
+          <span class="legal-ref">Ст. 183 УПК РФ</span>`
+      },
+      { title: 'Мера пресечения — заключение под стражу', category: 'force', badge: 'Ст. 108 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Преступления с наказанием <strong>свыше 3 лет</strong> лишения свободы<br>• При невозможности применения иной меры пресечения<br>• Подозреваемый может скрыться / продолжить преступную деятельность / угрожать свидетелям / уничтожить доказательства</p>
+          <span class="card-label">Сроки:</span>
+          <p class="card-text">• До 2 месяцев (стандарт)<br>• До 6 месяцев (продление руководителем СО)<br>• До 12 месяцев (продление вышестоящим руководителем)<br>• До 18 месяцев — в исключительных случаях (особо тяжкие)</p>
+          <span class="legal-ref">Ст. 97, 108, 109 УПК РФ</span>`
       }
+    ],
+    procedures: [
+      { title: 'Допрос подозреваемого', badge: 'Ст. 46, 187-190 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Правила:</span>
+          <p class="card-text">• Не более <strong>4 часов подряд</strong>, не более <strong>8 часов в день</strong><br>• Обязательный перерыв не менее <strong>1 часа</strong><br>• Нельзя в ночное время (кроме неотложных случаев)</p>
+          <span class="card-label">Обязательно:</span>
+          <p class="card-text">• Разъяснить ст. 51 Конституции<br>• Участие защитника (с момента задержания/предъявления подозрения)<br>• Составление протокола</p>
+          <div class="critical-warning">ЗАПРЕЩЕНО: наводящие вопросы, угрозы, шантаж, пытки. Всё это — ст. 75 УПК РФ</div>
+          <span class="legal-ref">Ст. 46, 187-190 УПК РФ</span>`
+      },
+      { title: 'Допрос обвиняемого', badge: 'Ст. 173 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Порядок:</span>
+          <p class="card-text">1. Сразу после предъявления обвинения<br>2. Разъяснить права (ст. 47 УПК)<br>3. Спросить, признает ли вину<br>4. Предложить дать показания по существу обвинения<br>5. Обязательно участие защитника</p>
+          <span class="card-label">Особенность:</span>
+          <p class="card-text">Отказ от дачи показаний НЕ является препятствием для продолжения расследования и предъявления дела в суд.</p>
+          <span class="legal-ref">Ст. 173-174 УПК РФ</span>`
+      },
+      { title: 'Очная ставка', badge: 'Ст. 192 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Одновременный допрос двух ранее допрошенных лиц при наличии <strong>существенных противоречий</strong>.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Выяснить, знают ли они друг друга<br>2. Поочередно задать вопросы о спорных обстоятельствах<br>3. Занести все показания в протокол</p>
+          <span class="legal-ref">Ст. 192 УПК РФ</span>`
+      },
+      { title: 'Опознание', badge: 'Ст. 193 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Требования:</span>
+          <p class="card-text">• Предъявляется в группе <strong>не менее 3 лиц</strong>, внешне сходных<br>• Обязательно <strong>2 понятых</strong><br>• Предварительно опознающий допрашивается<br>• Опознаваемый может выбрать любое место среди статистов</p>
+          <span class="legal-ref">Ст. 193 УПК РФ</span>`
+      },
+      { title: 'Проверка показаний на месте', badge: 'Ст. 194 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Порядок:</span>
+          <p class="card-text">1. Лицо само указывает на объекты<br>2. Рассказывает обстоятельства<br>3. Запрещено наводить или подсказывать<br>4. 2 понятых + фото/видео</p>
+          <span class="legal-ref">Ст. 194 УПК РФ</span>`
+      },
+      { title: 'Следственный эксперимент', badge: 'Ст. 181 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Воспроизведение действий/обстановки для проверки данных дела.</p>
+          <div class="critical-warning">Не допускается, если создает опасность для здоровья, унижает честь и достоинство.</div>
+          <span class="legal-ref">Ст. 181 УПК РФ</span>`
+      },
+      { title: 'Назначение экспертизы', badge: 'Ст. 195-207 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Виды:</span>
+          <p class="card-text">• Судебно-медицинская<br>• Судебно-психиатрическая<br>• Криминалистическая<br>• Компьютерно-техническая<br>• Лингвистическая<br>• Автотехническая<br>• Строительно-техническая</p>
+          <span class="card-label">Обязательна экспертиза:</span>
+          <p class="card-text">• Причины смерти<br>• Характер и степень вреда здоровью<br>• Психическое/физическое состояние (при сомнениях)<br>• Возраст (если нет документов)</p>
+          <span class="legal-ref">Ст. 195-207 УПК РФ</span>`
+      },
+      { title: 'Наложение ареста на имущество', badge: 'Ст. 115 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Цели:</span>
+          <p class="card-text">• Обеспечение исполнения приговора (конфискация)<br>• Обеспечение гражданского иска<br>• Возможное погашение штрафов</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">• <strong>Только по судебному решению</strong><br>• Составление протокола с описью<br>• Возможна передача на хранение<br>• Запрет распоряжаться имуществом</p>
+          <span class="legal-ref">Ст. 115 УПК РФ</span>`
+      },
+      { title: 'Получение образцов для экспертизы', badge: 'Ст. 202 УПК', badgeColor: 'blue',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Получение образцов крови, слюны, волос, почерка, иных образцов для сравнительного исследования.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">• Постановление следователя<br>• При необходимости — принудительно<br>• Не должно унижать достоинство, опасно для здоровья</p>
+          <span class="legal-ref">Ст. 202 УПК РФ</span>`
+      },
+      { title: 'Временное отстранение от должности', badge: 'Ст. 114 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Запрет подозреваемому/обвиняемому занимать должность или осуществлять деятельность, связанную с преступлением.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">• По судебному решению<br>• Направляется работодателю<br>• Срок — до окончания расследования</p>
+          <span class="legal-ref">Ст. 114 УПК РФ</span>`
+      }
+    ],
+    violations: [
+      { title: 'Принуждение к даче показаний', severity: 'critical', article: 'Ст. 302 УК РФ',
+        text: 'Применение угроз, шантажа, насилия, пыток к подозреваемому/обвиняемому/свидетелю/потерпевшему.', punishment: 'До 8 лет лишения свободы (ч. 2 — с применением насилия/пыток)' },
+      { title: 'Фальсификация доказательств', severity: 'critical', article: 'Ст. 303 УК РФ',
+        text: 'Фальсификация доказательств по уголовному делу следователем/дознавателем/прокурором/адвокатом.', punishment: 'До 5 лет (ч. 2). До 7 лет (ч. 3 — тяжкие последствия)' },
+      { title: 'Незаконное возбуждение УД', severity: 'critical', article: 'Ст. 299 УК РФ',
+        text: 'Привлечение заведомо невиновного к уголовной ответственности.', punishment: 'До 7 лет (ч. 1). До 10 лет (ч. 2 — с обвинением в тяжком/особо тяжком)' },
+      { title: 'Незаконное задержание', severity: 'critical', article: 'Ст. 301 УК РФ',
+        text: 'Заведомо незаконное задержание, заключение под стражу.', punishment: 'До 5 лет (ч. 2 — тяжкие последствия)' }
+    ],
+    checklists: [
+      { title: '✅ Возбуждение УД (ст. 146 УПК)', items: [
+        'Изучить материалы', 'Вынести постановление',
+        'Принять к производству', 'Направить прокурору (24 часа)', 'Уведомить участников'
+      ]},
+      { title: '✅ Обыск в жилище', items: [
+        'Решение суда (обязательно!)', 'Предложить выдать добровольно',
+        '2 понятых ИЛИ видеозапись', 'Протокол с описью', 'Копия — владельцу'
+      ]}
     ],
     errors: [
       { text: 'СКР ведет ОРД (это делает ФСБ/МВД)' },
-      { text: 'Обыск в жилище без решения суда (кроме исключительных случаев с последующим уведомлением суда за 24ч)' },
+      { text: 'Обыск в жилище без решения суда' },
       { text: 'Следователь путается с оперуполномоченным' },
       { text: 'Игнорирование ст. 75 УПК (недопустимые доказательства)' }
     ],
+    blanks: [6, 7, 8, 9],
     interactions: [
       { target: 'ФСБ', reason: 'Получение материалов ОРД' },
       { target: 'МВД', reason: 'Получение материалов дознания' },
       { target: 'Прокуратура', reason: 'Надзор, согласование ходатайств' },
-      { target: 'Суд', reason: 'Ходатайства об аресте, обыске, продлении' }
-    ],
-    blanks: [6, 7, 8, 9]
+      { target: 'Суд', reason: 'Ходатайства об аресте, обыске' }
+    ]
   },
+
   prosecutor: {
-    id: 'prosecutor',
-    name: 'Прокуратура',
-    icon: '⚖️',
-    color: '#d35400',
-    structure: {
-      text: `Генеральная прокуратура РФ
+    id: 'prosecutor', name: 'Прокуратура', icon: '⚖️', color: '#d35400',
+    structure: `Генеральная прокуратура РФ
 ├── Прокуратуры субъектов РФ
 │   └── Районные/городские прокуратуры
 ├── Главная военная прокуратура (ГВП)
 │   ├── Прокуратуры военных округов
 │   └── Прокуратуры гарнизонов
-└── Специализированные (транспортные, природоохранные)`
-    },
+└── Специализированные (транспортные, природоохранные)`,
     laws: [
       { num: 'ФЗ №2202-1', name: 'О прокуратуре РФ', date: '17.01.1992' },
       { num: 'Ст. 37 УПК', name: 'Полномочия прокурора', date: '' },
       { num: 'Ст. 124 УПК', name: 'Порядок рассмотрения жалоб', date: '' }
     ],
     powers: [
-      { text: 'Утверждать обвинительное заключение', status: 'green' },
-      { text: 'Возвращать дело следователю на доработку', status: 'green' },
-      { text: 'Отменять незаконные постановления следователя', status: 'green' },
-      { text: 'Рассматривать жалобы граждан (3-10 суток)', status: 'green' },
-      { text: 'Участвовать в суде (гособвинение)', status: 'green' },
-      { text: 'Требовать документы от любых органов', status: 'green' }
-    ],
-    restrictions: [
-      'Прокурор НЕ ведет следствие (с 2007 года)',
-      'Прокурор НЕ возбуждает УД (с 2011 года)',
-      'Прокурор НЕ отменяет приговор суда — только апелляционное/кассационное представление'
-    ],
-    algorithms: {
-      'Рассмотрение жалобы (ст. 124 УПК)': [
-        'Получить жалобу на действия следователя/дознавателя',
-        'Изучить материалы',
-        'Рассмотреть в течение 3 суток (до 10 в сложных случаях)',
-        'Вынести постановление: удовлетворить ИЛИ отказать',
-        'Уведомить заявителя'
-      ],
-      'Надзор за следствием': [
-        'Проверить законность возбуждения УД (в течение 24ч)',
-        'Изучить постановления следователя',
-        'При нарушении — отменить постановление',
-        'Внести представление об устранении нарушений',
-        'Направить материалы в соответствующий СО'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Утверждение обвинительного заключения',
-        items: [
-          'Изучить материалы УД',
-          'Проверить соблюдение УПК',
-          'Проверить обоснованность обвинения',
-          'Вынести постановление об утверждении',
-          'Направить дело в суд'
-        ]
+      { title: 'Утверждение обвинительного заключения', category: 'docs', badge: 'Ст. 221 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Полномочия:</span>
+          <p class="card-text">Прокурор рассматривает дело, поступившее от следователя, и принимает одно из решений:<br>1. Утвердить обвинительное заключение и направить дело в суд<br>2. Вернуть дело следователю для дополнительного расследования<br>3. Вернуть дело для перепредъявления обвинения<br>4. Прекратить дело<br>5. Изменить объем обвинения (в сторону смягчения)</p>
+          <span class="card-label">Сроки:</span>
+          <p class="card-text">Рассмотрение — <strong>до 10 суток</strong> (по общему правилу). Для сложных дел — до 30 суток.</p>
+          <span class="legal-ref">Ст. 221 УПК РФ</span>`
       },
-      {
-        title: '✅ Рассмотрение жалобы (ст. 124 УПК)',
-        items: [
-          'Зарегистрировать жалобу',
-          'Изучить материалы',
-          'Принять решение (3-10 суток)',
-          'Вынести постановление',
-          'Уведомить заявителя'
-        ]
+      { title: 'Надзор за следствием', category: 'docs', badge: 'Ст. 37 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Полномочия:</span>
+          <p class="card-text">• Проверять законность возбуждения УД (в течение 24ч)<br>• Изучать постановления следователя<br>• При нарушении — отменять постановления<br>• Вносить представления об устранении нарушений<br>• Направлять материалы в соответствующий СО<br>• Проверять законность задержания подозреваемого</p>
+          <div class="critical-warning">❗ Прокурор НЕ ведет следствие (с 2007 года). Он только надзирает.</div>
+          <span class="legal-ref">Ст. 37 УПК РФ, ФЗ-2202-1</span>`
+      },
+      { title: 'Рассмотрение жалоб', category: 'docs', badge: 'Ст. 124 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Сроки:</span>
+          <p class="card-text">• <strong>3 суток</strong> — общий срок рассмотрения<br>• <strong>До 10 суток</strong> — в сложных случаях (с уведомлением заявителя)</p>
+          <span class="card-label">Решение:</span>
+          <p class="card-text">• Полностью или частично удовлетворить жалобу<br>• Отказать в удовлетворении<br>• Принять меры к устранению нарушений</p>
+          <span class="legal-ref">Ст. 124 УПК РФ</span>`
+      },
+      { title: 'Государственное обвинение в суде', category: 'docs', badge: 'Ст. 246 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Полномочия:</span>
+          <p class="card-text">• Участвовать в судебных заседаниях всех инстанций<br>• Представлять доказательства<br>• Заявлять ходатайства<br>• Излагать суду свою позицию<br>• Вправе отказаться от обвинения (если придет к выводу о невиновности) — это влечет прекращение дела</p>
+          <span class="legal-ref">Ст. 246 УПК РФ</span>`
+      },
+      { title: 'Апелляционные/кассационные представления', category: 'docs', badge: 'Ст. 389.1 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Прокурор вправе обжаловать приговор суда путем внесения представления в апелляционную/кассационную инстанцию.</p>
+          <div class="critical-warning">❗ Прокурор НЕ отменяет приговор суда сам — это делает только вышестоящий суд.</div>
+          <span class="legal-ref">Ст. 389.1, 401.2 УПК РФ</span>`
       }
+    ],
+    procedures: [
+      { title: 'Рассмотрение жалобы (ст. 124 УПК)', badge: 'Ст. 124 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Получить жалобу на действия следователя/дознавателя<br>2. Изучить материалы<br>3. Рассмотреть в течение 3 суток (до 10 в сложных случаях)<br>4. Вынести постановление: удовлетворить ИЛИ отказать<br>5. Уведомить заявителя</p>
+          <span class="legal-ref">Ст. 124 УПК РФ</span>`
+      },
+      { title: 'Проверка законности возбуждения УД', badge: 'Ст. 146 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Сроки:</span>
+          <p class="card-text">Копия постановления о возбуждении УД поступает прокурору <strong>незамедлительно</strong>. Прокурор вправе отменить его в течение <strong>24 часов</strong>.</p>
+          <span class="card-label">Основания для отмены:</span>
+          <p class="card-text">• Отсутствие признаков преступления<br>• Нарушение процедуры возбуждения УД<br>• Наличие обстоятельств, исключающих производство по делу (ст. 24 УПК)</p>
+          <span class="legal-ref">Ч. 4 ст. 146 УПК РФ</span>`
+      }
+    ],
+    violations: [
+      { title: 'Халатность', severity: 'critical', article: 'Ст. 293 УК РФ',
+        text: 'Неисполнение или ненадлежащее исполнение прокурором своих обязанностей из-за недобросовестного отношения к службе.', punishment: 'До 7 лет лишения свободы (ч. 2 — повлекшее смерть человека)' },
+      { title: 'Злоупотребление полномочиями', severity: 'critical', article: 'Ст. 285 УК РФ',
+        text: 'Использование прокурором своих полномочий вопреки интересам службы.', punishment: 'До 10 лет лишения свободы (ч. 3 — тяжкие последствия)' }
+    ],
+    checklists: [
+      { title: '✅ Утверждение обвинительного заключения', items: [
+        'Изучить материалы УД', 'Проверить соблюдение УПК',
+        'Проверить обоснованность обвинения', 'Вынести постановление', 'Направить дело в суд'
+      ]},
+      { title: '✅ Рассмотрение жалобы (ст. 124 УПК)', items: [
+        'Зарегистрировать жалобу', 'Изучить материалы',
+        'Принять решение (3-10 суток)', 'Вынести постановление', 'Уведомить заявителя'
+      ]}
     ],
     errors: [
       { text: 'Прокурор ведет следствие (не ведет с 2007 г.)' },
       { text: 'Прокурор возбуждает УД (не возбуждает с 2011 г.)' },
-      { text: 'Прокурор "отменяет приговор" (только представление в апелляцию/кассацию)' },
+      { text: 'Прокурор "отменяет приговор" (только представление в апелляцию)' },
       { text: 'Игнорирование сроков по жалобам (3-10 суток)' }
     ],
+    blanks: [18, 19],
     interactions: [
       { target: 'СКР', reason: 'Надзор за следствием' },
       { target: 'МВД', reason: 'Надзор за дознанием' },
       { target: 'Суд', reason: 'Гособвинение, представления' },
       { target: 'ФСИН', reason: 'Надзор за местами лишения свободы' }
-    ],
-    blanks: [18, 19]
+    ]
   },
+
   lawyer: {
-    id: 'lawyer',
-    name: 'Адвокатура',
-    icon: '🎓',
-    color: '#16a085',
-    structure: {
-      text: `Формы адвокатских образований (ФЗ №63):
+    id: 'lawyer', name: 'Адвокатура', icon: '🎓', color: '#16a085',
+    structure: `Формы адвокатских образований (ФЗ-63):
 ├── Адвокатский кабинет (1 адвокат)
 ├── Коллегия адвокатов (НКО, 2+ учредителя)
 ├── Адвокатское бюро (партнерский договор 2+)
@@ -997,111 +1159,155 @@ const FACTIONS = {
 Статус:
 ├── Удостоверение адвоката — подтверждает статус
 ├── Ордер — подтверждает полномочия по делу
-└── Соглашение — договор с доверителем`
-    },
+└── Соглашение — договор с доверителем`,
     laws: [
       { num: 'ФЗ №63-ФЗ', name: 'Об адвокатской деятельности и адвокатуре', date: '' },
       { num: 'КПЭА', name: 'Кодекс профессиональной этики адвоката', date: '' },
       { num: 'Ст. 53 УПК', name: 'Полномочия защитника', date: '' },
-      { num: 'Ст. 450.1 УПК', name: 'Производство в отношении адвоката', date: '' },
-      { num: 'Ст. 49 ГПК', name: 'Представительство в гражданском суде', date: '' }
+      { num: 'Ст. 450.1 УПК', name: 'Производство в отношении адвоката', date: '' }
     ],
     powers: [
-      { text: 'Направлять адвокатские запросы (30+30 дней)', status: 'green' },
-      { text: 'Опрашивать лиц с их согласия', status: 'green' },
-      { text: 'Истребовать справки (с согласия организаций)', status: 'green' },
-      { text: 'Привлекать специалистов', status: 'green' },
-      { text: 'Знакомиться со всеми материалами дела', status: 'green' },
-      { text: 'Фиксировать информацию (технически)', status: 'green' },
-      { text: 'Свидания с подзащитным наедине (с момента задержания)', status: 'green' },
-      { text: 'Требовать удаления посторонних при следственных действиях', status: 'green' }
-    ],
-    restrictions: [
-      'Адвокат НЕ может лгать суду (ст. 10 КПЭА)',
-      'Адвокат НЕ раскрывает адвокатскую тайну',
-      'Адвокат НЕ защищает двух соучастников с конфликтом интересов',
-      'Гонорар успеха ЗАПРЕЩЕН в уголовных делах'
-    ],
-    algorithms: {
-      'Вступление в уголовное дело': [
-        'Заключить соглашение с доверителем',
-        'Выписать ордер',
-        'Подать ордер следователю/в суд',
-        'Заявить ходатайство о допуске',
-        'Ознакомиться с материалами дела',
-        'Встретиться с подзащитным наедине'
-      ],
-      'Допуск к военнослужащему': [
-        'Прибыть на КПП с удостоверением и ордером',
-        'Предъявить документы дежурному',
-        'Никакого согласования с командованием НЕ требуется (ст. 53 УПК)',
-        'Пройти на свидание наедине и конфиденциально',
-        'При отказе — жалоба военному прокурору'
-      ],
-      'Обжалование действий следователя': [
-        'Зафиксировать нарушение в протоколе (возражение)',
-        'Подготовить жалобу руководителю СО',
-        'Жалоба прокурору (ст. 124 УПК)',
-        'Жалоба в суд (ст. 125 УПК)',
-        'Ходатайство об исключении доказательств (ст. 75 УПК)'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Вступление в уголовное дело',
-        items: [
-          'Заключить соглашение',
-          'Выписать ордер',
-          'Подать ордер следователю',
-          'Заявить ходатайство о допуске',
-          'Ознакомиться с делом',
-          'Встреча с подзащитным'
-        ]
+      { title: 'Адвокатская тайна', category: 'docs', badge: 'СВЯТОЕ', badgeColor: 'purple',
+        content: `<div class="ok-box">Адвокатская тайна — <strong>абсолютный принцип</strong>. Никакие обстоятельства не могут служить основанием для её разглашения.</div>
+          <span class="card-label">Что является адвокатской тайной:</span>
+          <p class="card-text">• Факт обращения к адвокату (включая имена доверителей)<br>• Все сведения, сообщенные доверителем<br>• Содержание советов адвоката<br>• Любые документы адвокатского производства<br>• Переписка с доверителем</p>
+          <div class="critical-warning">Адвокат НЕ обязан и НЕ вправе сообщать о преступлениях, о которых узнал от доверителя. Это прямое нарушение адвокатской тайны.</div>
+          <span class="legal-ref">Ст. 8 ФЗ-63, ст. 6 КПЭА</span>`
       },
-      {
-        title: '✅ Допуск к военнослужащему',
-        items: [
-          'Удостоверение адвоката',
-          'Ордер',
-          'Прибыть на КПП',
-          'Никакого согласования с командованием',
-          'Свидание наедине и конфиденциально'
-        ]
+      { title: 'Допуск к военнослужащему', category: 'docs', badge: 'Ст. 53 УПК', badgeColor: 'green',
+        content: `<div class="ok-box">Военный адвокат имеет право на свидание с подзащитным-военнослужащим <strong>наедине и конфиденциально</strong>, в том числе <strong>до первого допроса</strong>, без ограничения числа и продолжительности.</div>
+          <span class="card-label">Допуск:</span>
+          <p class="card-text">По предъявлении <strong>удостоверения адвоката и ордера</strong>. Никакого предварительного согласования с командованием или КПП в законе НЕ предусмотрено.</p>
+          <span class="card-label">Действия на КПП:</span>
+          <p class="card-text">1. Предъявить удостоверение и ордер<br>2. Потребовать пропустить<br>3. При отказе — жалоба военному прокурору и в СКР<br>4. Составить рапорт о нарушении прав</p>
+          <span class="legal-ref">Ст. 53 УПК РФ, ст. 49 ФЗ-103</span>`
       },
-      {
-        title: '✅ Адвокатский запрос (ст. 6.1 ФЗ-63)',
-        items: [
-          'Составить запрос с указанием цели',
-          'Приложить копию ордера',
-          'Направить адресату',
-          'Срок ответа — 30 дней (макс. 60 с продлением)',
-          'При отказе — жалоба (ст. 5.39 КоАП, штраф 5-10 тыс.)'
-        ]
+      { title: 'Право требовать покинуть помещение', category: 'docs', badge: 'ВАЖНО', badgeColor: 'yellow',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">1. <strong>Нарушение адвокатской тайны</strong> — присутствие посторонних во время конфиденциальной беседы<br>2. <strong>Незаконное присутствие</strong> — лица без процессуального статуса при следственном действии<br>3. <strong>Угроза безопасности</strong> — лица, угрожающие адвокату или доверителю<br>4. <strong>Нарушение процедуры</strong> — следователь допускает лиц, не указанных в протоколе</p>
+          <span class="card-label">Действия:</span>
+          <p class="card-text">1. Заявить устное ходатайство об удалении посторонних<br>2. При отказе — потребовать занести возражение в протокол<br>3. Подать жалобу прокурору или в суд (ст. 125 УПК)<br>4. При необходимости — приостановить участие в действии</p>
+          <span class="legal-ref">Ст. 53 УПК РФ</span>`
+      },
+      { title: 'Адвокатский запрос', category: 'docs', badge: 'Ст. 6.1 ФЗ-63', badgeColor: 'green',
+        content: `<span class="card-label">Право:</span>
+          <p class="card-text">Адвокат вправе направлять официальные запросы в органы власти, воинские части, организации. Они <strong>обязаны</strong> предоставить информацию.</p>
+          <span class="card-label">Сроки:</span>
+          <p class="card-text">• <strong>30 дней</strong> — основной срок<br>• В исключительных случаях продление <strong>не более чем на 30 дней</strong> (суммарный максимум — 60 дней) с уведомлением адвоката</p>
+          <div class="warning">Отказ в предоставлении информации — <strong>ст. 5.39 КоАП РФ</strong> (штраф 5-10 тыс. руб. для должностных лиц).</div>
+          <span class="legal-ref">Ст. 6.1 ФЗ-63</span>`
+      },
+      { title: 'Неприкосновенность адвоката', category: 'docs', badge: 'Ст. 450.1 УПК', badgeColor: 'purple',
+        content: `<span class="card-label">Специальный статус:</span>
+          <p class="card-text">Адвокат обладает специальным правовым статусом. Обыск, выемка в адвокатском образовании возможны <strong>только на основании судебного решения</strong>.</p>
+          <span class="card-label">Ограничения:</span>
+          <p class="card-text">• Нельзя проводить ОРМ в отношении адвоката без судебного решения<br>• Нельзя допрашивать адвоката об обстоятельствах, ставших известными в связи с оказанием юрпомощи (ч. 3 ст. 56 УПК)<br>• Уголовное дело в отношении адвоката — исключительная компетенция СКР</p>
+          <span class="legal-ref">Ст. 450.1 УПК РФ</span>`
+      },
+      { title: 'Полномочия защитника', category: 'docs', badge: 'Ст. 53 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Полный список прав:</span>
+          <p class="card-text">1. Иметь свидания с подзащитным наедине<br>2. Собирать доказательства (опрос, истребование справок, привлечение специалистов)<br>3. Привлекать специалистов<br>4. Присутствовать при предъявлении обвинения<br>5. Участвовать в допросах, обысках, иных следственных действиях<br>6. Знакомиться с протоколами и материалами дела<br>7. Заявлять ходатайства и отводы<br>8. Приносить жалобы<br>9. Использовать иные не запрещенные законом средства</p>
+          <span class="legal-ref">Ст. 53 УПК РФ</span>`
+      },
+      { title: 'Обязательное участие защитника', category: 'docs', badge: 'Ст. 51 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Случаи:</span>
+          <p class="card-text">1. Подозреваемый/обвиняемый не отказался от защитника<br>2. Несовершеннолетний<br>3. Физические/психические недостатки (не может защищаться сам)<br>4. Не владеет языком судопроизводства<br>5. Обвиняется в преступлении с наказанием <strong>более 15 лет, ПЛС или смертной казнью</strong><br>6. Уголовное дело в суде с участием присяжных<br>7. Особый порядок судебного разбирательства (гл. 40 УПК)</p>
+          <div class="critical-warning">Проведение следственного действия без защитника (когда он обязателен) — грубейшее нарушение УПК. Доказательства — недопустимые (ст. 75 УПК).</div>
+          <span class="legal-ref">Ст. 51 УПК РФ</span>`
+      },
+      { title: 'Вступление защитника в дело', category: 'docs', badge: 'Ст. 49, 50 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Моменты:</span>
+          <p class="card-text">• С момента возбуждения УД в отношении конкретного лица<br>• С момента фактического задержания (ст. 91, 92 УПК)<br>• С момента применения меры пресечения (кроме подписки о невыезде)<br>• С момента вручения уведомления о подозрении<br>• С момента начала иных мер процессуального принуждения</p>
+          <span class="legal-ref">Ст. 49, 50 УПК РФ</span>`
+      },
+      { title: 'Представительство в гражданском суде', category: 'docs', badge: 'Ст. 49 ГПК', badgeColor: 'green',
+        content: `<span class="card-label">Требования:</span>
+          <p class="card-text">Дееспособные лица с надлежаще оформленными полномочиями. С 2019 года представители в районных судах и выше должны иметь <strong>высшее юридическое образование</strong> или ученую степень.</p>
+          <span class="card-label">Документы:</span>
+          <p class="card-text">• Доверенность (нотариальная — для граждан, простая с печатью — для организаций)<br>• Ордер + диплом о высшем юр. образовании</p>
+          <span class="legal-ref">Ст. 49, 53 ГПК РФ</span>`
       }
     ],
+    procedures: [
+      { title: 'Ходатайство об исключении доказательств', badge: 'Ст. 75 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Доказательства, полученные с нарушением УПК, являются <strong>недопустимыми</strong>. Они не имеют юридической силы и не могут быть положены в основу обвинения.</p>
+          <span class="card-label">Типичные основания:</span>
+          <p class="card-text">• Допрос без защитника (когда он обязателен)<br>• Обыск без судебного решения<br>• Досмотр без понятых<br>• Применение насилия/угроз при допросе<br>• Нарушение права на переводчика<br>• Неразъяснение прав</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Составить письменное ходатайство<br>2. Подать следователю/в суд<br>3. Обосновать нарушение<br>4. Суд/следователь выносит постановление</p>
+          <span class="legal-ref">Ст. 75 УПК РФ</span>`
+      },
+      { title: 'Жалоба в порядке ст. 125 УПК', badge: 'Ст. 125 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Судебная проверка законности действий/бездействия и решений дознавателя, следователя, прокурора на стадии досудебного производства.</p>
+          <span class="card-label">Что можно обжаловать:</span>
+          <p class="card-text">• Отказ в возбуждении УД<br>• Прекращение УД<br>• Отказ в удовлетворении ходатайства<br>• Применение меры пресечения<br>• Отказ в допуске защитника<br>• Любые иные действия, нарушающие права</p>
+          <span class="card-label">Сроки рассмотрения судом:</span>
+          <p class="card-text"><strong>5 суток</strong> с момента поступления жалобы.</p>
+          <span class="legal-ref">Ст. 125 УПК РФ</span>`
+      },
+      { title: 'Отказ от защитника', badge: 'Ст. 52 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Правила:</span>
+          <p class="card-text">Отказ от защитника допускается <strong>только по инициативе самого подзащитного</strong>. Отказ должен быть заявлен в присутствии защитника и оформлен письменно.</p>
+          <div class="warning">Отказ от защитника <strong>не обязателен</strong> для следователя/суда. Они вправе не принять отказ, если есть сомнения в его добровольности или если защитник обязателен по закону.</div>
+          <span class="legal-ref">Ст. 52 УПК РФ</span>`
+      },
+      { title: 'Гонорар успеха', badge: 'С 2023 года', badgeColor: 'purple',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Условие соглашения, при котором оплата зависит от результата дела.</p>
+          <span class="card-label">Ограничения:</span>
+          <p class="card-text">• Разрешен с 2023 года<br>• <strong>ЗАПРЕЩЕН в уголовных делах</strong> и делах об административных правонарушениях<br>• Должен быть прямо указан в соглашении</p>
+          <span class="legal-ref">Ст. 25 ФЗ-63</span>`
+      }
+    ],
+    violations: [
+      { title: 'Нарушение адвокатской тайны', severity: 'critical', article: 'КПЭА + Ст. 310 УК РФ',
+        text: 'Разглашение сведений, связанных с оказанием юридической помощи доверителю.', punishment: 'Прекращение статуса адвоката (максимальная мера дисциплинарной ответственности)' },
+      { title: 'Защита двух соучастников с конфликтом интересов', severity: 'critical', article: 'КПЭА',
+        text: 'Один адвокат не может защищать двух лиц, если между ними есть конфликт интересов (один обвиняет другого).', punishment: 'Прекращение статуса адвоката' },
+      { title: 'Введение суда в заблуждение', severity: 'critical', article: 'Ст. 10 КПЭА',
+        text: 'Адвокат не вправе делать заведомо ложные заявления суду, представлять поддельные доказательства.', punishment: 'Прекращение статуса адвоката' },
+      { title: 'Отказ от защиты без согласия доверителя', severity: 'critical', article: 'КПЭА',
+        text: 'Адвокат, принявший поручение, не вправе отказаться от защиты без уважительных причин и согласия доверителя.', punishment: 'Замечание, предупреждение, прекращение статуса' }
+    ],
+    checklists: [
+      { title: '✅ Вступление в уголовное дело', items: [
+        'Заключить соглашение', 'Выписать ордер',
+        'Подать ордер следователю', 'Заявить ходатайство о допуске',
+        'Ознакомиться с делом', 'Встреча с подзащитным'
+      ]},
+      { title: '✅ Допуск к военнослужащему', items: [
+        'Удостоверение адвоката', 'Ордер',
+        'Прибыть на КПП', 'Никакого согласования с командованием',
+        'Свидание наедине и конфиденциально'
+      ]},
+      { title: '✅ Адвокатский запрос (ст. 6.1 ФЗ-63)', items: [
+        'Составить запрос с указанием цели', 'Приложить копию ордера',
+        'Направить адресату', 'Срок ответа — 30 дней (макс. 60 с продлением)',
+        'При отказе — жалоба (ст. 5.39 КоАП, штраф 5-10 тыс.)'
+      ]}
+    ],
     errors: [
-      { text: 'Адвокат раскрывает адвокатскую тайну (СВЯТОЕ правило)' },
-      { text: 'Адвокат лжет суду (нарушение КПЭА и УК)' },
+      { text: 'Раскрытие адвокатской тайны (СВЯТОЕ правило)' },
+      { text: 'Адвокат лжет суду' },
       { text: 'Защита двух соучастников с конфликтом интересов' },
       { text: 'Гонорар успеха в уголовном деле (ЗАПРЕЩЕН)' },
       { text: 'Отказ от защиты без согласия доверителя' }
     ],
+    blanks: [20, 21, 22, 23],
     interactions: [
       { target: 'СКР', reason: 'Защита подозреваемых/обвиняемых' },
       { target: 'МВД', reason: 'Участие в следственных действиях' },
-      { target: 'Суд', reason: 'Защита в суде, представительство' },
+      { target: 'Суд', reason: 'Защита в суде' },
       { target: 'Прокуратура', reason: 'Жалобы на действия следователей' },
-      { target: 'ФСИН', reason: 'Свидания с подзащитными в ИУ/СИЗО' }
-    ],
-    blanks: [20, 21, 22, 23]
+      { target: 'ФСИН', reason: 'Свидания с подзащитными' }
+    ]
   },
+
   judge: {
-    id: 'judge',
-    name: 'Судьи',
-    icon: '👨‍⚖️',
-    color: '#34495e',
-    structure: {
-      text: `Конституционный Суд РФ
+    id: 'judge', name: 'Судьи', icon: '👨‍⚖️', color: '#34495e',
+    structure: `Конституционный Суд РФ
 Верховный Суд РФ
 ├── Судебная коллегия по экономическим спорам
 ├── Апелляционная коллегия
@@ -1114,250 +1320,391 @@ const FACTIONS = {
 ├── Апелляционный военный суд (Власиха)
 ├── Кассационный военный суд (Новосибирск)
 ├── Окружные (флотские) военные суды
-└── Гарнизонные военные суды`
-    },
+└── Гарнизонные военные суды`,
     laws: [
       { num: 'ФЗ №3132-1', name: 'О статусе судей в РФ', date: '26.06.1992' },
       { num: 'ФКЗ №1-ФКЗ', name: 'О судебной системе РФ', date: '31.12.1996' },
       { num: 'КСЭ', name: 'Кодекс судейской этики', date: '' }
     ],
     powers: [
-      { text: 'Мировой — дела до 3 лет лишения свободы', status: 'green' },
-      { text: 'Районный — основная масса уголовных и гражданских дел', status: 'green' },
-      { text: 'Областной — тяжкие/особо тяжкие (убийства, терроризм)', status: 'green' },
-      { text: 'Военный — все дела военнослужащих + гостайна', status: 'green' },
-      { text: 'Избирать меру пресечения (арест, залог, домашний арест)', status: 'yellow' },
-      { text: 'Давать разрешения на обыск, прослушку (ст. 8 ФЗ-144, ст. 182 УПК)', status: 'yellow' }
-    ],
-    restrictions: [
-      'Судья неприкосновенен (ст. 16 ФЗ-3132-1)',
-      'Обыск/задержание судьи — только с согласия квалификационной коллегии',
-      'Уголовное дело против судьи — исключительная компетенция СКР'
-    ],
-    algorithms: {
-      'Избрание меры пресечения (ст. 108 УПК)': [
-        'Получить ходатайство следователя (согласованное с прокурором)',
-        'Назначить судебное заседание',
-        'Обеспечить участие подозреваемого, защитника, прокурора',
-        'Выслушать мнения сторон',
-        'Вынести постановление: арест / залог / домашний арест / отказать',
-        'Срок ареста — до 2 месяцев (с продлением)'
-      ],
-      'Разрешение на ОРМ (ст. 8 ФЗ-144)': [
-        'Получить постановление начальника органа ОРД',
-        'Изучить основания (тяжкое/особо тяжкое)',
-        'Вынести решение: разрешить / отказать',
-        'Срок — до 180 суток',
-        'Направить оператору связи для исполнения'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Избрание меры пресечения (ст. 108 УПК)',
-        items: [
-          'Получить ходатайство следователя',
-          'Проверить согласие прокурора',
-          'Обеспечить участников',
-          'Выслушать стороны',
-          'Вынести постановление',
-          'Направить в ИВС/СИЗО'
-        ]
+      { title: 'Подсудность дел', category: 'docs', badge: 'Ст. 31 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Мировой судья:</span>
+          <p class="card-text">• Дела частного обвинения (побои, клевета без отягч.)<br>• Преступления с наказанием <strong>до 3 лет</strong> лишения свободы</p>
+          <span class="card-label">Районный суд:</span>
+          <p class="card-text">Основная масса уголовных и гражданских дел</p>
+          <span class="card-label">Областной суд (ВС республики):</span>
+          <p class="card-text">• Тяжкие/особо тяжкие (убийства с отягч., терроризм)<br>• Дела с участием присяжных заседателей<br>• Преступления против госбезопасности</p>
+          <span class="card-label">Военный суд:</span>
+          <p class="card-text">Все дела военнослужащих + дела с гостайной</p>
+          <span class="legal-ref">Ст. 31, 32 УПК РФ</span>`
       },
-      {
-        title: '✅ Разрешение на ОРМ (прослушка)',
-        items: [
-          'Получить постановление УФСБ',
-          'Проверить основания',
-          'Вынести решение',
-          'Срок — до 180 суток',
-          'Направить оператору связи'
-        ]
+      { title: 'Избрание меры пресечения', category: 'force', badge: 'Ст. 108 УПК', badgeColor: 'red',
+        content: `<span class="card-label">Полномочия суда:</span>
+          <p class="card-text">Только суд вправе избрать следующие меры пресечения:<br>• Заключение под стражу<br>• Домашний арест<br>• Залог<br>• Запрет определенных действий</p>
+          <span class="card-label">Процедура:</span>
+          <p class="card-text">1. Получить ходатайство следователя (согласованное с руководителем СО и прокурором)<br>2. Назначить судебное заседание<br>3. Обеспечить участие подозреваемого, защитника, прокурора<br>4. Выслушать мнения сторон<br>5. Вынести постановление: избрать меру ИЛИ отказать<br>6. Срок ареста — до 2 месяцев (с продлением)</p>
+          <div class="critical-warning">Арест без судебного решения (кроме исключительных случаев) — нарушение УПК и Конституции.</div>
+          <span class="legal-ref">Ст. 108 УПК РФ</span>`
+      },
+      { title: 'Разрешение на ОРМ', category: 'docs', badge: 'Ст. 8 ФЗ-144', badgeColor: 'purple',
+        content: `<span class="card-label">ОРМ, требующие судебного решения:</span>
+          <p class="card-text">• Контроль и запись переговоров (ПН)<br>• Снятие информации с технических каналов связи<br>• Обследование жилища (негласное)<br>• Ограничение тайны переписки/почтовых отправлений</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Получить постановление начальника органа ОРД<br>2. Изучить основания (тяжкое/особо тяжкое)<br>3. Вынести решение: разрешить / отказать<br>4. Срок — до 180 суток</p>
+          <span class="legal-ref">Ч. 4 ст. 8 ФЗ-144</span>`
+      },
+      { title: 'Неприкосновенность судьи', category: 'docs', badge: 'Ст. 16 ФЗ-3132-1', badgeColor: 'purple',
+        content: `<div class="ok-box">Судья неприкосновенен. Это гарантия независимости судебной власти.</div>
+          <span class="card-label">Ограничения:</span>
+          <p class="card-text">• Обыск/задержание судьи — <strong>только с согласия квалификационной коллегии судей</strong><br>• Уголовное дело против судьи — исключительная компетенция СКР<br>• Привлечение к админ. ответственности — особая процедура<br>• Нельзя подвергнуть личному досмотру (кроме случаев, прямо предусмотренных ФЗ)</p>
+          <span class="legal-ref">Ст. 16 ФЗ-3132-1 «О статусе судей в РФ»</span>`
       }
     ],
+    procedures: [
+      { title: 'Рассмотрение жалобы (ст. 125 УПК)', badge: 'Ст. 125 УПК', badgeColor: 'green',
+        content: `<span class="card-label">Сроки:</span>
+          <p class="card-text"><strong>5 суток</strong> с момента поступления жалобы.</p>
+          <span class="card-label">Решение суда:</span>
+          <p class="card-text">1. Признать действие/бездействие/решение незаконным и обязать устранить нарушение<br>2. Оставить жалобу без удовлетворения</p>
+          <span class="legal-ref">Ст. 125 УПК РФ</span>`
+      },
+      { title: 'Принудительный привод', badge: 'Ст. 113 УПК', badgeColor: 'yellow',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Принудительное доставление лица к следователю при неявке по вызову без уважительных причин.</p>
+          <span class="card-label">Ограничения:</span>
+          <p class="card-text">НЕ применяется к:<br>• Несовершеннолетним до 14 лет<br>• Беременным женщинам<br>• Больным (по заключению врача)<br>• В ночное время — только в исключительных случаях</p>
+          <span class="legal-ref">Ст. 113 УПК РФ</span>`
+      }
+    ],
+    violations: [
+      { title: 'Вынесение заведомо неправосудного приговора', severity: 'critical', article: 'Ст. 305 УК РФ',
+        text: 'Вынесение судьей заведомо неправосудного приговора, решения или иного судебного акта.', punishment: 'До 10 лет лишения свободы (ч. 2 — тяжкие последствия)' },
+      { title: 'Получение взятки', severity: 'critical', article: 'Ст. 290 УК РФ',
+        text: 'Получение судьей взятки за вынесение определенного решения.', punishment: 'До 15 лет лишения свободы + штраф' }
+    ],
+    checklists: [
+      { title: '✅ Избрание меры пресечения (ст. 108 УПК)', items: [
+        'Получить ходатайство следователя', 'Проверить согласие прокурора',
+        'Обеспечить участников', 'Выслушать стороны',
+        'Вынести постановление', 'Направить в ИВС/СИЗО'
+      ]}
+    ],
     errors: [
-      { text: 'Задержание судьи без согласия квалифколлегии (ст. 16 ФЗ-3132-1)' },
-      { text: 'Арест без судебного решения (кроме исключительных случаев)' },
+      { text: 'Задержание судьи без согласия квалифколлегии' },
+      { text: 'Арест без судебного решения' },
       { text: 'Продление ареста без повторного заседания' },
       { text: 'Отказ в защитнике при обязательности (ст. 51 УПК)' }
     ],
+    blanks: [15, 16, 17],
     interactions: [
-      { target: 'СКР', reason: 'Рассмотрение ходатайств следователей' },
-      { target: 'Прокуратура', reason: 'Гособвинение, представления' },
-      { target: 'Адвокатура', reason: 'Защита, представительство' },
+      { target: 'СКР', reason: 'Рассмотрение ходатайств' },
+      { target: 'Прокуратура', reason: 'Гособвинение' },
+      { target: 'Адвокатура', reason: 'Защита' },
       { target: 'ФСБ', reason: 'Разрешения на ОРМ' }
-    ],
-    blanks: [15, 16, 17]
+    ]
   },
+
   fsin: {
-    id: 'fsin',
-    name: 'ФСИН',
-    icon: '🔒',
-    color: '#795548',
-    structure: {
-      text: `Виды учреждений ФСИН:
+    id: 'fsin', name: 'ФСИН', icon: '🔒', color: '#795548',
+    structure: `Виды учреждений ФСИН:
 ├── СИЗО (следственный изолятор) — до суда
 ├── Колонии-поселения — нетяжкие преступления
 ├── ИК общего режима — основная масса осужденных
 ├── ИК строгого режима — для рецидивистов
 ├── ИК особого режима — особо опасные
 ├── Тюрьмы — пожизненно (Полярная Сова, Мордовия)
-└── Воспитательные колонии — несовершеннолетние`
-    },
+└── Воспитательные колонии — несовершеннолетние`,
     laws: [
       { num: 'УИК РФ', name: 'Уголовно-исполнительный кодекс', date: '' },
       { num: 'ФЗ №5473-1', name: 'О местах лишения свободы', date: '' },
       { num: 'ФЗ №103-ФЗ', name: 'О содержании под стражей', date: '' },
-      { num: 'ФЗ №60-ФЗ', name: 'О дисциплинарном аресте', date: '' },
       { num: 'Приказ №110', name: 'ПВР ИУ', date: '' },
       { num: 'Приказ №492', name: 'ПВР в СИЗО', date: '' }
     ],
     powers: [
-      { text: 'Обеспечивать содержание под стражей', status: 'green' },
-      { text: 'Проводить личные обыски заключенных', status: 'green' },
-      { text: 'Водворять в ШИЗО (до 15 суток)', status: 'yellow' },
-      { text: 'Применять силу и спецсредства при нарушениях', status: 'yellow' },
-      { text: 'Контролировать переписку и свидания', status: 'green' }
-    ],
-    restrictions: [
-      'Личный обыск — только 2 понятых',
-      'Водворение в ШИЗО — только после мед. осмотра',
-      'Свидания с адвокатом — без ограничений и без прослушки'
-    ],
-    algorithms: {
-      'Личный обыск в ИУ/СИЗО': [
-        'Обеспечить 2 понятых',
-        'Провести обыск',
-        'Описать изъятые запрещенные предметы',
-        'Составить протокол',
-        'Опечатать изъятое',
-        'Ознакомить заключенного'
-      ],
-      'Водворение в ШИЗО': [
-        'Зафиксировать злостное нарушение режима',
-        'Провести медицинский осмотр (обязательно!)',
-        'Издать постановление',
-        'Водворить на срок до 15 суток',
-        'Вести учет в карточке заключенного'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Личный обыск в ИУ/СИЗО',
-        items: [
-          '2 понятых',
-          'Провести обыск',
-          'Опись запрещенных предметов',
-          'Составить протокол',
-          'Опечатать изъятое',
-          'Ознакомить заключенного'
-        ]
+      { title: 'Личный обыск в ИУ/СИЗО', category: 'search', badge: 'Ст. 82 УИК', badgeColor: 'red',
+        content: `<div class="critical-warning">Обязательно 2 понятых! Видеозапись НЕ заменяет понятых!</div>
+          <span class="card-label">Основания:</span>
+          <p class="card-text">• Плановый шмон<br>• Оперативная информация о наличии запрещенных предметов<br>• После свиданий/передач<br>• Перед водворением в ШИЗО/ПКТ</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Обеспечить 2 понятых<br>2. Провести обыск<br>3. Описать изъятые запрещенные предметы<br>4. Составить протокол<br>5. Ознакомить заключенного</p>
+          <span class="legal-ref">Ст. 82 УИК РФ, Приказ №492</span>`
       },
-      {
-        title: '✅ Водворение в ШИЗО',
-        items: [
-          'Зафиксировать нарушение',
-          'Мед. осмотр (обязательно!)',
-          'Издать постановление',
-          'Срок — до 15 суток',
-          'Учет в карточке'
-        ]
+      { title: 'Водворение в ШИЗО', category: 'force', badge: 'Ст. 115 УИК', badgeColor: 'yellow',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">Злостное нарушение установленного порядка отбывания наказания (отказ от работы, неповиновение администрации, нарушение режима).</p>
+          <span class="card-label">ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ:</span>
+          <p class="card-text">Перед водворением — <strong>медицинский осмотр</strong> (справка о возможности содержания в ШИЗО).</p>
+          <span class="card-label">Сроки:</span>
+          <p class="card-text">• До <strong>15 суток</strong> в ШИЗО<br>• До <strong>6 месяцев</strong> в ПКТ (помещение камерного типа)</p>
+          <span class="legal-ref">Ст. 115 УИК РФ, ст. 36 ФЗ-103</span>`
+      },
+      { title: 'Свидания с адвокатом', category: 'docs', badge: 'Ст. 89 УИК', badgeColor: 'green',
+        content: `<div class="ok-box">Свидания с адвокатом — <strong>без ограничений по числу и продолжительности</strong>. Наедине и конфиденциально.</div>
+          <span class="card-label">Правила:</span>
+          <p class="card-text">• По удостоверению адвоката и ордеру<br>• <strong>Без стеклянной перегородки</strong><br>• <strong>БЕЗ прослушивания</strong> (абсолютный запрет)<br>• Без ограничений по времени суток<br>• Передача документов — только через сотрудника (для проверки на запрещенные предметы)</p>
+          <div class="critical-warning">Прослушка свиданий адвоката с подзащитным — грубейшее нарушение адвокатской тайны. Доказательства — недопустимы.</div>
+          <span class="legal-ref">Ст. 89 УИК РФ, ст. 49 ФЗ-103</span>`
+      },
+      { title: 'Применение физической силы и спецсредств', category: 'force', badge: 'Ст. 28-31 ФЗ-5473-1', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Пресечение преступлений и адм. правонарушений<br>• Задержание и водворение в ШИЗО/ПКТ<br>• Пресечение неповиновения/сопротивления<br>• Освобождение заложников</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предупредить (голосом)<br>2. Применить соразмерно угрозе<br>3. Оказать первую помощь<br>4. В течение 24 часов уведомить прокурора (если причинен вред)</p>
+          <span class="legal-ref">Ст. 28-31 ФЗ-5473-1</span>`
       }
+    ],
+    procedures: [
+      { title: 'Личный обыск', badge: 'Ст. 82 УИК', badgeColor: 'red',
+        content: `<span class="card-label">Порядок:</span>
+          <p class="card-text">1. 2 понятых<br>2. Провести обыск<br>3. Опись запрещенных предметов<br>4. Составить протокол<br>5. Опечатать изъятое<br>6. Ознакомить заключенного</p>
+          <span class="legal-ref">Ст. 82 УИК РФ</span>`
+      },
+      { title: 'Водворение в ШИЗО', badge: 'Ст. 115 УИК', badgeColor: 'yellow',
+        content: `<span class="card-label">Порядок:</span>
+          <p class="card-text">1. Зафиксировать нарушение<br>2. Мед. осмотр (обязательно!)<br>3. Издать постановление<br>4. Срок — до 15 суток<br>5. Учет в карточке</p>
+          <span class="legal-ref">Ст. 115 УИК РФ</span>`
+      }
+    ],
+    violations: [
+      { title: 'Превышение полномочий', severity: 'critical', article: 'Ст. 286 УК РФ',
+        text: 'Применение силы/оружия/спецсредств сверх необходимых мер.', punishment: 'До 10 лет лишения свободы' },
+      { title: 'Истязание заключенных', severity: 'critical', article: 'Ст. 117 УК РФ',
+        text: 'Причинение физических или психических страданий путем систематического нанесения побоев либо иными насильственными действиями.', punishment: 'До 7 лет (ч. 2 — группой/в отношении 2+ лиц)' },
+      { title: 'Халатность', severity: 'critical', article: 'Ст. 293 УК РФ',
+        text: 'Неисполнение обязанностей, повлекшее смерть заключенного или массовые беспорядки.', punishment: 'До 7 лет лишения свободы' },
+      { title: 'Воспрепятствование свиданию с адвокатом', severity: 'critical', article: 'Ст. 5.39 КоАП РФ',
+        text: 'Незаконный отказ в допуске адвоката к подзащитному.', punishment: 'Штраф 5-10 тыс. руб.' }
+    ],
+    checklists: [
+      { title: '✅ Личный обыск в ИУ/СИЗО', items: [
+        '2 понятых', 'Провести обыск',
+        'Опись запрещенных предметов', 'Составить протокол',
+        'Опечатать изъятое', 'Ознакомить заключенного'
+      ]},
+      { title: '✅ Водворение в ШИЗО', items: [
+        'Зафиксировать нарушение', 'Мед. осмотр (обязательно!)',
+        'Издать постановление', 'Срок — до 15 суток', 'Учет в карточке'
+      ]}
     ],
     errors: [
       { text: 'Обыск без 2 понятых' },
       { text: 'Водворение в ШИЗО без мед. осмотра' },
       { text: 'Ограничение свиданий с адвокатом (незаконно)' },
-      { text: 'Прослушка свиданий адвоката с подзащитным (нарушение тайны)' }
+      { text: 'Прослушка свиданий адвоката с подзащитным' }
     ],
+    blanks: [29, 30],
     interactions: [
       { target: 'Суд', reason: 'Исполнение приговоров' },
       { target: 'СКР', reason: 'Расследование преступлений в ИУ' },
       { target: 'Прокуратура', reason: 'Надзор за соблюдением прав' },
       { target: 'Адвокатура', reason: 'Свидания с подзащитными' },
       { target: 'МВД', reason: 'Конвоирование, этапирование' }
-    ],
-    blanks: [29, 30]
+    ]
   },
+
   rosgvardia: {
-    id: 'rosgvardia',
-    name: 'Росгвардия',
-    icon: '🚨',
-    color: '#e67e22',
-    structure: {
-      text: `Росгвардия (подчиняется напрямую Президенту, НЕ МВД!)
+    id: 'rosgvardia', name: 'Росгвардия', icon: '🚨', color: '#e67e22',
+    structure: `Росгвардия (подчиняется напрямую Президенту, НЕ МВД!)
 ├── ОМОН (мобильный отряд особого назначения)
 ├── СОБР (специальный отряд быстрого реагирования)
 ├── Вневедомственная охрана (ОВО)
 ├── Лицензионно-разрешительная работа (ЛРР) — оружие граждан
-└── Подразделения спецназначения`
-    },
+└── Подразделения спецназначения`,
     laws: [
       { num: 'ФЗ №226-ФЗ', name: 'О войсках национальной гвардии РФ', date: '03.07.2016' },
       { num: 'Ст. 4 ФЗ-226', name: 'Задачи и полномочия', date: '' }
     ],
     powers: [
-      { text: 'Проверять документы в местах массового скопления', status: 'green' },
-      { text: 'Применять оружие БЕЗ предупреждения при террор. угрозе', status: 'red' },
-      { text: 'Оцеплять и блокировать территории', status: 'green' },
-      { text: 'Применять бронетехнику и водометы', status: 'yellow' },
-      { text: 'Задерживать и доставлять в ОВД', status: 'green' }
-    ],
-    restrictions: [
-      'НЕ входит в состав МВД',
-      'Подчиняется напрямую Президенту',
-      'Применение оружия — строго по ФЗ-226'
-    ],
-    algorithms: {
-      'Применение физической силы / спецсредств': [
-        'Оценить обстановку и угрозу',
-        'Предупредить (кроме случаев террор. угрозы)',
-        'Применить соразмерно угрозе',
-        'Составить акт применения',
-        'В течение 24 часов уведомить прокурора (если причинен вред)'
-      ],
-      'Доставление (ст. 27.2 КоАП)': [
-        'Задержать правонарушителя',
-        'Составить протокол доставления',
-        'Доставить в ОВД или подразделение Росгвардии',
-        'Передать дежурному для составления адм. протокола'
-      ]
-    },
-    checklists: [
-      {
-        title: '✅ Применение силы / спецсредств',
-        items: [
-          'Оценить угрозу',
-          'Предупредить (кроме террор. случаев)',
-          'Применить соразмерно',
-          'Составить акт',
-          'Уведомить прокурора (24ч) при вреде'
-        ]
+      { title: 'Проверка документов', category: 'docs', badge: 'Ст. 11 ФЗ-226', badgeColor: 'blue',
+        content: `<span class="card-label">Когда можно:</span>
+          <p class="card-text">• В местах массового скопления людей (концерты, митинги, стадионы)<br>• При проведении КТО<br>• При наличии подозрения в совершении преступления<br>• Для прохода на охраняемые объекты</p>
+          <span class="card-label">Обязанности:</span>
+          <p class="card-text">Представиться, предъявить удостоверение, разъяснить основания.</p>
+          <span class="legal-ref">Ст. 11 ФЗ-226</span>`
       },
-      {
-        title: '✅ Доставление (ст. 27.2 КоАП)',
-        items: [
-          'Задержать',
-          'Составить протокол доставления',
-          'Доставить в ОВД/Росгвардию',
-          'Передать дежурному'
-        ]
+      { title: 'Применение огнестрельного оружия', category: 'force', badge: 'Ст. 23 ФЗ-226', badgeColor: 'red',
+        content: `<span class="card-label">Уникальное право:</span>
+          <div class="critical-warning">Вправе применять оружие <strong>БЕЗ предупреждения</strong> в случае террористической угрозы, нападения с угрозой жизни, попытки завладения оружием.</div>
+          <span class="card-label">Основания:</span>
+          <p class="card-text">• Защита от нападения, угрожающего жизни<br>• Освобождение заложников<br>• Пресечение попытки завладения оружием/боеприпасами/спецтехникой<br>• Задержание лица, застигнутого при совершении тяжкого преступления<br>• Пресечение побега из-под стражи<br>• Отражение группового/вооруженного нападения на охраняемые объекты</p>
+          <span class="legal-ref">Ст. 23 ФЗ-226</span>`
+      },
+      { title: 'Оцепление и блокирование территорий', category: 'force', badge: 'Ст. 11 ФЗ-226', badgeColor: 'yellow',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Проведение КТО<br>• Пресечение массовых беспорядков<br>• Обеспечение безопасности при массовых мероприятиях<br>• Задержание вооруженных преступников</p>
+          <span class="card-label">Действия:</span>
+          <p class="card-text">Ограничить доступ, приостановить движение транспорта, досмотр транспортных средств, контроль за перемещением лиц.</p>
+          <span class="legal-ref">Ст. 11 ФЗ-226</span>`
+      },
+      { title: 'Применение спецсредств', category: 'force', badge: 'Ст. 21 ФЗ-226', badgeColor: 'red',
+        content: `<span class="card-label">Допустимые спецсредства:</span>
+          <p class="card-text">• Палка резиновая (ПР)<br>• Наручники (БРС)<br>• Слезоточивый газ (Черемуха, Сирень)<br>• Светозвуковые гранаты (Заря, Факел)<br>• Водометы<br>• Бронетехника<br>• Средства принудительной остановки транспорта</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Предупредить (кроме случаев террор. угрозы)<br>2. Применить соразмерно<br>3. Оказать помощь пострадавшим<br>4. В течение 24 часов уведомить прокурора (если причинен вред)</p>
+          <span class="legal-ref">Ст. 21 ФЗ-226</span>`
       }
     ],
-    errors: [
-      { text: 'Применение оружия без оснований (ст. 20-22 ФЗ-226)' },
-      { text: 'Неуведомление прокурора в течение 24ч при причинении вреда' },
-      { text: 'Путаница: Росгвардия ≠ МВД (это разные структуры)' }
+    procedures: [
+      { title: 'Акт применения силы/спецсредств', badge: 'Ст. 20-22 ФЗ-226', badgeColor: 'red',
+        content: `<span class="card-label">Порядок составления:</span>
+          <p class="card-text">1. Фиксация времени и места<br>2. Указание оснований применения<br>3. Описание примененных средств<br>4. Описание результата (телесные повреждения, задержание)<br>5. Подписи сотрудника и командира<br>6. <strong>В течение 24 часов</strong> — уведомление прокурора (если причинен вред здоровью)</p>
+          <span class="legal-ref">Ст. 20-22 ФЗ-226</span>`
+      },
+      { title: 'Доставление (ст. 27.2 КоАП)', badge: 'Ст. 27.2 КоАП', badgeColor: 'yellow',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Принудительное препровождение лица в ОВД или подразделение Росгвардии для составления административного протокола (если это невозможно сделать на месте).</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Задержать правонарушителя<br>2. Составить протокол доставления<br>3. Доставить в ОВД/Росгвардию<br>4. Передать дежурному</p>
+          <span class="legal-ref">Ст. 27.2 КоАП РФ</span>`
+      }
     ],
+    violations: [
+      { title: 'Превышение полномочий', severity: 'critical', article: 'Ст. 286 УК РФ',
+        text: 'Применение оружия/спецсредств без законных оснований.', punishment: 'До 10 лет лишения свободы' },
+      { title: 'Превышение мер необходимой обороны', severity: 'critical', article: 'Ст. 108, 114 УК РФ',
+        text: 'Убийство/причинение тяжкого вреда здоровью при превышении пределов необходимой обороны.', punishment: 'До 2 лет (убийство) / до 4 лет (тяжкий вред)' },
+      { title: 'Халатность', severity: 'critical', article: 'Ст. 293 УК РФ',
+        text: 'Неисполнение обязанностей при КТО, охране объектов.', punishment: 'До 7 лет лишения свободы' }
+    ],
+    checklists: [
+      { title: '✅ Применение силы/спецсредств', items: [
+        'Оценить угрозу', 'Предупредить (кроме террор. случаев)',
+        'Применить соразмерно', 'Составить акт',
+        'Уведомить прокурора (24ч) при вреде'
+      ]},
+      { title: '✅ Доставление (ст. 27.2 КоАП)', items: [
+        'Задержать', 'Составить протокол доставления',
+        'Доставить в ОВД/Росгвардию', 'Передать дежурному'
+      ]}
+    ],
+    errors: [
+      { text: 'Применение оружия без оснований' },
+      { text: 'Неуведомление прокурора в течение 24ч' },
+      { text: 'Путаница: Росгвардия ≠ МВД (разные структуры)' }
+    ],
+    blanks: [27, 28],
     interactions: [
-      { target: 'МВД', reason: 'Силовая поддержка, совместные операции' },
+      { target: 'МВД', reason: 'Силовая поддержка' },
       { target: 'ФСБ', reason: 'Антитеррор, поддержка ЦСН' },
       { target: 'Прокуратура', reason: 'Надзор, уведомления о применении силы' },
       { target: 'Суд', reason: 'Охрана судебных процессов' }
+    ]
+  },
+
+  army: {
+    id: 'army', name: 'Армия (МО РФ)', icon: '🪖', color: '#5a7a3a',
+    structure: `Сухопутные войска
+Воздушно-космические силы (ВКС)
+Военно-морской флот (ВМФ)
+Ракетные войска стратегического назначения (РВСН)
+Воздушно-десантные войска (ВДВ)
+
+ОТДЕЛЬНЫЕ РОДЫ:
+├── Военная полиция (ВП) — подчиняется зам. Министра обороны
+├── Главная военная прокуратура (ГВП) — надзор
+└── Военные следственные органы СКР — расследование`,
+    laws: [
+      { num: 'ФЗ №76-ФЗ', name: 'О статусе военнослужащих', date: '27.05.1998' },
+      { num: 'ФЗ №53-ФЗ', name: 'О воинской обязанности и военной службе', date: '28.03.1998' },
+      { num: 'ФЗ №61-ФЗ', name: 'Об обороне', date: '31.05.1996' },
+      { num: 'Указ №1495', name: 'Общевоинские уставы ВС РФ', date: '10.11.2007' },
+      { num: 'Приказ МО №727', name: 'Руководство по ВП', date: '' }
     ],
-    blanks: [27, 28]
+    powers: [
+      { title: 'Задержание военнослужащего ВП', category: 'force', badge: 'Ст. 14 УВС', badgeColor: 'red',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Застигнут при совершении преступления<br>• Совершил дисциплинарный проступок (СОЧ, неисполнение приказа)<br>• Имеются данные, указывающие на причастность к преступлению</p>
+          <span class="card-label">Алгоритм:</span>
+          <p class="card-text">1. Представиться, предъявить удостоверение ВП<br>2. Разъяснить основания<br>3. Доложить командиру части и военному коменданту<br>4. Составить протокол задержания<br>5. Передать на гауптвахту ИЛИ комендатуру</p>
+          <div class="critical-warning">❌ ВП НЕ задерживает гражданских ВНЕ территории воинской части (это МВД/Росгвардия)</div>
+          <span class="legal-ref">Ст. 14 Устава внутренней службы</span>`
+      },
+      { title: 'Дисциплинарный арест', category: 'force', badge: 'ФЗ №60', badgeColor: 'yellow',
+        content: `<span class="card-label">ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ:</span>
+          <div class="critical-warning">❌ Офицеры и прапорщики НЕ подлежат дисциплинарному аресту. Только солдаты и сержанты!</div>
+          <span class="card-label">Основания:</span>
+          <p class="card-text">Совершение грубого дисциплинарного проступка:<br>• СОЧ свыше 2 суток<br>• Неявка в срок без уважительных причин<br>• Пьянство на службе<br>• Оскорбление начальника</p>
+          <span class="card-label">Сроки:</span>
+          <p class="card-text">• До <strong>30 суток</strong> на гауптвахте<br>• Применяется военным комендантом по постановлению</p>
+          <span class="legal-ref">ФЗ №60 «О дисциплинарном аресте военнослужащих»</span>`
+      },
+      { title: 'Пропуск адвоката на ВЧ', category: 'docs', badge: 'Ст. 53 УПК', badgeColor: 'green',
+        content: `<div class="ok-box">Адвокат допускается по удостоверению + ордеру. Согласование с командованием НЕ требуется!</div>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Адвокат предъявляет удостоверение + ордер на КПП<br>2. Дежурный по части регистрирует документы<br>3. Выдается разовый пропуск<br>4. Адвокат проходит на свидание наедине и конфиденциально</p>
+          <div class="warning">Отказ в допуске адвоката — нарушение УПК. Жалоба военному прокурору и в СКР.</div>
+          <span class="legal-ref">Ст. 53 УПК РФ, ст. 49 ФЗ-103</span>`
+      },
+      { title: 'Обыск в казарме / служебных помещениях', category: 'search', badge: 'УВС', badgeColor: 'yellow',
+        content: `<span class="card-label">Основания:</span>
+          <p class="card-text">• Наличие данных о сокрытии запрещенных предметов<br>• Проведение плановых проверок<br>• По решению командира части</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Издать приказ по части<br>2. Привлечь 2 понятых (из числа военнослужащих)<br>3. Провести обыск<br>4. Составить протокол с описью<br>5. При наличии признаков преступления — передать в военную прокуратуру и ВСО СКР</p>
+          <span class="legal-ref">Устав внутренней службы ВС РФ</span>`
+      }
+    ],
+    procedures: [
+      { title: 'Рапорт командира о происшествии', badge: 'Ст. 14 УВС', badgeColor: 'green',
+        content: `<span class="card-label">Суть:</span>
+          <p class="card-text">Командир подразделения докладывает о происшествии (СОЧ, нарушение, преступление) в штаб части и военной прокуратуре.</p>
+          <span class="card-label">Порядок:</span>
+          <p class="card-text">1. Составить рапорт с описанием событий<br>2. Направить командиру части<br>3. Копию — в военную прокуратуру<br>4. Копию — в ВСО СКР</p>
+          <span class="legal-ref">Ст. 14 Устава внутренней службы</span>`
+      },
+      { title: 'Военный суд', badge: 'ФКЗ №1-ФКЗ', badgeColor: 'green',
+        content: `<span class="card-label">Подсудность:</span>
+          <p class="card-text">• Все дела военнослужащих<br>• Дела граждан, призванных на сборы<br>• Дела с гостайной (даже для гражданских)</p>
+          <span class="card-label">Иерархия:</span>
+          <p class="card-text">1. Гарнизонный военный суд (первая инстанция)<br>2. Окружной (флотский) военный суд<br>3. Апелляционный военный суд (Власиха)<br>4. Кассационный военный суд (Новосибирск)<br>5. Военная коллегия ВС РФ</p>
+          <div class="critical-warning">❌ Командир части НЕ вправе судить военнослужащего. Это только компетенция гарнизонного военного суда.</div>
+          <span class="legal-ref">ФКЗ №1-ФКЗ</span>`
+      },
+      { title: 'Обжалование приказа командира', badge: 'Ст. 45 ФЗ-76', badgeColor: 'yellow',
+        content: `<span class="card-label">Порядок:</span>
+          <p class="card-text">1. Обжалование старшему командиру (начальнику)<br>2. Обращение в военную прокуратуру<br>3. Подача административного иска в военный суд (КАС РФ)</p>
+          <div class="info-box">Приказ командира должен исполняться, даже если он обжалуется. Исключение — приказ явно преступный (например, совершить убийство).</div>
+          <span class="legal-ref">Ст. 45 ФЗ-76</span>`
+      }
+    ],
+    violations: [
+      { title: 'СОЧ свыше 1 месяца', severity: 'critical', article: 'Ст. 337 ч. 4 УК РФ',
+        text: 'Самовольное оставление части свыше 1 месяца.', punishment: 'До 5 лет лишения свободы' },
+      { title: 'Дезертирство', severity: 'critical', article: 'Ст. 338 УК РФ',
+        text: 'Самовольное оставление части с целью уклониться от службы полностью. Или неявка в часть в тех же целях.', punishment: 'До 7 лет (ч. 1). От 3 до 10 лет (ч. 2 — группой, с оружием, в военное время)' },
+      { title: 'Неисполнение приказа', severity: 'critical', article: 'Ст. 332 УК РФ',
+        text: 'Умышленное неисполнение приказа начальника.', punishment: 'До 5 лет (ч. 1). До 10 лет (ч. 3 — в военное время)' },
+      { title: 'Нарушение уставных правил', severity: 'critical', article: 'Ст. 335 УК РФ',
+        text: 'Нарушение уставных правил взаимоотношений между военнослужащими при отсутствии между ними отношений подчиненности (дедовщина).', punishment: 'До 12 лет (ч. 3 — тяжкие последствия)' }
+    ],
+    checklists: [
+      { title: '✅ Задержание солдата/сержанта ВП', items: [
+        'Представиться и показать удостоверение', 'Разъяснить основания',
+        'Доложить коменданту', 'Составить протокол',
+        'Направить на гауптвахту (до 30 суток)', 'Уведомить командира части'
+      ]},
+      { title: '✅ Передача гражданских лиц (если задержан на ВЧ)', items: [
+        'Составить протокол доставления', 'Передать в ОВД по месту дислокации части',
+        'Уведомить военную прокуратуру', 'Сохранить материалы в деле части'
+      ]}
+    ],
+    errors: [
+      { text: 'ВП задерживает гражданских на улице' },
+      { text: 'Командир лично судит военнослужащего' },
+      { text: 'Офицер посажен на гауптвахту по приказу командира' },
+      { text: 'Применение оружия без оснований' }
+    ],
+    blanks: [24, 25, 26],
+    interactions: [
+      { target: 'СКР', reason: 'Передача материалов о преступлениях' },
+      { target: 'Военная прокуратура', reason: 'Надзор за законностью' },
+      { target: 'МВД', reason: 'Передача гражданских с ВЧ' },
+      { target: 'ФСБ', reason: 'Контрразведывательное обеспечение' }
+    ]
   }
 };
 
+// ============ БЛАНКИ (30 штук) ============
 const BLANKS = {
   1: { title: 'Приказ на проведение ОРМ', faction: 'fsb', status: 'yellow', fields: ['nomer', 'sutmrm', 'fio', 'osnov'], template: `[102171572598491]
 ПРИКАЗ № {{nomer}} О ПРОВЕДЕНИИ ОРМ
@@ -1573,7 +1920,6 @@ const BLANKS = {
 };
 
 // ============ UI ============
-
 const factionsNav = document.getElementById('factionsNav');
 const tabsNav = document.getElementById('tabsNav');
 const tabContent = document.getElementById('tabContent');
@@ -1582,8 +1928,9 @@ const searchResults = document.getElementById('searchResults');
 const globalSearch = document.getElementById('globalSearch');
 const copyToast = document.getElementById('copyToast');
 
-let currentFaction = 'army';
-let currentTab = 'structure';
+let currentFaction = 'mvd';
+let currentTab = 'powers';
+let currentFilter = 'all';
 
 // Навигация по фракциям
 Object.values(FACTIONS).forEach((f, i) => {
@@ -1597,7 +1944,8 @@ Object.values(FACTIONS).forEach((f, i) => {
 
 function selectFaction(id) {
   currentFaction = id;
-  currentTab = 'structure';
+  currentTab = 'powers';
+  currentFilter = 'all';
   document.querySelectorAll('.faction-btn').forEach(b => b.classList.toggle('active', b.dataset.faction === id));
   renderTabs();
   renderTab();
@@ -1607,13 +1955,13 @@ function selectFaction(id) {
 
 // Вкладки
 const TABS = [
+  { id: 'powers', name: '⚖️ Полномочия' },
+  { id: 'procedures', name: '🔍 Процедуры' },
+  { id: 'violations', name: '⚠️ Нарушения' },
   { id: 'structure', name: '🏢 Структура' },
   { id: 'laws', name: '📜 Законы' },
-  { id: 'powers', name: '⚖️ Полномочия' },
-  { id: 'restrictions', name: '🚫 Ограничения' },
-  { id: 'algorithms', name: '📋 Алгоритмы' },
   { id: 'checklists', name: '✅ Требования' },
-  { id: 'errors', name: '⚠️ Ошибки' },
+  { id: 'errors', name: '🚫 Ошибки' },
   { id: 'interactions', name: '🤝 Взаимодействие' },
   { id: 'blanks', name: '📑 Бланки' }
 ];
@@ -1626,6 +1974,7 @@ function renderTabs() {
     btn.textContent = t.name;
     btn.onclick = () => {
       currentTab = t.id;
+      currentFilter = 'all';
       document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderTab();
@@ -1645,7 +1994,7 @@ function renderTab() {
         <h2>${f.icon} ${f.name}</h2>
         <p>Иерархия подразделений и командования</p>
       </div>
-      <div class="hierarchy">${f.structure.text}</div>
+      <div class="hierarchy">${f.structure}</div>
     `;
   } else if (currentTab === 'laws') {
     html = `<div class="section-title">📜 Правовая база — ${f.name}</div>
@@ -1661,27 +2010,52 @@ function renderTab() {
     });
     html += `</tbody></table>`;
   } else if (currentTab === 'powers') {
-    html = `<div class="section-title">⚖️ Полномочия — ${f.name}</div>
-      <div class="card">
-        <h3>Что имеет право делать сотрудник</h3>
-        <ul>`;
-    f.powers.forEach(p => {
-      const cls = p.status === 'green' ? 'status-green' : p.status === 'red' ? 'status-red' : 'status-yellow';
-      const txt = p.status === 'green' ? 'Разрешено' : p.status === 'red' ? 'Исключительный случай' : 'Требуется решение суда';
-      html += `<li>${p.text} <span class="status-badge ${cls}">${txt}</span></li>`;
+    html = `<div class="section-title">⚖️ Полномочия — ${f.name}</div>`;
+    // Фильтры по категориям
+    const categories = ['all', ...new Set(f.powers.map(p => p.category))];
+    const categoryLabels = { all: 'Все', docs: '📄 Документы', force: '🔫 Применение силы', search: '🔎 Обыск/Досмотр', ord: '🕵️ ОРД' };
+    html += `<div class="filter-bar">`;
+    categories.forEach(c => {
+      html += `<button class="filter-chip ${currentFilter === c ? 'active' : ''}" onclick="setFilter('${c}')">${categoryLabels[c] || c}</button>`;
     });
-    html += `</ul></div>`;
-  } else if (currentTab === 'restrictions') {
-    html = `<div class="section-title">🚫 Ограничения — ${f.name}</div>`;
-    f.restrictions.forEach(r => {
-      html += `<div class="error-card"><strong>❌ ${r}</strong></div>`;
+    html += `</div>`;
+    html += `<div class="cards-grid">`;
+    f.powers.filter(p => currentFilter === 'all' || p.category === currentFilter).forEach(p => {
+      html += `<div class="card">
+        <div class="card-header">
+          <h3 class="card-title">${p.title}</h3>
+          <span class="card-badge ${p.badgeColor}">${p.badge}</span>
+        </div>
+        <div class="card-content">${p.content}</div>
+      </div>`;
     });
-  } else if (currentTab === 'algorithms') {
-    html = `<div class="section-title">📋 Алгоритмы действий — ${f.name}</div>`;
-    Object.entries(f.algorithms).forEach(([name, steps]) => {
-      html += `<div class="card"><h3>${name}</h3><ol style="padding-left:20px">`;
-      steps.forEach(s => html += `<li style="padding:5px 0">${s}</li>`);
-      html += `</ol></div>`;
+    html += `</div>`;
+  } else if (currentTab === 'procedures') {
+    html = `<div class="section-title">🔍 Процедуры и следственные действия — ${f.name}</div>`;
+    html += `<div class="cards-grid">`;
+    f.procedures.forEach(p => {
+      html += `<div class="card">
+        <div class="card-header">
+          <h3 class="card-title">${p.title}</h3>
+          <span class="card-badge ${p.badgeColor}">${p.badge}</span>
+        </div>
+        <div class="card-content">${p.content}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  } else if (currentTab === 'violations') {
+    html = `<div class="section-title">⚠️ Уголовная и дисциплинарная ответственность сотрудников — ${f.name}</div>`;
+    f.violations.forEach(v => {
+      html += `<div class="card" style="border-left: 4px solid ${v.severity === 'critical' ? 'var(--red)' : 'var(--yellow)'};">
+        <div class="card-header">
+          <h3 class="card-title">${v.title}</h3>
+          <span class="card-badge ${v.severity === 'critical' ? 'red' : 'yellow'}">${v.article}</span>
+        </div>
+        <div class="card-content">
+          <p class="card-text"><strong>Состав:</strong> ${v.text}</p>
+          <div class="critical-warning"><strong>Наказание:</strong> ${v.punishment}</div>
+        </div>
+      </div>`;
     });
   } else if (currentTab === 'checklists') {
     html = `<div class="section-title">✅ Требования — ${f.name}</div>`;
@@ -1698,19 +2072,23 @@ function renderTab() {
       html += `</div>`;
     });
   } else if (currentTab === 'errors') {
-    html = `<div class="section-title">⚠️ Типичные ошибки — ${f.name}</div>`;
+    html = `<div class="section-title">🚫 Типичные ошибки — ${f.name}</div>`;
     f.errors.forEach(e => {
-      html += `<div class="error-card"><strong>❌ ${e.text}</strong></div>`;
+      html += `<div class="critical-warning"><strong>❌ ${e.text}</strong></div>`;
     });
   } else if (currentTab === 'interactions') {
     html = `<div class="section-title">🤝 Взаимодействие — ${f.name}</div>
-      <div class="grid-2">`;
+      <div class="cards-grid">`;
     f.interactions.forEach(i => {
-      const targetFaction = Object.values(FACTIONS).find(f => f.name.toLowerCase().includes(i.target.toLowerCase()));
+      const targetFaction = Object.values(FACTIONS).find(f => f.name.toLowerCase().includes(i.target.toLowerCase()) || f.id === i.target.toLowerCase());
       html += `<div class="card">
-        <h3>${targetFaction ? targetFaction.icon : '🏢'} ${i.target}</h3>
-        <p>${i.reason}</p>
-        <a class="cross-link" onclick="${targetFaction ? `selectFaction('${targetFaction.id}')` : ''}">Перейти →</a>
+        <div class="card-header">
+          <h3 class="card-title">${targetFaction ? targetFaction.icon : '🏢'} ${i.target}</h3>
+        </div>
+        <div class="card-content">
+          <p class="card-text">${i.reason}</p>
+          ${targetFaction ? `<button class="btn btn-primary" style="margin-top:10px" onclick="selectFaction('${targetFaction.id}')">Перейти →</button>` : ''}
+        </div>
       </div>`;
     });
     html += `</div>`;
@@ -1732,7 +2110,7 @@ function renderTab() {
       });
       html += `</div>
           <div class="blank-preview" id="preview_${bId}">${renderTemplate(b.template, bId)}</div>
-          <button class="btn btn-copy" onclick="copyBlank(${bId})">📋 Скопировать в буфер</button>
+          <button class="btn btn-copy" onclick="copyBlank(${bId})">📋 Скопировать</button>
           <button class="btn btn-secondary" onclick="clearBlank(${bId})">🗑 Очистить</button>
         </div>
       </div>`;
@@ -1742,20 +2120,25 @@ function renderTab() {
   tabContent.innerHTML = html;
 }
 
+function setFilter(c) {
+  currentFilter = c;
+  renderTab();
+}
+
 function getFieldLabel(f) {
   const labels = {
     nomer: 'Номер', sutmrm: 'Суть ОРМ', fio: 'ФИО', osnov: 'Основание',
     number: 'Номер телефона', srok: 'Срок (суток)', statya: 'Статья УК',
-    podr: 'Подразделение / должность', nazv: 'Название ОРМ', data: 'Дата',
-    adres: 'Адрес', datavremya: 'Дата и время', status: 'Статус (свидетель/подозреваемый)',
+    podr: 'Подразделение', nazv: 'Название ОРМ', data: 'Дата',
+    adres: 'Адрес', datavremya: 'Дата и время', status: 'Статус',
     vremya: 'Время', mesto: 'Место', sotr: 'Сотрудник (звание, ФИО)',
     spisok: 'Список изъятых предметов', opisanie: 'Описание', ponyatye: 'Понятые (ФИО)',
     sudya: 'Судья', adresat: 'Адресат', narush: 'Описание нарушений',
     reestr: 'Реестровый номер', doveritel: 'Доверитель', perechen: 'Перечень',
     sud: 'Название суда', fio_sled: 'ФИО следователя', deystvie: 'Действие',
-    komandir: 'Командир части', zvaniye: 'Звание', narush: 'Нарушение',
-    zashch: 'Подзащитный', primenen: 'Что применено', rezultat: 'Результат',
-    otkuda: 'Откуда', kamera: 'Камера', izyato: 'Изъято'
+    komandir: 'Командир части', zvaniye: 'Звание', zashch: 'Подзащитный',
+    primenen: 'Что применено', rezultat: 'Результат', otkuda: 'Откуда',
+    kamera: 'Камера', izyato: 'Изъято'
   };
   return labels[f] || f;
 }
@@ -1784,7 +2167,7 @@ function updateBlankPreview(bId) {
 function copyBlank(bId) {
   const preview = document.getElementById('preview_' + bId);
   navigator.clipboard.writeText(preview.textContent).then(() => {
-    showToast('✅ Текст скопирован в буфер обмена!');
+    showToast('✅ Скопировано в буфер!');
   });
 }
 
@@ -1820,73 +2203,82 @@ globalSearch.addEventListener('input', (e) => {
   mainContent.style.display = 'none';
   let results = [];
   
-  // Поиск по фракциям
   Object.values(FACTIONS).forEach(f => {
     if (f.name.toLowerCase().includes(q)) {
-      results.push({ type: 'faction', faction: f, text: `Фракция: ${f.name}` });
+      results.push({ type: 'faction', faction: f, text: f.name });
     }
-    // По законам
     f.laws.forEach(l => {
       if ((l.num + ' ' + l.name).toLowerCase().includes(q)) {
         results.push({ type: 'law', faction: f, law: l, text: `${l.num} ${l.name}` });
       }
     });
-    // По полномочиям
     f.powers.forEach(p => {
-      if (p.text.toLowerCase().includes(q)) {
-        results.push({ type: 'power', faction: f, text: p.text });
+      if (p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q)) {
+        results.push({ type: 'power', faction: f, text: p.title, content: p.content });
       }
     });
-    // По ошибкам
-    f.errors.forEach(e => {
-      if (e.text.toLowerCase().includes(q)) {
-        results.push({ type: 'error', faction: f, text: e.text });
+    f.procedures.forEach(p => {
+      if (p.title.toLowerCase().includes(q) || p.content.toLowerCase().includes(q)) {
+        results.push({ type: 'procedure', faction: f, text: p.title, content: p.content });
+      }
+    });
+    f.violations.forEach(v => {
+      if ((v.title + ' ' + v.text).toLowerCase().includes(q)) {
+        results.push({ type: 'violation', faction: f, text: `${v.title} — ${v.article}` });
+      }
+    });
+    f.errors.forEach(err => {
+      if (err.text.toLowerCase().includes(q)) {
+        results.push({ type: 'error', faction: f, text: err.text });
       }
     });
   });
   
-  // Поиск по бланкам
   Object.entries(BLANKS).forEach(([id, b]) => {
     if (b.title.toLowerCase().includes(q) || b.template.toLowerCase().includes(q)) {
       const faction = Object.values(FACTIONS).find(f => f.blanks.includes(parseInt(id)));
-      results.push({ type: 'blank', blank: b, id, faction, text: `Бланк: ${b.title}` });
+      results.push({ type: 'blank', blank: b, id, faction, text: b.title });
     }
   });
   
   if (results.length === 0) {
-    searchResults.innerHTML = `<div class="empty-state"><h3>🔍 Ничего не найдено</h3><p>Попробуйте изменить запрос</p></div>`;
+    searchResults.innerHTML = `<div class="info-banner"><h2>🔍 Ничего не найдено</h2><p>Попробуйте изменить запрос</p></div>`;
     return;
   }
   
-  let html = `<div class="section-title">🔍 Результаты поиска: "${e.target.value}" (${results.length})</div>`;
-  results.forEach(r => {
+  let html = `<div class="section-title">🔍 Результаты: "${e.target.value}" (${results.length})</div>`;
+  html += `<div class="cards-grid">`;
+  results.slice(0, 30).forEach(r => {
+    let cardContent = '';
+    let onClick = '';
     if (r.type === 'faction') {
-      html += `<div class="card" style="cursor:pointer" onclick="selectFaction('${r.faction.id}')">
-        <h3>${r.faction.icon} ${r.faction.name}</h3>
-        <p style="color:var(--text-dim)">Перейти к фракции →</p>
-      </div>`;
+      cardContent = `<p class="card-text">Перейти к фракции →</p>`;
+      onClick = `selectFaction('${r.faction.id}')`;
     } else if (r.type === 'law') {
-      html += `<div class="card" style="cursor:pointer" onclick="selectFaction('${r.faction.id}'); currentTab='laws'; renderTabs(); renderTab();">
-        <h3>📜 ${r.law.num} — ${r.law.name}</h3>
-        <p style="color:var(--text-dim)">Фракция: ${r.faction.icon} ${r.faction.name} ${r.law.date ? '| ' + r.law.date : ''}</p>
-      </div>`;
-    } else if (r.type === 'power') {
-      html += `<div class="card" style="cursor:pointer" onclick="selectFaction('${r.faction.id}'); currentTab='powers'; renderTabs(); renderTab();">
-        <h3>⚖️ ${highlightText(r.text, q)}</h3>
-        <p style="color:var(--text-dim)">${r.faction.icon} ${r.faction.name}</p>
-      </div>`;
+      cardContent = `<p class="card-text">${r.faction.icon} ${r.faction.name} ${r.law.date ? '| ' + r.law.date : ''}</p>`;
+      onClick = `selectFaction('${r.faction.id}'); currentTab='laws'; renderTabs(); renderTab();`;
+    } else if (r.type === 'power' || r.type === 'procedure') {
+      cardContent = `<p class="card-text">${r.faction.icon} ${r.faction.name}</p>`;
+      onClick = `selectFaction('${r.faction.id}'); currentTab='${r.type === 'power' ? 'powers' : 'procedures'}'; renderTabs(); renderTab();`;
+    } else if (r.type === 'violation') {
+      cardContent = `<p class="card-text">${r.faction.icon} ${r.faction.name}</p>`;
+      onClick = `selectFaction('${r.faction.id}'); currentTab='violations'; renderTabs(); renderTab();`;
     } else if (r.type === 'error') {
-      html += `<div class="error-card" style="cursor:pointer" onclick="selectFaction('${r.faction.id}'); currentTab='errors'; renderTabs(); renderTab();">
-        <strong>❌ ${highlightText(r.text, q)}</strong>
-        <p style="color:var(--text-dim); margin-top:5px">${r.faction.icon} ${r.faction.name}</p>
-      </div>`;
+      cardContent = `<p class="card-text">${r.faction.icon} ${r.faction.name}</p>`;
+      onClick = `selectFaction('${r.faction.id}'); currentTab='errors'; renderTabs(); renderTab();`;
     } else if (r.type === 'blank') {
-      html += `<div class="card" style="cursor:pointer" onclick="selectFaction('${r.faction.id}'); currentTab='blanks'; renderTabs(); renderTab(); setTimeout(()=>{const body=document.getElementById('blank_body_${r.id}'); if(body) body.classList.add('open');},100)">
-        <h3>📋 ${highlightText(r.blank.title, q)}</h3>
-        <p style="color:var(--text-dim)">${r.faction.icon} ${r.faction.name}</p>
-      </div>`;
+      cardContent = `<p class="card-text">${r.faction.icon} ${r.faction.name}</p>`;
+      onClick = `selectFaction('${r.faction.id}'); currentTab='blanks'; renderTabs(); renderTab(); setTimeout(()=>{const body=document.getElementById('blank_body_${r.id}'); if(body) body.classList.add('open');},100)`;
     }
+    const icon = r.type === 'law' ? '📜' : r.type === 'power' ? '⚖️' : r.type === 'procedure' ? '🔍' : r.type === 'violation' ? '⚠️' : r.type === 'blank' ? '📋' : r.type === 'error' ? '❌' : r.faction.icon;
+    html += `<div class="card" style="cursor:pointer" onclick="${onClick}">
+      <div class="card-header">
+        <h3 class="card-title">${icon} ${highlightText(r.text, q)}</h3>
+      </div>
+      <div class="card-content">${cardContent}</div>
+    </div>`;
   });
+  html += `</div>`;
   searchResults.innerHTML = html;
 });
 
@@ -1896,8 +2288,7 @@ function highlightText(text, q) {
 }
 
 // Инициализация
-selectFaction('army');
+selectFaction('mvd');
 </script>
-
 </body>
 </html>
