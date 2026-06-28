@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚖️ СПРАВОЧНИК | Полная версия v4.0</title>
+<title>⚖️ СПРАВОЧНИК | Полная версия v3.0</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -659,9 +659,9 @@ mark.blue { background: rgba(121, 192, 255, 0.5); }
 // ═══════════════════════════════════════════════════════════
 const SB_URL = 'https://lbxwdzagdzunqwsanpiu.supabase.co';
 const SB_KEY = 'sb_publishable_GkU6ATOeqG2uSDSPo5ap9Q_67V4Mltt'; // вставь полный ключ
-const sb = (typeof supabase !== 'undefined' && SB_URL !== 'https://lbxwdzagdzunqwsanpiu.supabase.co') 
-  ? supabase.createClient(SB_URL, SB_KEY) 
-  : null;
+const sb = (typeof supabase !== 'undefined')
+? supabase.createClient(SB_URL, SB_KEY)
+: null;
 
 let currentUser = null;
 
