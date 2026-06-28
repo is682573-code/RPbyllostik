@@ -1000,7 +1000,7 @@ errors: [
 { text: 'Видеозапись вместо понятых при досмотре (незаконно)' },
 { text: 'Удержание подозреваемого более 48 часов без судебного решения' }
 ],
-blanks: [10, 11, 12, 13, 14, 37, 38],
+blanks: blanks: [10, 11, 12, 13, 14],
 interactions: [
 { target: 'СКР', reason: 'Передача материалов для возбуждения УД' },
 { target: 'Прокуратура', reason: 'Надзор, согласование ходатайств' },
@@ -1219,7 +1219,7 @@ errors: [
 { text: 'Следственный эксперимент путают с оперативным экспериментом' },
 { text: 'Оперуполномоченный путают со следователем' }
 ],
-blanks: [1, 2, 3, 4, 5, 36],
+blanks: blanks: [1, 2, 3, 4, 5, 36, 37, 38],
 interactions: [
 { target: 'СКР', reason: 'Передача материалов ОРД' },
 { target: 'Прокуратура', reason: 'Надзор за ОРД' },
@@ -2357,13 +2357,13 @@ const BLANKS = {
 
 // ═══ НОВЫЕ БЛАНКИ (36-38) ═══
 36: { title: 'Рапорт на проведение ОРМ (ГУФСБ)', faction: 'fsb', status: 'yellow', 
-  fields: ['fio_ot', 'dolzhnost', 'zvanie', 'vid_orm', 'osnovanie_orm', 'cel_orm', 'data_nach', 'vremya_nach', 'vremya_kon', 'mesto_orm', 'rukovoditel_orm', 'sostav_sotr', 'silya_sredstva', 'data_podp', 'fio_podp'], 
+  fields: ['fio', 'dolzhnost', 'zvanie', 'vid_orm', 'osnovanie_orm', 'cel_orm', 'data_nach', 'vremya_nach', 'vremya_kon', 'mesto_orm', 'rukovoditel_orm', 'sostav_sotr', 'silya_sredstva', 'data_podp', 'fio_p'], 
   template: `ГУФСБ
 РАПОРТ
 О проведении оперативно-розыскного мероприятия
 
 Директору ГУФСБ
-От: {{fio_ot}}
+От: {{fio}}
 Должность: {{dolzhnost}}
 Звание: {{zvanie}}
 
@@ -2386,10 +2386,10 @@ const BLANKS = {
 По окончании мероприятия обязуюсь представить письменный отчет о результатах проведения ОРМ.
 
 «{{data_podp}}» 20__ г.
-Подпись: _____________ Ф.И.О.: {{fio_podp}}` },
+Подпись: _____________ / {{fio_p}} /` },
 
-37: { title: 'Рапорт на отпуск', faction: 'mvd', status: 'green',
-  fields: ['fio', 'dolzhnost', 'zvanie', 'data_nach', 'data_kon', 'data_podp'],
+37: { title: 'Рапорт на отпуск', faction: 'fsb', status: 'green',
+  fields: ['fio', 'dolzhnost', 'zvanie', 'data_nach', 'data_kon', 'data_podp', 'fio_p'],
   template: `РАПОРТ
 
 Начальнику {{dolzhnost}}
@@ -2401,10 +2401,10 @@ const BLANKS = {
 Прошу предоставить мне очередной оплачиваемый отпуск продолжительностью 30 календарных дней с «{{data_nach}}» 20__ г. по «{{data_kon}}» 20__ г.
 
 «{{data_podp}}» 20__ г.
-Подпись: _____________ / {{fio}} /` },
+Подпись: _____________ / {{fio_p}} /` },
 
-38: { title: 'Рапорт на отгул', faction: 'mvd', status: 'green',
-  fields: ['fio', 'dolzhnost', 'zvanie', 'kolichestvo', 'edinica', 'data', 'prichina', 'data_podp'],
+38: { title: 'Рапорт на отгул', faction: 'fsb', status: 'green',
+  fields: ['fio', 'dolzhnost', 'zvanie', 'kolichestvo', 'edinica', 'data', 'prichina', 'data_podp', 'fio_p'],
   template: `РАПОРТ
 
 Начальнику {{dolzhnost}}
@@ -2416,8 +2416,9 @@ const BLANKS = {
 Прошу предоставить мне отгул за ранее отработанное сверхурочное время в количестве {{kolichestvo}} {{edinica}} «{{data}}» 20__ г. в связи с {{prichina}}.
 
 «{{data_podp}}» 20__ г.
-Подпись: _____________ / {{fio}} /` }
+Подпись: _____________ / {{fio_p}} /` }
 };
+
 // ============ UI ============
 const factionsNav = document.getElementById('factionsNav');
 const tabsNav = document.getElementById('tabsNav');
@@ -2486,19 +2487,20 @@ let html = '';
 
 // ═══ НОВЫЕ ВКЛАДКИ ═══
 if (currentTab === 'algorithms') {
-html = `<div class="section-title">📖 Алгоритмы отыгровки</div>
-<div class="info-banner"><h2>Пошаговые инструкции для RP-ситуаций</h2><p>Выберите фракцию и следуйте шагам</p></div>
-<div class="algo-factions">`;
-Object.values(FACTIONS).forEach(ff => {
-if (ALGORITHMS[ff.id] && ALGORITHMS[ff.id].length > 0) {
-html += `<button class="algo-faction-btn ${currentAlgoFaction === ff.id ? 'active' : ''}" onclick="selectAlgoFaction('${ff.id}')">${ff.icon} ${ff.name}</button>`;
-}
-});
-html += `</div><div class="algo-list">`;
-const algos = ALGORITHMS[currentAlgoFaction] || [];
+html = `<div class="section-title">📖 Алгоритмы отыгровки — ${f.name}</div>
+<div class="info-banner"><h2>${f.icon} ${f.name}</h2><p>Пошаговые инструкции для RP-ситуаций</p></div>`;
+
+const algos = ALGORITHMS[f.id] || [];
 if (algos.length === 0) {
-html += `<div class="info-banner"><p>Для этой фракции алгоритмы пока не добавлены</p></div>`;
+html += `<div class="info-banner" style="text-align:center">
+<h2>📭 Алгоритмы для ${f.name} ещё не добавлены</h2>
+<p>Хочешь предложить алгоритмы для этой фракции?</p>
+<a href="https://t.me/ll0stik" target="_blank" class="btn btn-primary" style="margin-top:12px;display:inline-block;text-decoration:none">
+✉️ Написать @ll0stik
+</a>
+</div>`;
 } else {
+html += `<div class="algo-list">`;
 algos.forEach(algo => {
 html += `<div class="algo-card"><h4>${algo.title}</h4>`;
 algo.steps.forEach((step, i) => {
@@ -2506,8 +2508,8 @@ html += `<div class="algo-step"><div class="algo-step-num">${i + 1}</div><div cl
 });
 html += `</div>`;
 });
-}
 html += `</div>`;
+}
 }
 else if (currentTab === 'codes') {
 html = `<div class="section-title">📻 Таблица 10-кодов и радиопозывных</div>
@@ -2520,12 +2522,25 @@ html += `</div>`;
 }
 else if (currentTab === 'deadlines') {
 html = `<div class="section-title">⏱ Калькулятор процессуальных сроков УПК</div>
-<div class="info-banner"><h2>Рассчитай дедлайны</h2><p>Укажи время фактического задержания — система рассчитает все процессуальные сроки</p></div>
+<div class="info-banner"><h2>Рассчитай дедлайны</h2><p>Укажи время и причину задержания</p></div>
 <div class="calc-wrap">
 <div class="calc-row">
 <label>⏰ Время фактического задержания:</label>
 <input type="datetime-local" id="detention-time" onchange="calculateDeadlines()">
 <button class="btn btn-primary" onclick="setNow()">Сейчас</button>
+</div>
+<div class="calc-row">
+<label>📋 Причина задержания:</label>
+<select id="detention-reason" onchange="calculateDeadlines()" style="flex:1;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none">
+<option value="Подозрение в совершении преступления (ст. 91 УПК)">Подозрение в совершении преступления (ст. 91 УПК)</option>
+<option value="Административное правонарушение (ст. 27.3 КоАП)">Административное правонарушение (ст. 27.3 КоАП)</option>
+<option value="Застигнут на месте преступления">Застигнут на месте преступления</option>
+<option value="По указанию потерпевших/очевидцев">По указанию потерпевших/очевидцев</option>
+<option value="Следы преступления на теле/одежде">Следы преступления на теле/одежде</option>
+<option value="Попытка скрыться">Попытка скрыться</option>
+<option value="Без постоянного места жительства">Без постоянного места жительства</option>
+<option value="Личность не установлена">Личность не установлена</option>
+</select>
 </div>
 <div class="deadlines" id="deadlines-output"></div>
 </div>`;
@@ -2796,10 +2811,13 @@ calculateDeadlines();
 }
 
 function calculateDeadlines() {
-const input = document.getElementById('detention-time').value;
-if (!input) return;
-const start = new Date(input);
+const input = document.getElementById('detention-time');
+const reason = document.getElementById('detention-reason');
 const output = document.getElementById('deadlines-output');
+if (!input || !input.value) return;
+
+const start = new Date(input.value);
+const reasonText = reason ? reason.value : 'Не указана';
 
 const deadlines = [
 { title: 'Протокол задержания (ст. 91 УПК)', hours: 3 },
@@ -2810,9 +2828,12 @@ const deadlines = [
 { title: 'Предъявление обвинения', hours: 72 }
 ];
 
-let html = '';
-const now = new Date();
+let html = `<div style="margin-bottom:12px;padding:10px;background:var(--bg-2);border-radius:8px;font-size:13px;color:var(--text-dim)">
+<strong style="color:var(--accent)">Причина:</strong> ${reasonText}<br>
+<strong style="color:var(--accent)">Время задержания:</strong> ${start.toLocaleString('ru-RU')}
+</div>`;
 
+const now = new Date();
 deadlines.forEach(d => {
 const deadline = new Date(start.getTime() + d.hours * 3600000);
 const remain = deadline - now;
@@ -2824,7 +2845,7 @@ let remainText = '';
 
 if (isPassed) {
 statusClass = 'urgent';
-remainText = `<span style="color:var(--red)">⚠ СРОК ПРОСРОЧЕН!</span>`;
+remainText = `<span style="color:var(--red)"> СРОК ПРОСРОЧЕН!</span>`;
 } else if (isUrgent) {
 statusClass = 'urgent';
 const mins = Math.floor(remain / 60000);
@@ -2841,27 +2862,40 @@ html += `<div class="deadline-card ${statusClass}">
 <div class="deadline-remain">${remainText}</div>
 </div>`;
 });
-
 output.innerHTML = html;
 }
 
+function setNow() {
+const now = new Date();
+const offset = now.getTimezoneOffset() * 60000;
+const local = new Date(now.getTime() - offset).toISOString().slice(0, 16);
+const input = document.getElementById('detention-time');
+if (input) {
+input.value = local;
+calculateDeadlines();
+}
+}
 // ═══════════════════════════════════════════════════════════
 //  МАРКЕР / ЛАСТИК
 // ═══════════════════════════════════════════════════════════
+// ═══ МАРКЕР / ЛАСТИК (ИСПРАВЛЕННАЯ ВЕРСИЯ) ═══
 let currentMarkerColor = 'yellow';
 
 document.addEventListener('mouseup', (e) => {
+setTimeout(() => {
 const sel = window.getSelection();
-if (!sel || sel.isCollapsed) return;
+if (!sel || sel.isCollapsed || sel.toString().trim().length === 0) return;
+
 const range = sel.getRangeAt(0);
 const container = range.commonAncestorContainer;
-const card = (container.nodeType === 3 ? container.parentElement : container).closest('.card-content, .algo-step-text');
+const card = (container.nodeType === 3 ? container.parentElement : container).closest('.card-content, .algo-step-text, .card-text');
 if (!card) return;
 
 const toolbar = document.getElementById('marker-toolbar');
-toolbar.style.left = Math.min(e.clientX, window.innerWidth - 200) + 'px';
-toolbar.style.top = (e.clientY - 60) + 'px';
+toolbar.style.left = Math.min(e.clientX, window.innerWidth - 220) + 'px';
+toolbar.style.top = (window.scrollY + e.clientY - 70) + 'px';
 toolbar.classList.add('show');
+}, 10);
 });
 
 function setMarkerColor(color) {
@@ -2873,6 +2907,8 @@ applyMarker();
 function applyMarker() {
 const sel = window.getSelection();
 if (!sel || sel.isCollapsed) return;
+
+try {
 const range = sel.getRangeAt(0);
 const text = sel.toString();
 if (!text.trim()) return;
@@ -2880,11 +2916,15 @@ if (!text.trim()) return;
 const mark = document.createElement('mark');
 mark.className = currentMarkerColor;
 mark.textContent = text;
-mark.onclick = (e) => {
+mark.style.cursor = 'pointer';
+mark.title = 'Нажми чтобы стереть';
+mark.onclick = function(e) {
+e.stopPropagation();
 if (confirm('Стереть выделение?')) {
-const parent = mark.parentNode;
-while (mark.firstChild) parent.insertBefore(mark.firstChild, mark);
-parent.removeChild(mark);
+const parent = this.parentNode;
+while (this.firstChild) parent.insertBefore(this.firstChild, this);
+parent.removeChild(this);
+parent.normalize();
 }
 };
 
@@ -2892,11 +2932,17 @@ range.deleteContents();
 range.insertNode(mark);
 sel.removeAllRanges();
 hideMarkerToolbar();
+} catch(err) {
+console.log('Маркер ошибка:', err);
+hideMarkerToolbar();
+}
 }
 
 function eraseSelection() {
 const sel = window.getSelection();
 if (!sel || sel.isCollapsed) return;
+
+try {
 const range = sel.getRangeAt(0);
 const container = range.commonAncestorContainer;
 const el = container.nodeType === 3 ? container.parentElement : container;
@@ -2905,7 +2951,9 @@ marks.forEach(m => {
 const parent = m.parentNode;
 while (m.firstChild) parent.insertBefore(m.firstChild, m);
 parent.removeChild(m);
+parent.normalize();
 });
+} catch(err) {}
 hideMarkerToolbar();
 }
 
@@ -2914,6 +2962,13 @@ document.getElementById('marker-toolbar').classList.remove('show');
 window.getSelection().removeAllRanges();
 }
 
+// Закрытие тулбара при клике вне
+document.addEventListener('click', (e) => {
+const toolbar = document.getElementById('marker-toolbar');
+if (toolbar && !toolbar.contains(e.target)) {
+toolbar.classList.remove('show');
+}
+});
 // ═══════════════════════════════════════════════════════════
 //  ГОРЯЧИЕ КЛАВИШИ
 // ═══════════════════════════════════════════════════════════
@@ -2959,7 +3014,8 @@ mesto_orm: 'Место проведения', rukovoditel_orm: 'Ответств
 sostav_sotr: 'Состав сотрудников', silya_sredstva: 'Силы и средства',
 data_podp: 'Дата подписи (число)', fio_podp: 'ФИО подписавшего',
 data_kon: 'Дата окончания (число)', kolichestvo: 'Количество', edinica: 'Единица (суток/часов)',
-prichina: 'Причина (семейные обстоятельства и т.д.)'
+prichina: 'Причина (семейные обстоятельства и т.д.)',
+fio_p: 'ФИО (подпись)'
 };
 return labels[f] || f;
 }
