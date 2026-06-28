@@ -660,118 +660,117 @@ mark.blue { background: rgba(121, 192, 255, 0.5); }
 const SB_URL = 'https://lbxwdzagdzunqwsanpiu.supabase.co';
 const SB_KEY = 'sb_publishable_GkU6ATOeqG2uSDSPo5ap9Q_67V4Mltt';
 const sb = supabase.createClient(SB_URL, SB_KEY);
-
 let currentUser = null;
 
 // ═══════════════════════════════════════════════════════════
 //  ФУНКЦИИ АВТОРИЗАЦИИ
 // ═══════════════════════════════════════════════════════════
 function switchAuthTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((t, i) => {
-    t.classList.toggle('active', (tab === 'register' && i === 0) || (tab === 'login' && i === 1));
-  });
-  document.getElementById('pane-register').classList.toggle('active', tab === 'register');
-  document.getElementById('pane-login').classList.toggle('active', tab === 'login');
+document.querySelectorAll('.auth-tab').forEach((t, i) => {
+t.classList.toggle('active', (tab === 'register' && i === 0) || (tab === 'login' && i === 1));
+});
+document.getElementById('pane-register').classList.toggle('active', tab === 'register');
+document.getElementById('pane-login').classList.toggle('active', tab === 'login');
 }
 
 async function doRegister() {
-  const nick = document.getElementById('reg-nick').value.trim();
-  const token = document.getElementById('reg-token').value.trim();
-  const err = document.getElementById('reg-err');
-  const btn = document.getElementById('reg-btn');
-  err.textContent = '';
-  if (!nick || !token) { err.textContent = 'Заполни оба поля'; return; }
-  if (!sb) { err.textContent = 'Supabase не подключен'; return; }
-  btn.disabled = true; btn.textContent = '...';
-  const { data: authData, error: authErr } = await sb.auth.signInAnonymously();
-  if (authErr) { err.textContent = authErr.message; btn.disabled = false; btn.textContent = 'Зарегистрироваться'; return; }
-  const { data, error } = await sb.rpc('register_with_token', { p_nickname: nick, p_token: token });
-  if (error || !data?.success) {
-    await sb.auth.signOut();
-    err.textContent = data?.error || error?.message || 'Ошибка регистрации';
-    btn.disabled = false; btn.textContent = 'Зарегистрироваться';
-    return;
-  }
-  currentUser = { id: authData.user.id, nick };
-  localStorage.setItem('rp_session', JSON.stringify({ id: currentUser.id, nick: currentUser.nick }));
-  showUUIDScreen(currentUser.id, currentUser.nick);
+const nick = document.getElementById('reg-nick').value.trim();
+const token = document.getElementById('reg-token').value.trim();
+const err = document.getElementById('reg-err');
+const btn = document.getElementById('reg-btn');
+err.textContent = '';
+if (!nick || !token) { err.textContent = 'Заполни оба поля'; return; }
+if (!sb) { err.textContent = 'Supabase не подключен'; return; }
+btn.disabled = true; btn.textContent = '...';
+const { data: authData, error: authErr } = await sb.auth.signInAnonymously();
+if (authErr) { err.textContent = authErr.message; btn.disabled = false; btn.textContent = 'Зарегистрироваться'; return; }
+const { data, error } = await sb.rpc('register_with_token', { p_nickname: nick, p_token: token });
+if (error || !data?.success) {
+await sb.auth.signOut();
+err.textContent = data?.error || error?.message || 'Ошибка регистрации';
+btn.disabled = false; btn.textContent = 'Зарегистрироваться';
+return;
+}
+currentUser = { id: authData.user.id, nick };
+localStorage.setItem('rp_session', JSON.stringify({ id: currentUser.id, nick: currentUser.nick }));
+showUUIDScreen(currentUser.id, currentUser.nick);
 }
 
 function showUUIDScreen(uid, nick) {
-  const gate = document.getElementById('auth-gate');
-  gate.innerHTML = `
-    <div class="auth-container" style="text-align:center">
-      <div class="auth-logo-icon">🎉</div>
-      <div class="auth-logo-title">Добро пожаловать, ${nick}!</div>
-      <div class="auth-warn" style="margin-top:20px">
-        <strong>⚠ СОХРАНИ ЭТОТ КОД!</strong>
-        Это твой единственный ключ для входа.
-      </div>
-      <div class="code-display" onclick="navigator.clipboard.writeText('${uid}').then(()=>showToast('Код скопирован!'))">${uid}</div>
-      <button class="auth-btn" onclick="finishAuth()">Продолжить →</button>
-    </div>
-  `;
+const gate = document.getElementById('auth-gate');
+gate.innerHTML = `
+<div class="auth-container" style="text-align:center">
+<div class="auth-logo-icon">🎉</div>
+<div class="auth-logo-title">Добро пожаловать, ${nick}!</div>
+<div class="auth-warn" style="margin-top:20px">
+<strong>⚠ СОХРАНИ ЭТОТ КОД!</strong>
+Это твой единственный ключ для входа.
+</div>
+<div class="code-display" onclick="navigator.clipboard.writeText('${uid}').then(()=>showToast('Код скопирован!'))">${uid}</div>
+<button class="auth-btn" onclick="finishAuth()">Продолжить →</button>
+</div>
+`;
 }
 
 async function doLogin() {
-  const code = document.getElementById('login-code').value.trim();
-  const err = document.getElementById('login-err');
-  const btn = document.getElementById('login-btn');
-  err.textContent = '';
-  if (!code) { err.textContent = 'Введи код'; return; }
-  const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-  if (!uuidRe.test(code)) { err.textContent = 'Неверный формат кода'; return; }
-  if (!sb) { err.textContent = 'Supabase не подключен'; return; }
-  btn.disabled = true; btn.textContent = '...';
-  const { data, error } = await sb.rpc('get_nickname_by_id', { p_id: code });
-  if (error || !data) {
-    err.textContent = 'Код не найден';
-    btn.disabled = false; btn.textContent = 'Войти';
-    return;
-  }
-  currentUser = { id: code, nick: data };
-  localStorage.setItem('rp_session', JSON.stringify({ id: code, nick: data }));
-  finishAuth();
+const code = document.getElementById('login-code').value.trim();
+const err = document.getElementById('login-err');
+const btn = document.getElementById('login-btn');
+err.textContent = '';
+if (!code) { err.textContent = 'Введи код'; return; }
+const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+if (!uuidRe.test(code)) { err.textContent = 'Неверный формат кода'; return; }
+if (!sb) { err.textContent = 'Supabase не подключен'; return; }
+btn.disabled = true; btn.textContent = '...';
+const { data, error } = await sb.rpc('get_nickname_by_id', { p_id: code });
+if (error || !data) {
+err.textContent = 'Код не найден';
+btn.disabled = false; btn.textContent = 'Войти';
+return;
+}
+currentUser = { id: code, nick: data };
+localStorage.setItem('rp_session', JSON.stringify({ id: code, nick: data }));
+finishAuth();
 }
 
 function finishAuth() {
-  document.getElementById('auth-gate').classList.add('hidden');
-  renderUserBadge();
-  initApp();
+document.getElementById('auth-gate').classList.add('hidden');
+renderUserBadge();
+// Убираем вызов initApp(), так как этой функции нет
 }
 
 function doLogout() {
-  if (sb) sb.auth.signOut();
-  localStorage.removeItem('rp_session');
-  currentUser = null;
-  document.getElementById('auth-gate').classList.remove('hidden');
-  location.reload();
+if (sb) sb.auth.signOut();
+localStorage.removeItem('rp_session');
+currentUser = null;
+document.getElementById('auth-gate').classList.remove('hidden');
+location.reload();
 }
 
 function renderUserBadge() {
-  const el = document.getElementById('headerRight');
-  if (!el) return;
-  if (!currentUser) { el.innerHTML = ''; return; }
-  el.innerHTML = `
-    <div class="user-badge">
-      <span>👤</span>
-      <span class="user-badge-name">${currentUser.nick}</span>
-    </div>
-    <button class="logout-btn" onclick="doLogout()">Выйти</button>
-  `;
+const el = document.getElementById('headerRight');
+if (!el) return; // Если элемента нет, просто выходим
+if (!currentUser) { el.innerHTML = ''; return; }
+el.innerHTML = `
+<div class="user-badge">
+<span>👤</span>
+<span class="user-badge-name">${currentUser.nick}</span>
+</div>
+<button class="logout-btn" onclick="doLogout()">Выйти</button>
+`;
 }
 
 async function restoreSession() {
-  const saved = localStorage.getItem('rp_session');
-  if (!saved) return false;
-  try {
-    const data = JSON.parse(saved);
-    if (data?.id && data?.nick) {
-      currentUser = data;
-      return true;
-    }
-  } catch(e) {}
-  return false;
+const saved = localStorage.getItem('rp_session');
+if (!saved) return false;
+try {
+const data = JSON.parse(saved);
+if (data?.id && data?.nick) {
+currentUser = data;
+return true;
+}
+} catch(e) {}
+return false;
 }
 
 // ============ ДАННЫЕ ФРАКЦИЙ ============
@@ -2419,7 +2418,6 @@ const BLANKS = {
 Подпись: _____________ / {{fio_p}} /` }
 };
 
-// ============ UI ============
 const factionsNav = document.getElementById('factionsNav');
 const tabsNav = document.getElementById('tabsNav');
 const tabContent = document.getElementById('tabContent');
@@ -2430,6 +2428,7 @@ const copyToast = document.getElementById('copyToast');
 let currentFaction = 'mvd';
 let currentTab = 'powers';
 let currentFilter = 'all';
+
 // Навигация по фракциям
 Object.values(FACTIONS).forEach((f, i) => {
 const btn = document.createElement('button');
@@ -2439,6 +2438,7 @@ btn.innerHTML = `<span>${f.icon}</span><span>${f.name}</span>`;
 btn.onclick = () => selectFaction(f.id);
 factionsNav.appendChild(btn);
 });
+
 function selectFaction(id) {
 currentFaction = id;
 currentTab = 'powers';
@@ -2449,7 +2449,7 @@ renderTab();
 searchResults.innerHTML = '';
 globalSearch.value = '';
 }
-// Вкладки
+
 const TABS = [
 { id: 'powers', name: '⚖️ Полномочия' },
 { id: 'procedures', name: '🔍 Процедуры' },
@@ -2462,9 +2462,10 @@ const TABS = [
 { id: 'blanks', name: '📑 Бланки' },
 { id: 'algorithms', name: '📖 Алгоритмы' },
 { id: 'codes', name: '📻 10-коды' },
-{ id: 'deadlines', name: ' Сроки УПК' },
+{ id: 'deadlines', name: '⏱ Сроки УПК' },
 { id: 'favorites', name: '⭐ Избранное' }
 ];
+
 function renderTabs() {
 tabsNav.innerHTML = '';
 TABS.forEach(t => {
@@ -2691,65 +2692,88 @@ tabContent.innerHTML = html;
 const ALGORITHMS = {
 mvd: [
 { title: '🚔 Задержание на посту', steps: [
-{ title: 'Останови транспорт', text: 'Жезл/свисток/громкоговоритель.' },
-{ title: 'Представься', text: 'Должность, звание, ФИО.' },
-{ title: 'Объясни причину', text: 'Чётко назови причину.' },
-{ title: 'Проверь документы', text: 'Водительское, СТС, страховка.' },
-{ title: 'При нарушениях — протокол', text: 'Составь протокол об АП.' },
-{ title: 'При подозрении в преступлении', text: 'Задержание по ст. 91 УПК.' }
+{ title: 'Останови транспорт', text: 'Жезл/свисток/громкоговоритель. Укажи место остановки.' },
+{ title: 'Представься', text: 'Должность, звание, ФИО. По требованию — покажи удостоверение.' },
+{ title: 'Объясни причину', text: 'Чётко назови причину: нарушение ПДД / ориентировка / проверка документов (с основанием).' },
+{ title: 'Проверь документы', text: 'Водительское, СТС, страховка. Проверь по базам (ИБД-Ф, ФФИ).' },
+{ title: 'При нарушениях — протокол', text: 'Составь протокол об АП. Разъясни права (ст. 25.1 КоАП).' },
+{ title: 'При подозрении в преступлении', text: 'Задержание по ст. 91 УПК. Протокол в течение 3 часов. Уведомление родных — 12 часов.' }
 ]},
 { title: '🔍 Личный досмотр гражданина', steps: [
-{ title: 'Основания', text: 'Подозрение в наличии орудий АП.' },
-{ title: 'Понятые', text: 'Строго 2 понятых ТОГО ЖЕ ПОЛА.' },
-{ title: 'Разъяснение прав', text: 'Объясни основания.' },
-{ title: 'Проведи досмотр', text: 'Одежда, вещи.' },
-{ title: 'Протокол', text: 'Полная опись.' }
+{ title: 'Основания', text: 'Подозрение в наличии орудий АП / запрещённых предметов. Обязательно указать причину!' },
+{ title: 'Понятые', text: 'Строго 2 понятых ТОГО ЖЕ ПОЛА. Видеозапись НЕ заменяет!' },
+{ title: 'Разъяснение прав', text: 'Объясни основания, права не давать пояснения, право на защиту.' },
+{ title: 'Проведи досмотр', text: 'Одежда, вещи. Всё изымаемое сразу описывай.' },
+{ title: 'Протокол', text: 'Полная опись, подписи понятых, копия — досматриваемому.' }
 ]}
 ],
 fsb: [
 { title: '🛡️ Задержание с поличным', steps: [
-{ title: 'Объяви о задержании', text: 'Чётко: "Вы задержаны сотрудником ФСБ."' },
-{ title: 'Разъясни права', text: 'Ст. 51 Конституции.' },
-{ title: 'Протокол за 3 часа', text: 'Обязательно указать основания.' },
-{ title: 'Рапорт в СКР', text: 'ФСБ НЕ возбуждает УД!' }
+{ title: 'Объяви о задержании', text: 'Чётко, громко. "Вы задержаны сотрудником ФСБ."' },
+{ title: 'Разъясни права', text: 'Ст. 51 Конституции (не свидетельствовать против себя). Право на защитника.' },
+{ title: 'Протокол за 3 часа', text: 'Обязательно указать основания по ст. 91 УПК.' },
+{ title: 'Рапорт в СКР', text: 'ФСБ НЕ возбуждает УД! Составь рапорт по ст. 143 УПК и передай в СКР.' }
 ]},
 { title: '🎧 Проведение прослушивания (ПН)', steps: [
-{ title: 'Постановление начальника', text: 'Вынеси постановление.' },
-{ title: 'Решение суда', text: 'БЕЗ суда — нарушение!' },
-{ title: 'Направление оператору', text: 'Передай постановление.' },
-{ title: 'Срок — до 180 суток', text: 'По истечении — новое решение.' },
-{ title: 'Рассекречивание', text: 'Для приобщения к УД.' }
+{ title: 'Постановление начальника', text: 'Вынеси постановление с обоснованием.' },
+{ title: 'Решение суда', text: 'БЕЗ суда — нарушение ст. 8 ФЗ-144 и ст. 23 Конституции!' },
+{ title: 'Направление оператору', text: 'Передай постановление оператору связи с обязательством о сотрудничестве.' },
+{ title: 'Срок — до 180 суток', text: 'По истечении — новое решение или прекращение.' },
+{ title: 'Рассекречивание', text: 'Для приобщения к УД — рассекречь материалы постановлением начальника.' }
 ]}
 ],
 skr: [
 { title: '📝 Возбуждение уголовного дела', steps: [
-{ title: 'Изучи материал', text: 'Рапорт ФСБ / заявление.' },
-{ title: 'Установи признаки преступления', text: 'Состав преступления.' },
-{ title: 'Постановление о возбуждении УД', text: 'Укажи статью.' },
-{ title: 'Прими к производству', text: 'Назначь себя следователем.' },
-{ title: 'Копия прокурору за 24 часа', text: 'Обязательно!' }
+{ title: 'Изучи материал', text: 'Рапорт ФСБ / заявление / явка с повинной.' },
+{ title: 'Установи признаки преступления', text: 'Состав преступления по УК РФ. Наличие события, умысла, виновности.' },
+{ title: 'Постановление о возбуждении УД', text: 'Укажи статью, время, место. Присвой номер.' },
+{ title: 'Прими к производству', text: 'Назначь себя следователем по делу.' },
+{ title: 'Копия прокурору за 24 часа', text: 'Обязательно! Прокурор вправе отменить в течение 24 часов.' }
+]}
+],
+prosecutor: [
+{ title: '⚖️ Рассмотрение жалобы (ст. 124 УПК)', steps: [
+{ title: 'Получи жалобу', text: 'Зарегистрируй в КУСП. Назначь срок рассмотрения.' },
+{ title: 'Изучи материалы', text: 'Запроси материалы из СО / ОВД. Изучи доводы заявителя.' },
+{ title: 'Рассмотри за 3-10 суток', text: 'Вынеси постановление: удовлетворить ИЛИ отказать.' },
+{ title: 'Уведоми заявителя', text: 'Отправь копию постановления заявителю. Разъясни порядок обжалования.' }
+]}
+],
+lawyer: [
+{ title: '🎓 Допуск к подзащитному', steps: [
+{ title: 'Заключи соглашение', text: 'С доверителем или его родственниками. Укажи предмет и гонорар.' },
+{ title: 'Выпиши ордер', text: 'От имени адвокатской палаты. Укажи реестровый номер.' },
+{ title: 'Предъяви на КПП / в ОВД', text: 'Удостоверение адвоката + ордер. Никакого согласования с командованием!' },
+{ title: 'Свидание наедине', text: 'Без ограничений по числу и продолжительности. Конфиденциально.' }
+]}
+],
+fsin: [
+{ title: '🔒 Водворение в ШИЗО', steps: [
+{ title: 'Зафиксируй нарушение', text: 'Составь рапорт о злостном нарушении режима.' },
+{ title: 'Медосмотр (ОБЯЗАТЕЛЬНО!)', text: 'Справка о возможности содержания в ШИЗО. Без справки — нарушение!' },
+{ title: 'Постановление', text: 'Издай постановление начальника ИУ.' },
+{ title: 'Срок — до 15 суток', text: 'Внеси запись в учётную карточку заключённого.' }
+]}
+],
+rosgvardia: [
+{ title: '🚨 Применение оружия', steps: [
+{ title: 'Оцени угрозу', text: 'Нападение, угроза жизни, попытка завладения оружием.' },
+{ title: 'Предупреждение', text: 'Голосом + выстрел вверх. ИСКЛЮЧЕНИЕ: террористическая угроза — можно БЕЗ предупреждения.' },
+{ title: 'Применение', text: 'Соразмерно угрозе. Стреляй на поражение только при крайней необходимости.' },
+{ title: 'Помощь раненым', text: 'Обязательно вызови скорую, окажи первую помощь.' },
+{ title: 'Уведомление прокурора', text: 'В течение 24 часов, если причинён вред здоровью.' }
+]}
+],
+army: [
+{ title: '🪖 Задержание военнослужащего ВП', steps: [
+{ title: 'Представься', text: 'Покажи удостоверение ВП. Объясни основания.' },
+{ title: 'Доложи', text: 'Командиру части и военному коменданту.' },
+{ title: 'Протокол', text: 'Составь протокол задержания.' },
+{ title: 'Гауптвахта', text: 'Направь на гауптвахту (до 30 суток) или в комендатуру.' },
+{ title: '⚠ НЕ для гражданских!', text: 'ВП НЕ задерживает гражданских ВНЕ территории ВЧ. Это МВД/Росгвардия.' }
 ]}
 ]
 };
-
-const TEN_CODES = [
-{ code: '10-1', meaning: 'Плохая связь', desc: 'Сигнал прерывается' },
-{ code: '10-4', meaning: 'Принято', desc: 'Информация получена' },
-{ code: '10-6', meaning: 'Занят', desc: 'Отвечу позже' },
-{ code: '10-7', meaning: 'Вышел из сети', desc: 'Экипаж заканчивает смену' },
-{ code: '10-8', meaning: 'В сети', desc: 'Экипаж в эфире' },
-{ code: '10-9', meaning: 'Повторите', desc: 'Повторите передачу' },
-{ code: '10-20', meaning: 'Местоположение', desc: 'Укажите местоположение' },
-{ code: '10-22', meaning: 'Прервать', desc: 'Прервите передачу' },
-{ code: '10-33', meaning: 'Экстренная связь', desc: 'Освободите канал' },
-{ code: '10-50', meaning: 'ДТП', desc: 'Дорожно-транспортное происшествие' },
-{ code: '10-78', meaning: 'Требуется помощь', desc: 'Необходима помощь' },
-{ code: '10-80', meaning: 'Погоня', desc: 'Преследование' },
-{ code: '10-97', meaning: 'Прибыл на место', desc: 'Экипаж на месте' },
-{ code: '10-99', meaning: 'Розыск', desc: 'Разыскиваемое лицо' },
-{ code: 'Код 0', meaning: 'Офицер в беде', desc: 'КРИТИЧЕСКИЙ сигнал' },
-{ code: 'Код 3', meaning: 'Экстренный вызов', desc: 'Со спецсигналами' }
-];
 
 let currentAlgoFaction = 'mvd';
 
