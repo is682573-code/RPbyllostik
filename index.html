@@ -658,10 +658,8 @@ mark.blue { background: rgba(121, 192, 255, 0.5); }
 //  SUPABASE КОНФИГУРАЦИЯ
 // ═══════════════════════════════════════════════════════════
 const SB_URL = 'https://lbxwdzagdzunqwsanpiu.supabase.co';
-const SB_KEY = 'sb_publishable_GkU6ATOeqG2uSDSPo5ap9Q_67V4Mltt'; // вставь полный ключ
-const sb = (typeof supabase !== 'undefined')
-? supabase.createClient(SB_URL, SB_KEY)
-: null;
+const SB_KEY = 'sb_publishable_GkU6ATOeqG2uSDSPo5ap9Q_67V4Mltt';
+const sb = supabase.createClient(SB_URL, SB_KEY);
 
 let currentUser = null;
 
