@@ -2483,7 +2483,75 @@ tabsNav.appendChild(btn);
 function renderTab() {
 const f = FACTIONS[currentFaction];
 let html = '';
-if (currentTab === 'structure') {
+
+// ═══ НОВЫЕ ВКЛАДКИ ═══
+if (currentTab === 'algorithms') {
+html = `<div class="section-title">📖 Алгоритмы отыгровки</div>
+<div class="info-banner"><h2>Пошаговые инструкции для RP-ситуаций</h2><p>Выберите фракцию и следуйте шагам</p></div>
+<div class="algo-factions">`;
+Object.values(FACTIONS).forEach(ff => {
+if (ALGORITHMS[ff.id] && ALGORITHMS[ff.id].length > 0) {
+html += `<button class="algo-faction-btn ${currentAlgoFaction === ff.id ? 'active' : ''}" onclick="selectAlgoFaction('${ff.id}')">${ff.icon} ${ff.name}</button>`;
+}
+});
+html += `</div><div class="algo-list">`;
+const algos = ALGORITHMS[currentAlgoFaction] || [];
+if (algos.length === 0) {
+html += `<div class="info-banner"><p>Для этой фракции алгоритмы пока не добавлены</p></div>`;
+} else {
+algos.forEach(algo => {
+html += `<div class="algo-card"><h4>${algo.title}</h4>`;
+algo.steps.forEach((step, i) => {
+html += `<div class="algo-step"><div class="algo-step-num">${i + 1}</div><div class="algo-step-content"><div class="algo-step-title">${step.title}</div><div class="algo-step-text">${step.text}</div></div></div>`;
+});
+html += `</div>`;
+});
+}
+html += `</div>`;
+}
+else if (currentTab === 'codes') {
+html = `<div class="section-title">📻 Таблица 10-кодов и радиопозывных</div>
+<div class="info-banner"><h2>Стандартные коды связи</h2><p>Используются для краткости и скорости передачи информации по рации</p></div>
+<div class="codes-grid">`;
+TEN_CODES.forEach(c => {
+html += `<div class="code-item"><div class="code-num">${c.code}</div><div class="code-meaning">${c.meaning}</div><div class="code-desc">${c.desc}</div></div>`;
+});
+html += `</div>`;
+}
+else if (currentTab === 'deadlines') {
+html = `<div class="section-title">⏱ Калькулятор процессуальных сроков УПК</div>
+<div class="info-banner"><h2>Рассчитай дедлайны</h2><p>Укажи время фактического задержания — система рассчитает все процессуальные сроки</p></div>
+<div class="calc-wrap">
+<div class="calc-row">
+<label>⏰ Время фактического задержания:</label>
+<input type="datetime-local" id="detention-time" onchange="calculateDeadlines()">
+<button class="btn btn-primary" onclick="setNow()">Сейчас</button>
+</div>
+<div class="deadlines" id="deadlines-output"></div>
+</div>`;
+}
+else if (currentTab === 'favorites') {
+html = `<div class="section-title">⭐ Избранное</div>`;
+const favs = JSON.parse(localStorage.getItem('rp_favorites') || '{}');
+const favKeys = Object.keys(favs);
+if (favKeys.length === 0) {
+html += `<div class="info-banner"><p>Пока ничего не добавлено в избранное.<br>Нажмите ⭐ на любой карточке, чтобы добавить её сюда.</p></div>`;
+} else {
+html += `<div class="cards-grid">`;
+favKeys.forEach(key => {
+const [factionId, type, idx] = key.split('_');
+const faction = FACTIONS[factionId];
+if (!faction) return;
+const arr = type === 'power' ? faction.powers : faction.procedures;
+const item = arr[parseInt(idx)];
+if (!item) return;
+html += renderCardWithActions(item, type, parseInt(idx), factionId);
+});
+html += `</div>`;
+}
+}
+// ═══ СТАРЫЕ ВКЛАДКИ (с поддержкой заметок и избранного) ═══
+else if (currentTab === 'structure') {
 html = `
 <div class="section-title">🏢 ${f.name} — Структура</div>
 <div class="info-banner">
@@ -2515,27 +2583,15 @@ html += `<button class="filter-chip ${currentFilter === c ? 'active' : ''}" oncl
 });
 html += `</div>`;
 html += `<div class="cards-grid">`;
-f.powers.filter(p => currentFilter === 'all' || p.category === currentFilter).forEach(p => {
-html += `<div class="card">
-<div class="card-header">
-<h3 class="card-title">${p.title}</h3>
-<span class="card-badge ${p.badgeColor}">${p.badge}</span>
-</div>
-<div class="card-content">${p.content}</div>
-</div>`;
+f.powers.filter(p => currentFilter === 'all' || p.category === currentFilter).forEach((p, idx) => {
+html += renderCardWithActions(p, 'power', idx);
 });
 html += `</div>`;
 } else if (currentTab === 'procedures') {
 html = `<div class="section-title">🔍 Процедуры и следственные действия — ${f.name}</div>`;
 html += `<div class="cards-grid">`;
-f.procedures.forEach(p => {
-html += `<div class="card">
-<div class="card-header">
-<h3 class="card-title">${p.title}</h3>
-<span class="card-badge ${p.badgeColor}">${p.badge}</span>
-</div>
-<div class="card-content">${p.content}</div>
-</div>`;
+f.procedures.forEach((p, idx) => {
+html += renderCardWithActions(p, 'procedure', idx);
 });
 html += `</div>`;
 } else if (currentTab === 'violations') {
@@ -2591,6 +2647,7 @@ html += `</div>`;
 html = `<div class="section-title">📑 Процессуальные бланки — ${f.name}</div>`;
 f.blanks.forEach(bId => {
 const b = BLANKS[bId];
+if (!b) return;
 const statusCls = b.status === 'green' ? 'status-green-bg' : b.status === 'red' ? 'status-red-bg' : 'status-yellow-bg';
 const statusTxt = b.status === 'green' ? 'Самостоятельно' : b.status === 'red' ? 'Решение суда' : 'Руководитель';
 html += `<div class="blank-card">
@@ -2613,92 +2670,49 @@ html += `</div>
 }
 tabContent.innerHTML = html;
 }
-
 // ═══════════════════════════════════════════════════════════
 //  НОВЫЕ ДАННЫЕ: АЛГОРИТМЫ И 10-КОДЫ (ОБЪЯВЛЕНЫ ОДИН РАЗ!)
 // ═══════════════════════════════════════════════════════════
 const ALGORITHMS = {
 mvd: [
 { title: '🚔 Задержание на посту', steps: [
-{ title: 'Останови транспорт', text: 'Жезл/свисток/громкоговоритель. Укажи место остановки.' },
-{ title: 'Представься', text: 'Должность, звание, ФИО. По требованию — покажи удостоверение.' },
-{ title: 'Объясни причину', text: 'Чётко назови причину: нарушение ПДД / ориентировка / проверка документов.' },
-{ title: 'Проверь документы', text: 'Водительское, СТС, страховка. Проверь по базам.' },
-{ title: 'При нарушениях — протокол', text: 'Составь протокол об АП. Разъясни права (ст. 25.1 КоАП).' },
-{ title: 'При подозрении в преступлении', text: 'Задержание по ст. 91 УПК. Протокол в течение 3 часов.' }
+{ title: 'Останови транспорт', text: 'Жезл/свисток/громкоговоритель.' },
+{ title: 'Представься', text: 'Должность, звание, ФИО.' },
+{ title: 'Объясни причину', text: 'Чётко назови причину.' },
+{ title: 'Проверь документы', text: 'Водительское, СТС, страховка.' },
+{ title: 'При нарушениях — протокол', text: 'Составь протокол об АП.' },
+{ title: 'При подозрении в преступлении', text: 'Задержание по ст. 91 УПК.' }
 ]},
 { title: '🔍 Личный досмотр гражданина', steps: [
-{ title: 'Основания', text: 'Подозрение в наличии орудий АП. Обязательно указать причину!' },
-{ title: 'Понятые', text: 'Строго 2 понятых ТОГО ЖЕ ПОЛА. Видеозапись НЕ заменяет!' },
-{ title: 'Разъяснение прав', text: 'Объясни основания, права не давать пояснения.' },
-{ title: 'Проведи досмотр', text: 'Одежда, вещи. Всё изымаемое сразу описывай.' },
-{ title: 'Протокол', text: 'Полная опись, подписи понятых, копия — досматриваемому.' }
+{ title: 'Основания', text: 'Подозрение в наличии орудий АП.' },
+{ title: 'Понятые', text: 'Строго 2 понятых ТОГО ЖЕ ПОЛА.' },
+{ title: 'Разъяснение прав', text: 'Объясни основания.' },
+{ title: 'Проведи досмотр', text: 'Одежда, вещи.' },
+{ title: 'Протокол', text: 'Полная опись.' }
 ]}
 ],
 fsb: [
 { title: '🛡️ Задержание с поличным', steps: [
 { title: 'Объяви о задержании', text: 'Чётко: "Вы задержаны сотрудником ФСБ."' },
-{ title: 'Разъясни права', text: 'Ст. 51 Конституции. Право на защитника.' },
-{ title: 'Протокол за 3 часа', text: 'Обязательно указать основания по ст. 91 УПК.' },
-{ title: 'Рапорт в СКР', text: 'ФСБ НЕ возбуждает УД! Составь рапорт по ст. 143 УПК и передай в СКР.' }
+{ title: 'Разъясни права', text: 'Ст. 51 Конституции.' },
+{ title: 'Протокол за 3 часа', text: 'Обязательно указать основания.' },
+{ title: 'Рапорт в СКР', text: 'ФСБ НЕ возбуждает УД!' }
 ]},
 { title: '🎧 Проведение прослушивания (ПН)', steps: [
-{ title: 'Постановление начальника', text: 'Вынеси постановление с обоснованием.' },
-{ title: 'Решение суда', text: 'БЕЗ суда — нарушение ст. 8 ФЗ-144!' },
-{ title: 'Направление оператору', text: 'Передай постановление оператору связи.' },
-{ title: 'Срок — до 180 суток', text: 'По истечении — новое решение или прекращение.' },
-{ title: 'Рассекречивание', text: 'Для приобщения к УД — рассекречь материалы.' }
+{ title: 'Постановление начальника', text: 'Вынеси постановление.' },
+{ title: 'Решение суда', text: 'БЕЗ суда — нарушение!' },
+{ title: 'Направление оператору', text: 'Передай постановление.' },
+{ title: 'Срок — до 180 суток', text: 'По истечении — новое решение.' },
+{ title: 'Рассекречивание', text: 'Для приобщения к УД.' }
 ]}
 ],
 skr: [
 { title: '📝 Возбуждение уголовного дела', steps: [
-{ title: 'Изучи материал', text: 'Рапорт ФСБ / заявление / явка с повинной.' },
-{ title: 'Установи признаки преступления', text: 'Состав преступления по УК РФ.' },
-{ title: 'Постановление о возбуждении УД', text: 'Укажи статью, время, место. Присвой номер.' },
-{ title: 'Прими к производству', text: 'Назначь себя следователем по делу.' },
-{ title: 'Копия прокурору за 24 часа', text: 'Обязательно! Прокурор вправе отменить.' }
-]}
-],
-prosecutor: [
-{ title: '⚖️ Рассмотрение жалобы (ст. 124 УПК)', steps: [
-{ title: 'Получи жалобу', text: 'Зарегистрируй в КУСП.' },
-{ title: 'Изучи материалы', text: 'Запроси материалы из СО / ОВД.' },
-{ title: 'Рассмотри за 3-10 суток', text: 'Вынеси постановление.' },
-{ title: 'Уведоми заявителя', text: 'Отправь копию постановления.' }
-]}
-],
-lawyer: [
-{ title: '🎓 Допуск к подзащитному', steps: [
-{ title: 'Заключи соглашение', text: 'С доверителем. Укажи предмет и гонорар.' },
-{ title: 'Выпиши ордер', text: 'От имени адвокатской палаты.' },
-{ title: 'Предъяви на КПП / в ОВД', text: 'Удостоверение + ордер. Никакого согласования!' },
-{ title: 'Свидание наедине', text: 'Без ограничений. Конфиденциально.' }
-]}
-],
-fsin: [
-{ title: '🔒 Водворение в ШИЗО', steps: [
-{ title: 'Зафиксируй нарушение', text: 'Составь рапорт.' },
-{ title: 'Медосмотр (ОБЯЗАТЕЛЬНО!)', text: 'Справка о возможности содержания в ШИЗО.' },
-{ title: 'Постановление', text: 'Издай постановление начальника ИУ.' },
-{ title: 'Срок — до 15 суток', text: 'Внеси запись в учётную карточку.' }
-]}
-],
-rosgvardia: [
-{ title: '🚨 Применение оружия', steps: [
-{ title: 'Оцени угрозу', text: 'Нападение, угроза жизни.' },
-{ title: 'Предупреждение', text: 'Голосом + выстрел вверх. ИСКЛЮЧЕНИЕ: террористическая угроза.' },
-{ title: 'Применение', text: 'Соразмерно угрозе.' },
-{ title: 'Помощь раненым', text: 'Обязательно вызови скорую.' },
-{ title: 'Уведомление прокурора', text: 'В течение 24 часов.' }
-]}
-],
-army: [
-{ title: '🪖 Задержание военнослужащего ВП', steps: [
-{ title: 'Представься', text: 'Покажи удостоверение ВП.' },
-{ title: 'Доложи', text: 'Командиру части и военному коменданту.' },
-{ title: 'Протокол', text: 'Составь протокол задержания.' },
-{ title: 'Гауптвахта', text: 'Направь на гауптвахту (до 30 суток).' },
-{ title: '⚠ НЕ для гражданских!', text: 'ВП НЕ задерживает гражданских ВНЕ ВЧ.' }
+{ title: 'Изучи материал', text: 'Рапорт ФСБ / заявление.' },
+{ title: 'Установи признаки преступления', text: 'Состав преступления.' },
+{ title: 'Постановление о возбуждении УД', text: 'Укажи статью.' },
+{ title: 'Прими к производству', text: 'Назначь себя следователем.' },
+{ title: 'Копия прокурору за 24 часа', text: 'Обязательно!' }
 ]}
 ]
 };
